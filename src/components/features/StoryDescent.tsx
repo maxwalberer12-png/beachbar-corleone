@@ -15,7 +15,10 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
   const t = DICTIONARY[lang].story;
 
   return (
-    <section id="experience" className="relative py-32 overflow-hidden bg-[#0C121A] text-stone-100">
+    <section 
+      id="experience" 
+      className="relative -mt-20 sm:-mt-28 z-20 py-32 overflow-hidden bg-[#0C121A] text-stone-100 rounded-t-[3.5rem] sm:rounded-t-[6rem] lg:rounded-t-[8rem] border-t border-white/20 shadow-[0_-30px_70px_rgba(0,0,0,0.9)]"
+    >
       {/* Dynamic Background Glows */}
       <div className="absolute top-1/4 left-[-10%] w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-[-10%] w-[700px] h-[700px] bg-amber-500/10 rounded-full blur-[160px] pointer-events-none" />

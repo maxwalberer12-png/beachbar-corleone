@@ -28,7 +28,7 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
   };
 
   return (
-    <section className="relative py-28 bg-[#080B10] text-white overflow-hidden select-none">
+    <section className="relative -mt-16 sm:-mt-24 z-20 py-28 bg-[#080B10] text-white overflow-hidden select-none rounded-t-[3.5rem] sm:rounded-t-[6rem] lg:rounded-t-[8rem] border-t border-white/15 shadow-[0_-30px_70px_rgba(0,0,0,0.9)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-left">
         <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-black text-white tracking-tight leading-[0.95]">
           TWO WORLDS. <br />

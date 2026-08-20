@@ -14,7 +14,7 @@ export default function InteractiveWaypoint({ lang }: InteractiveWaypointProps) 
   const t = DICTIONARY[lang].location;
 
   return (
-    <section id="location" className="relative py-32 bg-stone-950 text-white overflow-hidden">
+    <section id="location" className="relative -mt-16 sm:-mt-24 z-20 py-32 bg-stone-950 text-white overflow-hidden rounded-t-[3.5rem] sm:rounded-t-[6rem] lg:rounded-t-[8rem] border-t border-white/15 shadow-[0_-30px_70px_rgba(0,0,0,0.9)]">
       {/* Background Ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sky-500/10 rounded-full blur-[200px] pointer-events-none" />
 

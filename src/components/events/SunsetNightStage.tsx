@@ -17,7 +17,7 @@ export default function SunsetNightStage({ lang }: SunsetNightStageProps) {
   const upcomingEvents = EVENTS_DATA.filter((e) => e.id !== tonightEvent.id);
 
   return (
-    <section id="events" className="relative py-32 bg-[#080B10] text-white overflow-hidden">
+    <section id="events" className="relative -mt-16 sm:-mt-24 z-20 py-32 bg-[#080B10] text-white overflow-hidden rounded-t-[3.5rem] sm:rounded-t-[6rem] lg:rounded-t-[8rem] border-t border-white/15 shadow-[0_-30px_70px_rgba(0,0,0,0.9)]">
       {/* Background Moonlit Atmosphere Image */}
       <div className="absolute inset-0 z-0 opacity-25">
         <Image
