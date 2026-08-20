@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Sun, Moon, Sparkles, Compass } from 'lucide-react';
 import { Language } from '@/lib/types';
 import { DICTIONARY } from '@/lib/data';
+import CurvedDivider from '@/components/ui/CurvedDivider';
 
 interface DayNightCurtainProps {
   lang: Language;
@@ -28,7 +29,9 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
   };
 
   return (
-    <section className="relative -mt-16 sm:-mt-24 z-20 py-28 bg-[#080B10] text-white overflow-hidden select-none rounded-t-[3.5rem] sm:rounded-t-[6rem] lg:rounded-t-[8rem] border-t border-white/15 shadow-[0_-30px_70px_rgba(0,0,0,0.9)]">
+    <section className="relative -mt-16 sm:-mt-24 z-20 pb-28 bg-[#080B10] text-white select-none">
+      {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
+      <CurvedDivider fillColor="#080B10" className="-translate-y-[98%]" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-left">
         <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-black text-white tracking-tight leading-[0.95]">
           TWO WORLDS. <br />

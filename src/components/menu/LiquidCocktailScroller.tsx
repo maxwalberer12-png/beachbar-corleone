@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Sparkles, Wine, Coffee, GlassWater, Utensils, Droplets, Check, Compass, ChevronRight, ChevronLeft, Flame } from 'lucide-react';
 import { SIGNATURE_COCKTAILS, MENU_CATEGORIES, DICTIONARY, BAR_INFO } from '@/lib/data';
 import { Language, SignatureCocktail } from '@/lib/types';
+import CurvedDivider from '@/components/ui/CurvedDivider';
 
 interface LiquidCocktailScrollerProps {
   lang: Language;
@@ -33,7 +34,9 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
   };
 
   return (
-    <section id="menu" className="relative -mt-16 sm:-mt-24 z-20 py-32 bg-stone-950 text-white overflow-hidden rounded-t-[3.5rem] sm:rounded-t-[6rem] lg:rounded-t-[8rem] border-t border-amber-500/20 shadow-[0_-30px_70px_rgba(0,0,0,0.9)]">
+    <section id="menu" className="relative -mt-16 sm:-mt-24 z-20 pb-32 bg-stone-950 text-white select-none">
+      {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
+      <CurvedDivider fillColor="#0c0a09" className="-translate-y-[98%]" />
       {/* Background Liquid Aura */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[180px] pointer-events-none transition-colors duration-1000 opacity-20"

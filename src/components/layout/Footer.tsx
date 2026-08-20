@@ -6,6 +6,7 @@ import { ShieldCheck, Heart, MapPin, Phone, Mail } from 'lucide-react';
 import { InstagramIcon, FacebookIcon } from '@/components/ui/Icons';
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
+import CurvedDivider from '@/components/ui/CurvedDivider';
 
 interface FooterProps {
   lang: Language;
@@ -16,7 +17,9 @@ export default function Footer({ lang }: FooterProps) {
   const nav = DICTIONARY[lang].nav;
 
   return (
-    <footer id="site-footer" className="relative -mt-16 sm:-mt-24 z-20 bg-stone-950 text-stone-300 pt-20 pb-28 md:pb-16 border-t border-stone-800 rounded-t-[3.5rem] sm:rounded-t-[6rem] lg:rounded-t-[8rem] shadow-[0_-30px_70px_rgba(0,0,0,0.9)]">
+    <footer id="site-footer" className="relative -mt-16 sm:-mt-24 z-20 bg-stone-950 text-stone-300 pb-28 md:pb-16 select-none">
+      {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
+      <CurvedDivider fillColor="#0c0a09" className="-translate-y-[98%]" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-stone-800">
           

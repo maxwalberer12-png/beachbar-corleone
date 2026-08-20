@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Sun, Sunset, Moon, Volume2, VolumeX, Sparkles, Waves, ArrowRight, Dog, Mountain } from 'lucide-react';
 import { DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
+import CurvedDivider from '@/components/ui/CurvedDivider';
 
 interface StoryDescentProps {
   lang: Language;
@@ -17,8 +18,10 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
   return (
     <section 
       id="experience" 
-      className="relative -mt-20 sm:-mt-28 z-20 py-32 overflow-hidden bg-[#0C121A] text-stone-100 rounded-t-[3.5rem] sm:rounded-t-[6rem] lg:rounded-t-[8rem] border-t border-white/20 shadow-[0_-30px_70px_rgba(0,0,0,0.9)]"
+      className="relative -mt-16 sm:-mt-24 z-20 bg-[#0C121A] text-stone-100 pb-32"
     >
+      {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
+      <CurvedDivider fillColor="#0C121A" className="-translate-y-[98%]" />
       {/* Dynamic Background Glows */}
       <div className="absolute top-1/4 left-[-10%] w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-[-10%] w-[700px] h-[700px] bg-amber-500/10 rounded-full blur-[160px] pointer-events-none" />
