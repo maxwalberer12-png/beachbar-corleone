@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
-import MobileQuickBar from '@/components/layout/MobileQuickBar';
+import FloatingCallButton from '@/components/layout/FloatingCallButton';
 import Footer from '@/components/layout/Footer';
 import HeroIris from '@/components/scrollytelling/HeroIris';
 import StoryDescent from '@/components/features/StoryDescent';
@@ -45,8 +45,8 @@ export default function HomePage() {
       {/* Footer */}
       <Footer lang={lang} />
 
-      {/* Mobile Sticky Quick Action Bar */}
-      <MobileQuickBar lang={lang} />
+      {/* Mobile Floating Call Button (Floats on scroll, stops/hides before footer) */}
+      <FloatingCallButton lang={lang} />
 
       {/* 100% DSGVO Consent Modal */}
       <ConsentModal lang={lang} />

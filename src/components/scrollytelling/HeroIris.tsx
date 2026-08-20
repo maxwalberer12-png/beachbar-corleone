@@ -23,7 +23,6 @@ export default function HeroIris({ lang }: HeroIrisProps) {
       const scrollDistance = containerRef.current.offsetHeight - window.innerHeight;
       if (scrollDistance <= 0) return;
 
-      // Distance from top of container to top of viewport
       const currentScroll = -rect.top;
       const p = Math.min(1, Math.max(0, currentScroll / scrollDistance));
       setProgress(p);
@@ -38,18 +37,15 @@ export default function HeroIris({ lang }: HeroIrisProps) {
     };
   }, []);
 
-  // Circle radius:
-  // Starts at 26vmax (distinct circle portal)
-  // Reaches 120vmax at progress = 0.75 (100% full bleed screen)
-  // From 0.75 to 1.0, it remains 100% full bleed before unpinning
+  // Circle radius: Starts at 28vmax, reaches 120vmax at progress = 0.75 (100% full bleed), unpins at 1.0
   const isFullyOpen = progress >= 0.75;
-  const circleRadius = isFullyOpen ? 150 : 26 + (progress / 0.75) * 110;
+  const circleRadius = isFullyOpen ? 150 : 28 + (progress / 0.75) * 105;
   const contentOpacity = Math.max(0, 1 - progress * 2.0);
   const contentTranslateY = progress * -80;
   const imageScale = 1.05 + progress * 0.12;
 
   return (
-    <section ref={containerRef} className="relative h-[250vh] w-full bg-[#070509] select-none">
+    <section ref={containerRef} className="relative h-[240vh] w-full bg-[#070509] select-none">
       
       {/* Sticky Pinned Viewport Container (Remains pinned at top during the entire circle expansion) */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#070509]">
@@ -84,17 +80,17 @@ export default function HeroIris({ lang }: HeroIrisProps) {
           <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
         </div>
 
-        {/* Overlay Content (Pinned with graceful fade & rise) */}
+        {/* Overlay Content (Pinned with graceful fade & rise, responsive mobile padding) */}
         <div 
-          className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center pointer-events-auto will-change-transform pt-16"
+          className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center pointer-events-auto will-change-transform pt-20 sm:pt-16"
           style={{
             opacity: contentOpacity,
             transform: `translateY(${contentTranslateY}px)`,
           }}
         >
           
-          {/* Massive Screen Title */}
-          <h1 className="text-6xl sm:text-8xl md:text-9xl font-serif font-black tracking-tight text-white uppercase leading-[0.9] drop-shadow-2xl">
+          {/* Massive Screen Title (Mobile optimized text scaling) */}
+          <h1 className="text-4xl sm:text-7xl md:text-9xl font-serif font-black tracking-tight text-white uppercase leading-[0.92] drop-shadow-2xl">
             <span className="block text-stone-100">SEA VIEWS.</span>
             <span className="block animate-liquid-gradient">
               COCKTAILS.
@@ -102,27 +98,27 @@ export default function HeroIris({ lang }: HeroIrisProps) {
             <span className="block text-stone-200">SUNSET VIBES.</span>
           </h1>
 
-          <p className="mt-6 text-base sm:text-xl text-stone-200 font-sans font-light max-w-2xl leading-relaxed text-balance">
+          <p className="mt-4 sm:mt-6 text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl leading-relaxed text-balance px-2">
             {t.subtitle}
           </p>
 
-          {/* Direct Action Hub: 3 Large Prominent Buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5 w-full max-w-3xl">
+          {/* Direct Action Hub: 3 Large Prominent Buttons (Mobile Stacked full-width, Desktop Row) */}
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm sm:max-w-3xl px-2">
             {/* Button 1: Speise- & Getränkekarte */}
             <a
               href="#menu"
-              className="flex-1 min-w-[220px] sm:min-w-[200px] flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-sm uppercase tracking-wider shadow-2xl transition-all hover:scale-105 cursor-pointer"
+              className="w-full sm:flex-1 min-h-[48px] flex items-center justify-center gap-2.5 px-5 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl transition-all active:scale-95 sm:hover:scale-105 cursor-pointer"
             >
-              <Utensils className="w-5 h-5 text-stone-950" />
+              <Utensils className="w-4 h-4 sm:w-5 sm:h-5 text-stone-950" />
               <span>{t.btnMenu}</span>
             </a>
 
             {/* Button 2: Abendprogramm & Events */}
             <a
               href="#events"
-              className="flex-1 min-w-[220px] sm:min-w-[200px] flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-stone-900/80 hover:bg-stone-800 text-white font-bold text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl hover:scale-105 transition-all cursor-pointer backdrop-blur-md"
+              className="w-full sm:flex-1 min-h-[48px] flex items-center justify-center gap-2.5 px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl active:scale-95 sm:hover:scale-105 transition-all cursor-pointer backdrop-blur-md"
             >
-              <Music className="w-5 h-5 text-amber-400" />
+              <Music className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
               <span>{t.btnEvents}</span>
             </a>
 
@@ -131,16 +127,16 @@ export default function HeroIris({ lang }: HeroIrisProps) {
               href={BAR_INFO.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 min-w-[220px] sm:min-w-[200px] flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-stone-900/80 hover:bg-stone-800 text-white font-bold text-sm uppercase tracking-wider border border-white/20 shadow-xl hover:scale-105 transition-all cursor-pointer backdrop-blur-md"
+              className="w-full sm:flex-1 min-h-[48px] flex items-center justify-center gap-2.5 px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-white/20 shadow-xl active:scale-95 sm:hover:scale-105 transition-all cursor-pointer backdrop-blur-md"
             >
-              <Compass className="w-5 h-5 text-amber-300" />
+              <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />
               <span>{t.btnRoute}</span>
             </a>
           </div>
 
           {/* Scroll Indicator */}
-          <div className="mt-12 flex items-center gap-2 text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce">
-            <ArrowDown className="w-4 h-4 text-amber-400" />
+          <div className="mt-8 sm:mt-12 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce">
+            <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
             <span>SCROLL TO EXPAND THE VIEW</span>
           </div>
         </div>
