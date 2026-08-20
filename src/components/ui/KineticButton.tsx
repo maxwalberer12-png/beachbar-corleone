@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import KineticText from '@/components/ui/KineticText';
+import React from 'react';
 
 interface KineticButtonProps {
   label: string;
@@ -30,23 +29,26 @@ export default function KineticButton({
   type = 'button',
   disabled = false,
 }: KineticButtonProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   const content = (
     <>
+      {/* Dynamic Light Sweep Shimmer Effect on Hover */}
+      <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out pointer-events-none" />
+
+      {/* Icon with Spring Micro-Motion */}
       {icon && (
-        <span className="shrink-0 transition-transform duration-300 group-hover:scale-110">
+        <span className="relative z-10 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
           {icon}
         </span>
       )}
-      <KineticText
-        text={label}
-        isHovered={isHovered}
-        hoverColor={hoverColor}
-        staggerMs={16}
-      />
+
+      {/* Clean, Sharp Typography */}
+      <span className={`relative z-10 font-bold transition-colors duration-300 ${hoverColor}`}>
+        {label}
+      </span>
     </>
   );
+
+  const baseClasses = `group relative overflow-hidden inline-flex items-center justify-center gap-2.5 transition-all duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer select-none ${className}`;
 
   if (href) {
     return (
@@ -55,10 +57,8 @@ export default function KineticButton({
         target={target}
         rel={rel}
         onClick={onClick}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         aria-label={ariaLabel || label}
-        className={`group inline-flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer ${className}`}
+        className={baseClasses}
       >
         {content}
       </a>
@@ -70,10 +70,8 @@ export default function KineticButton({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       aria-label={ariaLabel || label}
-      className={`group inline-flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer ${className}`}
+      className={baseClasses}
     >
       {content}
     </button>

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { Phone } from 'lucide-react';
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
-import KineticText from '@/components/ui/KineticText';
 
 interface FloatingCallButtonProps {
   lang: Language;
@@ -13,7 +12,6 @@ interface FloatingCallButtonProps {
 export default function FloatingCallButton({ lang }: FloatingCallButtonProps) {
   const [isNearFooter, setIsNearFooter] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const t = DICTIONARY[lang].mobileBar;
 
   useEffect(() => {
@@ -53,23 +51,20 @@ export default function FloatingCallButton({ lang }: FloatingCallButtonProps) {
     >
       <a
         href={`tel:${BAR_INFO.phone}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="flex items-center gap-3 px-5 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-orange-500 text-stone-950 font-black text-xs uppercase tracking-wider shadow-2xl shadow-amber-500/50 active:scale-95 transition-all border border-white/30 backdrop-blur-md"
+        className="group relative overflow-hidden flex items-center gap-3 px-5 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-orange-500 text-stone-950 font-black text-xs uppercase tracking-wider shadow-2xl shadow-amber-500/50 active:scale-95 hover:scale-105 transition-all border border-white/30 backdrop-blur-md"
         aria-label="Call Beach Bar Corleone"
       >
+        {/* Shimmer sweep on touch/hover */}
+        <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out pointer-events-none" />
+
         {/* Pulsing Green/Black Live Dot */}
         <span className="relative flex h-3 w-3">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-stone-950 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-stone-950"></span>
         </span>
         
-        <Phone className="w-4 h-4 fill-stone-950 text-stone-950" />
-        <KineticText
-          text={t.call}
-          isHovered={isHovered}
-          className="font-extrabold tracking-widest"
-        />
+        <Phone className="w-4 h-4 fill-stone-950 text-stone-950 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6" />
+        <span className="font-extrabold tracking-widest">{t.call}</span>
       </a>
     </div>
   );
