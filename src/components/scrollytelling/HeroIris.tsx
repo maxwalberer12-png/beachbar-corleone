@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Compass, ArrowDown, Utensils, Music } from 'lucide-react';
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
@@ -12,7 +12,26 @@ interface HeroIrisProps {
 }
 
 export default function HeroIris({ lang }: HeroIrisProps) {
+  const [circleSize, setCircleSize] = useState(38); // percentage radius (starts at 38%, opens to 150%)
+  const [scrollOpacity, setScrollOpacity] = useState(1);
   const t = DICTIONARY[lang].hero;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      // Scroll range: 0px to 450px
+      const progress = Math.min(1, Math.max(0, scrollY / 450));
+      const newSize = 38 + progress * 112; // 38% -> 150% (full bleed)
+      const newOpacity = Math.max(0, 1 - progress * 1.5);
+      
+      setCircleSize(newSize);
+      setScrollOpacity(newOpacity);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black select-none pt-24 pb-16">
@@ -24,11 +43,11 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         </span>
       </div>
 
-      {/* Circular Iris Mask Portal (The iconic circular cliffside window) */}
+      {/* Dynamic Expanding Circular Iris Mask (Opens smoothly on scroll) */}
       <div 
-        className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none"
+        className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path] transition-all duration-75 ease-out"
         style={{
-          clipPath: 'circle(min(46vw, 480px) at 50% 50%)',
+          clipPath: `circle(${circleSize}% at 50% 50%)`,
         }}
       >
         <Image
@@ -93,9 +112,12 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="mt-12 flex items-center gap-2 text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce">
+        <div 
+          className="mt-12 flex items-center gap-2 text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce"
+          style={{ opacity: scrollOpacity }}
+        >
           <ArrowDown className="w-4 h-4 text-amber-400" />
-          <span>SCROLL DOWN</span>
+          <span>SCROLL TO EXPAND THE VIEW</span>
         </div>
       </div>
 
