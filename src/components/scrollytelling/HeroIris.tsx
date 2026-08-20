@@ -19,13 +19,18 @@ export default function HeroIris({ lang }: HeroIrisProps) {
       
       {/* Background Ghost Typography */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20">
-        <span className="text-[22vw] font-serif font-black tracking-tighter text-stroke-white whitespace-nowrap">
+        <span className="text-[24vw] font-serif font-black tracking-tighter text-stroke-white whitespace-nowrap">
           CORLEONE
         </span>
       </div>
 
-      {/* Full-Bleed Cinematic Background Image */}
-      <div className="absolute inset-0 z-10 overflow-hidden">
+      {/* Circular Iris Mask Portal (The iconic circular cliffside window) */}
+      <div 
+        className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none"
+        style={{
+          clipPath: 'circle(min(46vw, 480px) at 50% 50%)',
+        }}
+      >
         <Image
           src="/images/hero-cliffside.jpg"
           alt="Beach Bar Corleone Cliffside Panorama"
@@ -35,8 +40,8 @@ export default function HeroIris({ lang }: HeroIrisProps) {
           className="object-cover object-center scale-105"
         />
         {/* Layered cinematic lighting */}
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-black/70" />
-        <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/30 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/30 to-black/60" />
+        <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
       </div>
 
       {/* Overlay Content */}

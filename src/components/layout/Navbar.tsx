@@ -97,7 +97,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
               className="flex flex-col items-center group will-change-transform"
               style={{
                 transform: isIntro
-                  ? 'translateY(calc(50vh - 2.5rem)) scale(2.8)'
+                  ? 'translateY(calc(50vh - 2rem)) scale(1.65)'
                   : 'translateY(0) scale(1)',
                 transition: 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)',
                 transformOrigin: 'top center',
