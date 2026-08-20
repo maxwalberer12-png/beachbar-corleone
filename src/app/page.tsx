@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import MobileQuickBar from '@/components/layout/MobileQuickBar';
 import Footer from '@/components/layout/Footer';
-import SchemeIntroAnimation from '@/components/ui/SchemeIntroAnimation';
 import HeroIris from '@/components/scrollytelling/HeroIris';
 import StoryDescent from '@/components/features/StoryDescent';
 import DayNightCurtain from '@/components/scrollytelling/DayNightCurtain';
@@ -19,10 +18,7 @@ export default function HomePage() {
 
   return (
     <div className="relative flex min-h-screen flex-col bg-[#0A0D12] text-white selection:bg-amber-400 selection:text-stone-950">
-      {/* 0. Scheme Engine Initial Loading Screen with Traveling Logo */}
-      <SchemeIntroAnimation />
-
-      {/* Top Scheme Engine Style Centered Glass Navbar */}
+      {/* Top Scheme Engine Centered Glass Navbar with Unified Intro Logo Flight */}
       <Navbar currentLang={lang} onLanguageChange={setLang} />
 
       {/* Main Experience (Restored Rich Visual Flow) */}
