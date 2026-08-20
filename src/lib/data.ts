@@ -336,9 +336,9 @@ export const DICTIONARY = {
   en: {
     nav: {
       experience: "The Cliff",
-      drinks: "Cocktails & Menu",
-      events: "Sunset & Events",
-      location: "How to find us",
+      drinks: "Drinks",
+      events: "Events",
+      location: "Location",
       openStatus: "Open Today",
       directions: "Directions",
     },
@@ -433,9 +433,9 @@ export const DICTIONARY = {
   hr: {
     nav: {
       experience: "O nama",
-      drinks: "Karta pića",
+      drinks: "Pića",
       events: "Događanja",
-      location: "Kako do nas",
+      location: "Lokacija",
       openStatus: "Otvoreno danas",
       directions: "Navigacija",
     },
@@ -529,10 +529,10 @@ export const DICTIONARY = {
   },
   de: {
     nav: {
-      experience: "Die Klippe",
-      drinks: "Drinks & Menü",
-      events: "Sunset & Events",
-      location: "Anfahrt",
+      experience: "Erlebnis",
+      drinks: "Drinks",
+      events: "Events",
+      location: "Standort",
       openStatus: "Heute geöffnet",
       directions: "Route",
     },

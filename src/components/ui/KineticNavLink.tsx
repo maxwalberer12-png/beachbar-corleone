@@ -26,7 +26,7 @@ export default function KineticNavLink({
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`group relative inline-flex items-center text-xs font-mono font-bold tracking-[0.22em] uppercase transition-all duration-300 cursor-pointer ${className}`}
+      className={`group relative inline-flex items-center text-xs font-mono font-bold tracking-[0.18em] uppercase transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${className}`}
     >
       <KineticText
         text={label}

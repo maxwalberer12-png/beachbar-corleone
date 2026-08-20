@@ -65,11 +65,11 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex items-center justify-between relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative">
           
           {/* Left Nav Links with kinetic rolling typography hover animation */}
           <nav
-            className={`hidden md:flex items-center gap-10 flex-1 justify-start transition-all duration-700 delay-300 ${
+            className={`hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start transition-all duration-700 delay-300 ${
               isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
             }`}
           >
@@ -86,7 +86,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
           </nav>
 
           {/* Center Travelling Brand Logo: Assembles letter-by-letter in center, then glides to top navbar */}
-          <div className="flex-1 flex justify-center text-center">
+          <div className="shrink-0 px-4 sm:px-8 flex justify-center text-center">
             <Link
               href="/"
               className="flex flex-col items-center group will-change-transform"
@@ -99,7 +99,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
               }}
             >
               {/* Kinetic Letter-by-Letter Assembly */}
-              <div className="font-serif text-3xl sm:text-4xl font-black tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center">
+              <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-black tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center">
                 {LETTERS.map((letter, idx) => (
                   <span
                     key={idx}
@@ -128,7 +128,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
           {/* Right Nav Links with kinetic rolling typography hover animation & Language Switcher */}
           <div
-            className={`hidden md:flex items-center gap-8 flex-1 justify-end transition-all duration-700 delay-300 ${
+            className={`hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end transition-all duration-700 delay-300 ${
               isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
             }`}
           >
@@ -164,7 +164,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
           {/* Mobile Menu Button */}
           <div
-            className={`flex items-center gap-3 md:hidden transition-all duration-700 delay-300 ${
+            className={`flex items-center gap-3 lg:hidden transition-all duration-700 delay-300 ${
               isAtTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
@@ -186,7 +186,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors"
+              className="p-2 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors cursor-pointer"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -197,7 +197,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
         {/* Mobile Slide-down Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#080A0F]/95 backdrop-blur-2xl border-b border-stone-800 px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-200 mt-4">
+          <div className="lg:hidden bg-[#080A0F]/95 backdrop-blur-2xl border-b border-stone-800 px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-200 mt-4">
             <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-dot" />
               <span>{t.openStatus}: <strong className="text-white">{BAR_INFO.regularHours}</strong></span>
