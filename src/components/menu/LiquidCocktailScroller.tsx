@@ -34,9 +34,11 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
   };
 
   return (
-    <section id="menu" className="relative -mt-16 sm:-mt-24 z-20 pb-32 bg-stone-950 text-white select-none">
+    <section id="menu" className="relative z-20 pt-16 sm:pt-24 pb-32 bg-stone-950 text-white select-none">
       {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
-      <CurvedDivider fillColor="#0c0a09" className="-translate-y-[98%]" />
+      <div className="absolute top-0 left-0 right-0 -translate-y-[99%] overflow-hidden leading-none pointer-events-none">
+        <CurvedDivider fillColor="#0c0a09" />
+      </div>
       {/* Background Liquid Aura */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[180px] pointer-events-none transition-colors duration-1000 opacity-20"

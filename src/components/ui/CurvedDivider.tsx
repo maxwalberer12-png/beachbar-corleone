@@ -11,13 +11,13 @@ export default function CurvedDivider({ fillColor = '#0C121A', className = '' }:
   return (
     <div className={`w-full overflow-hidden leading-none select-none pointer-events-none ${className}`}>
       <svg
-        viewBox="0 0 1440 120"
+        viewBox="0 0 1440 90"
         fill={fillColor}
         preserveAspectRatio="none"
-        className="w-full h-16 sm:h-24 md:h-32 lg:h-36 block drop-shadow-[0_-20px_40px_rgba(0,0,0,0.8)]"
+        className="w-full h-12 sm:h-16 md:h-20 lg:h-24 block drop-shadow-[0_-12px_25px_rgba(0,0,0,0.8)]"
       >
-        {/* Continuous Halbrunde Kuppel / Majestic Arched Dome */}
-        <path d="M0,120 C360,10 1080,10 1440,120 L1440,120 L0,120 Z" />
+        {/* Harmonious Arched Dome Curve */}
+        <path d="M0,90 C400,0 1040,0 1440,90 L1440,90 L0,90 Z" />
       </svg>
     </div>
   );

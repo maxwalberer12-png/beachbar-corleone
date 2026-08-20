@@ -18,10 +18,12 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
   return (
     <section 
       id="experience" 
-      className="relative -mt-16 sm:-mt-24 z-20 bg-[#0C121A] text-stone-100 pb-32"
+      className="relative z-20 bg-[#0C121A] text-stone-100 pb-32 pt-8 sm:pt-14"
     >
       {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
-      <CurvedDivider fillColor="#0C121A" className="-translate-y-[98%]" />
+      <div className="absolute top-0 left-0 right-0 -translate-y-[99%] overflow-hidden leading-none pointer-events-none">
+        <CurvedDivider fillColor="#0C121A" />
+      </div>
       {/* Dynamic Background Glows */}
       <div className="absolute top-1/4 left-[-10%] w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-[-10%] w-[700px] h-[700px] bg-amber-500/10 rounded-full blur-[160px] pointer-events-none" />

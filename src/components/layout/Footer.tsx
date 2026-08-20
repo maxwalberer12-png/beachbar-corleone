@@ -17,9 +17,11 @@ export default function Footer({ lang }: FooterProps) {
   const nav = DICTIONARY[lang].nav;
 
   return (
-    <footer id="site-footer" className="relative -mt-16 sm:-mt-24 z-20 bg-stone-950 text-stone-300 pb-28 md:pb-16 select-none">
+    <footer id="site-footer" className="relative z-20 bg-stone-950 text-stone-300 pt-16 pb-28 md:pb-16 select-none">
       {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
-      <CurvedDivider fillColor="#0c0a09" className="-translate-y-[98%]" />
+      <div className="absolute top-0 left-0 right-0 -translate-y-[99%] overflow-hidden leading-none pointer-events-none">
+        <CurvedDivider fillColor="#0c0a09" />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-stone-800">
           
