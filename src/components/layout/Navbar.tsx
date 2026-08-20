@@ -21,15 +21,15 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
   const t = DICTIONARY[currentLang].nav;
 
   useEffect(() => {
-    // 1. Hold in center briefly (letters build fast in ~300ms) -> trigger flight at 0.8s
+    // 1. Letters assemble smoothly (0.06s to 0.5s), subline settles at ~1.0s -> trigger flight at 1.15s
     const flyTimer = setTimeout(() => {
       setIntroStep('flying');
-    }, 800);
+    }, 1150);
 
-    // 2. Settle in navbar at 1.45s -> intro complete
+    // 2. Settle in navbar at 1.8s -> intro complete
     const doneTimer = setTimeout(() => {
       setIntroStep('done');
-    }, 1450);
+    }, 1800);
 
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -108,7 +108,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                     key={idx}
                     className="inline-block animate-letter-build"
                     style={{
-                      animationDelay: `${30 + idx * 35}ms`,
+                      animationDelay: `${60 + idx * 60}ms`,
                     }}
                   >
                     {letter}

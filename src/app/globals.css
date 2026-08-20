@@ -228,7 +228,7 @@
 
 .animate-letter-build {
   opacity: 0;
-  animation: letter-assemble 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: letter-assemble 0.45s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes subline-assemble {
@@ -244,7 +244,7 @@
 
 .animate-subline-build {
   opacity: 0;
-  animation: subline-assemble 0.35s ease-out 0.35s forwards;
+  animation: subline-assemble 0.45s ease-out 0.55s forwards;
 }
 
 
