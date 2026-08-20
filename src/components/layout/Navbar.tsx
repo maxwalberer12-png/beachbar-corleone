@@ -85,26 +85,24 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             />
           </nav>
 
-          {/* Center Travelling Brand Logo: Assembles in viewport center, then glides to top navbar */}
-          <div
-            className={`flex justify-center text-center transition-all duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-              isAtTop
-                ? 'relative z-10 shrink-0 px-2 sm:px-8'
-                : 'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-auto'
-            }`}
-          >
+          {/* Left Spacer on Mobile to keep center logo 100% symmetrically centered during intro */}
+          <div className="lg:hidden flex-1" />
+
+          {/* Center Travelling Brand Logo: Assembles letter-by-letter in center, then glides to top navbar */}
+          <div className="flex-1 flex justify-center text-center">
             <Link
               href="/"
               className="flex flex-col items-center group will-change-transform"
+              style={{
+                transform: isAtTop
+                  ? 'translateY(0) scale(1)'
+                  : 'translateY(calc(46vh - 2rem)) scale(1.3)',
+                transition: 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)',
+                transformOrigin: 'top center',
+              }}
             >
               {/* Kinetic Letter-by-Letter Assembly */}
-              <div
-                className={`font-serif font-black tracking-[0.16em] sm:tracking-widest text-white group-hover:text-amber-400 transition-all duration-700 uppercase leading-none drop-shadow-2xl flex items-center justify-center whitespace-nowrap ${
-                  isAtTop
-                    ? 'text-xl sm:text-2xl lg:text-3xl'
-                    : 'text-2xl sm:text-4xl lg:text-5xl'
-                }`}
-              >
+              <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-black tracking-[0.16em] sm:tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center whitespace-nowrap">
                 {LETTERS.map((letter, idx) => (
                   <span
                     key={idx}
@@ -120,10 +118,10 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
               {/* Subline that builds in smoothly */}
               <span
-                className={`uppercase font-mono font-semibold transition-all duration-700 animate-subline-build whitespace-nowrap ${
+                className={`text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build whitespace-nowrap ${
                   isAtTop
-                    ? 'text-[8px] sm:text-[9px] tracking-[0.25em] sm:tracking-[0.3em] text-stone-400 mt-1'
-                    : 'text-[10px] sm:text-xs tracking-[0.35em] sm:tracking-[0.45em] text-stone-300 mt-2'
+                    ? 'text-stone-400'
+                    : 'text-stone-300 tracking-[0.35em] scale-110'
                 }`}
               >
                 BEACH BAR • CUKLIĆEVO
