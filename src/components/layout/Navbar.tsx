@@ -20,20 +20,20 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
   const t = DICTIONARY[currentLang].nav;
 
   useEffect(() => {
-    // 1. Letters assemble during first 1.0s -> assembled
+    // 1. Letters assemble during first 1.2s -> assembled
     const assembledTimer = setTimeout(() => {
       setIntroStep('assembled');
-    }, 1100);
+    }, 1200);
 
-    // 2. Hold in center until 2.2s -> trigger flight to top navbar
+    // 2. Hold in center until 2.3s -> trigger flight to top navbar
     const flyTimer = setTimeout(() => {
       setIntroStep('flying');
-    }, 2200);
+    }, 2300);
 
-    // 3. Arrive in navbar after 3.4s -> intro complete
+    // 3. Arrive in navbar after 3.5s -> intro complete
     const doneTimer = setTimeout(() => {
       setIntroStep('done');
-    }, 3400);
+    }, 3500);
 
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -118,11 +118,9 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                 {LETTERS.map((letter, idx) => (
                   <span
                     key={idx}
-                    className="inline-block transition-all duration-500 ease-out"
+                    className={`inline-block ${introStep === 'building' ? 'animate-letter-build' : 'opacity-100'}`}
                     style={{
-                      transitionDelay: isIntro ? `${idx * 90}ms` : '0ms',
-                      opacity: 1,
-                      transform: 'translateY(0)',
+                      animationDelay: `${180 + idx * 110}ms`,
                     }}
                   >
                     {letter}
@@ -130,16 +128,15 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                 ))}
               </div>
 
-              {/* Subline that fades in after letters build */}
+              {/* Subline that builds in after letters */}
               <span
                 className={`text-[9px] uppercase tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 ${
                   isAtTop
-                    ? 'text-stone-400'
-                    : 'text-stone-300 tracking-[0.4em] scale-110'
+                    ? 'text-stone-400 opacity-100'
+                    : introStep === 'building'
+                    ? 'animate-subline-build'
+                    : 'text-stone-300 tracking-[0.4em] scale-110 opacity-100'
                 }`}
-                style={{
-                  transitionDelay: '800ms',
-                }}
               >
                 BEACH BAR • CUKLIĆEVO
               </span>
