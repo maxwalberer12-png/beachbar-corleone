@@ -65,7 +65,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative min-h-[40px]">
           
           {/* Left Nav Links with kinetic rolling typography hover animation */}
           <nav
@@ -85,21 +85,26 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             />
           </nav>
 
-          {/* Center Travelling Brand Logo: Assembles letter-by-letter in center, then glides to top navbar */}
-          <div className="shrink-0 px-4 sm:px-8 flex justify-center text-center">
+          {/* Center Travelling Brand Logo: Assembles in viewport center, then glides to top navbar */}
+          <div
+            className={`flex justify-center text-center transition-all duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+              isAtTop
+                ? 'relative z-10 shrink-0 px-2 sm:px-8'
+                : 'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-auto'
+            }`}
+          >
             <Link
               href="/"
               className="flex flex-col items-center group will-change-transform"
-              style={{
-                transform: isAtTop
-                  ? 'translateY(0) scale(1)'
-                  : 'translateY(calc(50vh - 2rem)) scale(1.65)',
-                transition: 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)',
-                transformOrigin: 'top center',
-              }}
             >
               {/* Kinetic Letter-by-Letter Assembly */}
-              <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-black tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center">
+              <div
+                className={`font-serif font-black tracking-[0.16em] sm:tracking-widest text-white group-hover:text-amber-400 transition-all duration-700 uppercase leading-none drop-shadow-2xl flex items-center justify-center whitespace-nowrap ${
+                  isAtTop
+                    ? 'text-xl sm:text-2xl lg:text-3xl'
+                    : 'text-2xl sm:text-4xl lg:text-5xl'
+                }`}
+              >
                 {LETTERS.map((letter, idx) => (
                   <span
                     key={idx}
@@ -115,10 +120,10 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
               {/* Subline that builds in smoothly */}
               <span
-                className={`text-[9px] uppercase tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build ${
+                className={`uppercase font-mono font-semibold transition-all duration-700 animate-subline-build whitespace-nowrap ${
                   isAtTop
-                    ? 'text-stone-400'
-                    : 'text-stone-300 tracking-[0.4em] scale-110'
+                    ? 'text-[8px] sm:text-[9px] tracking-[0.25em] sm:tracking-[0.3em] text-stone-400 mt-1'
+                    : 'text-[10px] sm:text-xs tracking-[0.35em] sm:tracking-[0.45em] text-stone-300 mt-2'
                 }`}
               >
                 BEACH BAR • CUKLIĆEVO
@@ -162,18 +167,18 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button & Language Switcher (Fade in once logo arrives at top) */}
           <div
-            className={`flex items-center gap-3 lg:hidden transition-all duration-700 delay-300 ${
+            className={`flex items-center gap-2 lg:hidden ml-auto transition-all duration-700 delay-300 ${
               isAtTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
-            <div className="flex items-center rounded-full bg-black/40 p-0.5 border border-white/15 text-[11px] font-mono font-semibold text-stone-200">
+            <div className="flex items-center rounded-full bg-black/40 p-0.5 border border-white/15 text-[10px] font-mono font-semibold text-stone-200">
               {(['en', 'hr', 'de'] as Language[]).map((lang) => (
                 <button
                   key={lang}
                   onClick={() => onLanguageChange(lang)}
-                  className={`px-2 py-0.5 rounded-full uppercase transition-all ${
+                  className={`px-1.5 py-0.5 rounded-full uppercase transition-all ${
                     currentLang === lang
                       ? 'bg-amber-500 text-stone-950 font-bold'
                       : 'text-stone-300'
@@ -189,7 +194,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
               className="p-2 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors cursor-pointer"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
