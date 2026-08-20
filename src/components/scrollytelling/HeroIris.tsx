@@ -8,60 +8,40 @@ import { Language } from '@/lib/types';
 
 interface HeroIrisProps {
   lang: Language;
-  scrollProgress: number; // 0 to 1
+  scrollProgress?: number;
 }
 
-export default function HeroIris({ lang, scrollProgress }: HeroIrisProps) {
+export default function HeroIris({ lang }: HeroIrisProps) {
   const t = DICTIONARY[lang].hero;
 
-  // Mask scale grows from 30% to 150% as user scrolls through the opening stage
-  const maskScale = Math.min(150, 35 + scrollProgress * 250);
-  const textOpacity = Math.max(0, 1 - scrollProgress * 3);
-  const textTranslateY = scrollProgress * -100;
-  const imageScale = 1.15 - scrollProgress * 0.15;
-
   return (
-    <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-black select-none">
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black select-none pt-24 pb-16">
       
-      {/* Background Ghost Typography (Layer 0) */}
-      <div 
-        className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20"
-        style={{ transform: `translateY(${textTranslateY * 0.5}px)` }}
-      >
-        <span className="text-[25vw] font-serif font-black tracking-tighter text-stroke-white whitespace-nowrap">
+      {/* Background Ghost Typography */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20">
+        <span className="text-[22vw] font-serif font-black tracking-tighter text-stroke-white whitespace-nowrap">
           CORLEONE
         </span>
       </div>
 
-      {/* Iris Mask Container (Layer 1 - The expanding portal into the cliff) */}
-      <div 
-        className="absolute inset-0 z-10 overflow-hidden transition-all duration-75 ease-out"
-        style={{
-          clipPath: `circle(${maskScale}% at 50% 50%)`,
-        }}
-      >
+      {/* Full-Bleed Cinematic Background Image */}
+      <div className="absolute inset-0 z-10 overflow-hidden">
         <Image
           src="/images/hero-cliffside.jpg"
           alt="Beach Bar Corleone Cliffside Panorama"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
-          style={{ transform: `scale(${imageScale})` }}
+          className="object-cover object-center scale-105"
         />
         {/* Layered cinematic lighting */}
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-black/60" />
-        <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-black/70" />
+        <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/30 to-black/80" />
       </div>
 
-      {/* Overlay Content (Layer 2 - Fades out smoothly as the portal expands) */}
-      <div 
-        className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center pointer-events-auto"
-        style={{ 
-          opacity: textOpacity,
-          transform: `translateY(${textTranslateY}px)`,
-        }}
-      >
+      {/* Overlay Content */}
+      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center pointer-events-auto">
+        
         {/* Massive Screen Title */}
         <h1 className="text-6xl sm:text-8xl md:text-9xl font-serif font-black tracking-tight text-white uppercase leading-[0.9] drop-shadow-2xl">
           <span className="block text-stone-100">SEA VIEWS.</span>
@@ -71,7 +51,7 @@ export default function HeroIris({ lang, scrollProgress }: HeroIrisProps) {
           <span className="block text-stone-200">SUNSET VIBES.</span>
         </h1>
 
-        <p className="mt-5 text-base sm:text-xl text-stone-200 font-sans font-light max-w-2xl leading-relaxed text-balance">
+        <p className="mt-6 text-base sm:text-xl text-stone-200 font-sans font-light max-w-2xl leading-relaxed text-balance">
           {t.subtitle}
         </p>
 
@@ -107,13 +87,13 @@ export default function HeroIris({ lang, scrollProgress }: HeroIrisProps) {
           </a>
         </div>
 
-        {/* Scroll Journey Indicator */}
-        <div className="mt-8 flex items-center gap-2 text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce">
+        {/* Scroll Indicator */}
+        <div className="mt-12 flex items-center gap-2 text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce">
           <ArrowDown className="w-4 h-4 text-amber-400" />
-          <span>SCROLL TO DIVE INTO THE CLIFF</span>
+          <span>SCROLL DOWN</span>
         </div>
       </div>
 
-    </div>
+    </section>
   );
 }
