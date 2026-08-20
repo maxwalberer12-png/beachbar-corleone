@@ -82,23 +82,23 @@ export default function HeroIris({ lang }: HeroIrisProps) {
 
         {/* Overlay Content (Pinned with graceful fade & rise, responsive mobile padding) */}
         <div 
-          className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center pointer-events-auto will-change-transform pt-20 sm:pt-16"
+          className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-20 sm:pt-16"
           style={{
             opacity: contentOpacity,
             transform: `translateY(${contentTranslateY}px)`,
           }}
         >
           
-          {/* Massive Screen Title (Mobile optimized text scaling) */}
-          <h1 className="text-4xl sm:text-7xl md:text-9xl font-serif font-black tracking-tight text-white uppercase leading-[0.92] drop-shadow-2xl">
-            <span className="block text-stone-100">SEA VIEWS.</span>
-            <span className="block animate-liquid-gradient">
+          {/* Massive Screen Title (Mobile optimized text scaling, fully centered) */}
+          <h1 className="w-full text-center text-4xl sm:text-7xl md:text-9xl font-serif font-black tracking-tight text-white uppercase leading-[0.92] drop-shadow-2xl">
+            <span className="block text-stone-100 text-center w-full">SEA VIEWS.</span>
+            <span className="block animate-liquid-gradient text-center w-full">
               COCKTAILS.
             </span>
-            <span className="block text-stone-200">SUNSET VIBES.</span>
+            <span className="block text-stone-200 text-center w-full">SUNSET VIBES.</span>
           </h1>
 
-          <p className="mt-4 sm:mt-6 text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl leading-relaxed text-balance px-2">
+          <p className="mt-4 sm:mt-6 text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl mx-auto text-center leading-relaxed text-balance px-2">
             {t.subtitle}
           </p>
 
