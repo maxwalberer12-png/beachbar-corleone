@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Compass, Menu, X } from 'lucide-react';
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
+import CipherNavLink from '@/components/ui/CipherNavLink';
 
 interface NavbarProps {
   currentLang: Language;
@@ -46,52 +47,42 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
     };
   }, []);
 
-  const isIntro = introStep !== 'done';
   const isAtTop = introStep === 'flying' || introStep === 'done';
 
   return (
     <>
-      {/* 1. Fullscreen Dark Backdrop Curtain (Fades out when logo starts flying) */}
-      {introStep !== 'done' && (
-        <div
-          className={`fixed inset-0 z-40 bg-[#070509] pointer-events-none transition-opacity duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-            isAtTop ? 'opacity-0' : 'opacity-100'
-          }`}
-        >
-          {/* Ambient Sunset/Purple Glow & Film Grain */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(231,111,81,0.25)_0%,rgba(43,16,9,0.3)_45%,rgba(7,5,9,0.95)_75%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_0)] [background-size:24px_24px] opacity-40" />
-        </div>
-      )}
+      {/* Dark Ambient Backdrop during Intro Phase */}
+      <div
+        className={`fixed inset-0 z-40 bg-[#070509] transition-opacity duration-1000 pointer-events-none ${
+          introStep === 'intro' ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
 
-      {/* 2. Top Scheme Engine Symmetrical Header */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 select-none transition-colors duration-500 ${
-          isScrolled && !isIntro
-            ? 'py-4 bg-[#080A0F]/85 backdrop-blur-xl border-b border-white/10 shadow-2xl'
-            : 'py-6 bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? 'py-3.5 bg-stone-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
+            : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex items-center justify-between relative">
           
-          {/* Left Nav Links (Fade in once logo arrives at top) */}
+          {/* Left Nav Links with Cipher.tv style typography hover animation */}
           <nav
             className={`hidden md:flex items-center gap-10 flex-1 justify-start transition-all duration-700 delay-300 ${
               isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
             }`}
           >
-            <a
+            <CipherNavLink
               href="#experience"
-              className="text-xs font-mono font-bold tracking-[0.2em] text-stone-300 hover:text-white uppercase transition-colors"
-            >
-              {t.experience}
-            </a>
-            <a
+              label={t.experience}
+              activeColor="text-amber-400"
+            />
+            <CipherNavLink
               href="#menu"
-              className="text-xs font-mono font-bold tracking-[0.2em] text-stone-300 hover:text-amber-400 uppercase transition-colors"
-            >
-              {t.drinks}
-            </a>
+              label={t.drinks}
+              activeColor="text-amber-400"
+            />
           </nav>
 
           {/* Center Travelling Brand Logo: Assembles letter-by-letter in center, then glides to top navbar */}
@@ -135,24 +126,22 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             </Link>
           </div>
 
-          {/* Right Nav Links & Language Switcher (Fade in once logo arrives at top) */}
+          {/* Right Nav Links with Cipher.tv style typography hover animation & Language Switcher */}
           <div
             className={`hidden md:flex items-center gap-8 flex-1 justify-end transition-all duration-700 delay-300 ${
               isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
             }`}
           >
-            <a
+            <CipherNavLink
               href="#events"
-              className="text-xs font-mono font-bold tracking-[0.2em] text-stone-300 hover:text-white uppercase transition-colors"
-            >
-              {t.events}
-            </a>
-            <a
+              label={t.events}
+              activeColor="text-amber-400"
+            />
+            <CipherNavLink
               href="#location"
-              className="text-xs font-mono font-bold tracking-[0.2em] text-stone-300 hover:text-white uppercase transition-colors"
-            >
-              {t.location}
-            </a>
+              label={t.location}
+              activeColor="text-amber-400"
+            />
 
             {/* Language Switcher */}
             <div className="flex items-center rounded-full bg-white/10 p-1 border border-white/15 backdrop-blur-md text-[11px] font-mono font-bold text-stone-200 ml-2">
