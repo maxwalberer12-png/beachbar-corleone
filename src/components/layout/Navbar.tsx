@@ -21,15 +21,15 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
   const t = DICTIONARY[currentLang].nav;
 
   useEffect(() => {
-    // 1. Hold in center until 2.2s (letters build from 0.1s to 0.75s, then rest) -> trigger flight
+    // 1. Hold in center briefly (letters build fast in ~300ms) -> trigger flight at 0.8s
     const flyTimer = setTimeout(() => {
       setIntroStep('flying');
-    }, 2200);
+    }, 800);
 
-    // 2. Settle in navbar at 3.4s -> intro complete
+    // 2. Settle in navbar at 1.45s -> intro complete
     const doneTimer = setTimeout(() => {
       setIntroStep('done');
-    }, 3400);
+    }, 1450);
 
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -53,7 +53,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
     <>
       {/* Dark Ambient Backdrop during Intro Phase */}
       <div
-        className={`fixed inset-0 z-40 bg-[#070509] transition-opacity duration-1000 pointer-events-none ${
+        className={`fixed inset-0 z-40 bg-[#070509] transition-opacity duration-700 pointer-events-none ${
           introStep === 'intro' ? 'opacity-100' : 'opacity-0'
         }`}
       />
@@ -69,7 +69,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
           
           {/* Left Nav Links with kinetic rolling typography hover animation */}
           <nav
-            className={`hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start transition-all duration-700 delay-300 ${
+            className={`hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start transition-all duration-500 delay-150 ${
               isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
             }`}
           >
@@ -97,7 +97,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                 transform: isAtTop
                   ? 'translateY(0) scale(1)'
                   : 'translateY(calc(46vh - 2rem)) scale(1.3)',
-                transition: 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)',
+                transition: 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)',
                 transformOrigin: 'top center',
               }}
             >
@@ -108,7 +108,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                     key={idx}
                     className="inline-block animate-letter-build"
                     style={{
-                      animationDelay: `${100 + idx * 80}ms`,
+                      animationDelay: `${30 + idx * 35}ms`,
                     }}
                   >
                     {letter}
@@ -131,7 +131,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
           {/* Right Nav Links with kinetic rolling typography hover animation & Language Switcher */}
           <div
-            className={`hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end transition-all duration-700 delay-300 ${
+            className={`hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end transition-all duration-500 delay-150 ${
               isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
             }`}
           >
@@ -167,7 +167,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
 
           {/* Mobile Menu Button & Language Switcher (Fade in once logo arrives at top) */}
           <div
-            className={`flex items-center gap-2 lg:hidden ml-auto transition-all duration-700 delay-300 ${
+            className={`flex items-center gap-2 lg:hidden ml-auto transition-all duration-500 delay-150 ${
               isAtTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
