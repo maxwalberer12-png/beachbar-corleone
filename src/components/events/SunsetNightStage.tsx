@@ -7,6 +7,7 @@ import { InstagramIcon } from '@/components/ui/Icons';
 import { EVENTS_DATA, DICTIONARY, BAR_INFO } from '@/lib/data';
 import { Language } from '@/lib/types';
 import CurvedDivider from '@/components/ui/CurvedDivider';
+import KineticButton from '@/components/ui/KineticButton';
 
 interface SunsetNightStageProps {
   lang: Language;
@@ -108,15 +109,14 @@ export default function SunsetNightStage({ lang }: SunsetNightStageProps) {
                 <span>Free Entry • No Guestlist Needed</span>
               </div>
 
-              <a
+              <KineticButton
                 href={BAR_INFO.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 text-xs font-black uppercase tracking-wider transition-all shadow-lg hover:scale-105"
-              >
-                <InstagramIcon className="w-4 h-4" />
-                <span>Check Instagram Story</span>
-              </a>
+                label="Check Instagram Story"
+                icon={<InstagramIcon className="w-4 h-4" />}
+                className="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 text-xs font-black uppercase tracking-wider shadow-lg active:scale-95 hover:scale-105"
+              />
             </div>
           </div>
 

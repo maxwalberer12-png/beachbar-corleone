@@ -5,6 +5,7 @@ import { MapPin, Phone, Mail, Clock, Navigation, ShieldCheck, Compass, ExternalL
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
 import CurvedDivider from '@/components/ui/CurvedDivider';
+import KineticButton from '@/components/ui/KineticButton';
 
 interface InteractiveWaypointProps {
   lang: Language;
@@ -95,18 +96,14 @@ export default function InteractiveWaypoint({ lang }: InteractiveWaypointProps) 
             </div>
 
             {/* 1-Click Launch Button */}
-            <a
+            <KineticButton
               href={BAR_INFO.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 text-stone-950 font-black text-sm uppercase tracking-wider flex items-center justify-between transition-all shadow-xl hover:scale-[1.02] cursor-pointer"
-            >
-              <span className="flex items-center gap-3">
-                <Navigation className="w-5 h-5 text-stone-950" />
-                <span>{t.openInMapsBtn}</span>
-              </span>
-              <ArrowDownRight className="w-5 h-5" />
-            </a>
+              label={t.openInMapsBtn}
+              icon={<Navigation className="w-5 h-5 text-stone-950" />}
+              className="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 text-stone-950 font-black text-sm uppercase tracking-wider shadow-xl hover:scale-[1.02] active:scale-95"
+            />
           </div>
 
           {/* Right: 2-Click Privacy Map Canvas (7 Cols) */}
@@ -134,21 +131,20 @@ export default function InteractiveWaypoint({ lang }: InteractiveWaypointProps) 
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-                    <button
+                    <KineticButton
                       onClick={() => setMapLoaded(true)}
-                      className="px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs uppercase tracking-wider transition-colors shadow-lg cursor-pointer"
-                    >
-                      {t.loadMapBtn}
-                    </button>
-                    <a
+                      label={t.loadMapBtn}
+                      className="px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs uppercase tracking-wider shadow-lg active:scale-95"
+                    />
+                    <KineticButton
                       href={BAR_INFO.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3.5 rounded-2xl liquid-glass hover:bg-white/15 text-white font-semibold text-xs transition-colors shadow-sm inline-flex items-center justify-center gap-2 border border-white/20"
-                    >
-                      <span>Google Maps</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
+                      label="Google Maps"
+                      icon={<ExternalLink className="w-3.5 h-3.5" />}
+                      hoverColor="text-amber-300"
+                      className="px-6 py-3.5 rounded-2xl liquid-glass hover:bg-white/15 text-white font-semibold text-xs shadow-sm border border-white/20 active:scale-95"
+                    />
                   </div>
 
                   <div className="flex items-center justify-center gap-2 text-xs text-emerald-400 pt-2 font-mono">

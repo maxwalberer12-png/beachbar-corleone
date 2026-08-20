@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Cookie, X } from 'lucide-react';
 import { Language } from '@/lib/types';
+import KineticButton from '@/components/ui/KineticButton';
 
 interface ConsentModalProps {
   lang: Language;
@@ -77,7 +78,7 @@ export default function ConsentModal({ lang }: ConsentModalProps) {
           </div>
           <button 
             onClick={handleEssentialOnly}
-            className="text-stone-400 hover:text-stone-700 p-1 -mr-1 -mt-1 rounded-lg"
+            className="text-stone-400 hover:text-stone-700 p-1 -mr-1 -mt-1 rounded-lg cursor-pointer"
             aria-label="Close dialog"
           >
             <X className="w-4 h-4" />
@@ -85,18 +86,16 @@ export default function ConsentModal({ lang }: ConsentModalProps) {
         </div>
 
         <div className="mt-4 flex items-center gap-2 pt-2 border-t border-stone-100">
-          <button
+          <KineticButton
             onClick={handleEssentialOnly}
-            className="flex-1 px-3 py-2 text-xs font-medium text-stone-700 bg-stone-100 hover:bg-stone-200 rounded-xl transition-colors cursor-pointer"
-          >
-            {content.essentialBtn}
-          </button>
-          <button
+            label={content.essentialBtn}
+            className="flex-1 px-3 py-2 text-xs font-medium text-stone-700 bg-stone-100 hover:bg-stone-200 rounded-xl"
+          />
+          <KineticButton
             onClick={handleAcceptAll}
-            className="flex-1 px-3 py-2 text-xs font-semibold text-white bg-stone-900 hover:bg-amber-600 rounded-xl transition-colors shadow-sm cursor-pointer"
-          >
-            {content.acceptBtn}
-          </button>
+            label={content.acceptBtn}
+            className="flex-1 px-3 py-2 text-xs font-semibold text-white bg-stone-900 hover:bg-amber-600 rounded-xl shadow-sm"
+          />
         </div>
       </div>
     </div>

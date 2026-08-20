@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Compass, Menu, X } from 'lucide-react';
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
-import CipherNavLink from '@/components/ui/CipherNavLink';
+import KineticNavLink from '@/components/ui/KineticNavLink';
 
 interface NavbarProps {
   currentLang: Language;
@@ -67,18 +67,18 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex items-center justify-between relative min-h-[44px]">
           
-          {/* Left Nav Links with Cipher.tv style typography hover animation */}
+          {/* Left Nav Links with kinetic rolling typography hover animation */}
           <nav
             className={`hidden md:flex items-center gap-10 flex-1 justify-start transition-all duration-700 delay-300 ${
               isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
             }`}
           >
-            <CipherNavLink
+            <KineticNavLink
               href="#experience"
               label={t.experience}
               activeColor="text-amber-400"
             />
-            <CipherNavLink
+            <KineticNavLink
               href="#menu"
               label={t.drinks}
               activeColor="text-amber-400"
@@ -126,18 +126,18 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             </Link>
           </div>
 
-          {/* Right Nav Links with Cipher.tv style typography hover animation & Language Switcher */}
+          {/* Right Nav Links with kinetic rolling typography hover animation & Language Switcher */}
           <div
             className={`hidden md:flex items-center gap-8 flex-1 justify-end transition-all duration-700 delay-300 ${
               isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
             }`}
           >
-            <CipherNavLink
+            <KineticNavLink
               href="#events"
               label={t.events}
               activeColor="text-amber-400"
             />
-            <CipherNavLink
+            <KineticNavLink
               href="#location"
               label={t.location}
               activeColor="text-amber-400"

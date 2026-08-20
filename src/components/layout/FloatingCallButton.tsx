@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Phone } from 'lucide-react';
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
+import KineticText from '@/components/ui/KineticText';
 
 interface FloatingCallButtonProps {
   lang: Language;
@@ -12,6 +13,7 @@ interface FloatingCallButtonProps {
 export default function FloatingCallButton({ lang }: FloatingCallButtonProps) {
   const [isNearFooter, setIsNearFooter] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const t = DICTIONARY[lang].mobileBar;
 
   useEffect(() => {
@@ -51,6 +53,8 @@ export default function FloatingCallButton({ lang }: FloatingCallButtonProps) {
     >
       <a
         href={`tel:${BAR_INFO.phone}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         className="flex items-center gap-3 px-5 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-orange-500 text-stone-950 font-black text-xs uppercase tracking-wider shadow-2xl shadow-amber-500/50 active:scale-95 transition-all border border-white/30 backdrop-blur-md"
         aria-label="Call Beach Bar Corleone"
       >
@@ -61,7 +65,11 @@ export default function FloatingCallButton({ lang }: FloatingCallButtonProps) {
         </span>
         
         <Phone className="w-4 h-4 fill-stone-950 text-stone-950" />
-        <span className="font-extrabold tracking-widest">{t.call}</span>
+        <KineticText
+          text={t.call}
+          isHovered={isHovered}
+          className="font-extrabold tracking-widest"
+        />
       </a>
     </div>
   );

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Compass, ArrowDown, Utensils, Music } from 'lucide-react';
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
+import KineticButton from '@/components/ui/KineticButton';
 
 interface HeroIrisProps {
   lang: Language;
@@ -20,21 +21,22 @@ export default function HeroIris({ lang }: HeroIrisProps) {
     const handleScroll = () => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      const scrollDistance = containerRef.current.offsetHeight - window.innerHeight;
-      if (scrollDistance <= 0) return;
+      const windowHeight = window.innerHeight;
+      const totalScrollableDistance = rect.height - windowHeight;
+
+      if (totalScrollableDistance <= 0) return;
 
       const currentScroll = -rect.top;
-      const p = Math.min(1, Math.max(0, currentScroll / scrollDistance));
-      setProgress(p);
+      const calculatedProgress = Math.min(
+        Math.max(currentScroll / totalScrollableDistance, 0),
+        1
+      );
+      setProgress(calculatedProgress);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
     handleScroll();
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Circle radius: Starts at 28vmax, reaches 120vmax at progress = 0.75 (100% full bleed), unpins at 1.0
@@ -102,36 +104,35 @@ export default function HeroIris({ lang }: HeroIrisProps) {
             {t.subtitle}
           </p>
 
-          {/* Direct Action Hub: 3 Large Prominent Buttons (Mobile Stacked full-width, Desktop Row) */}
+          {/* Direct Action Hub: 3 Large Prominent Buttons with Kinetic Hover Animation */}
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm sm:max-w-3xl px-2">
             {/* Button 1: Speise- & Getränkekarte */}
-            <a
+            <KineticButton
               href="#menu"
-              className="w-full sm:flex-1 min-h-[48px] flex items-center justify-center gap-2.5 px-5 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl transition-all active:scale-95 sm:hover:scale-105 cursor-pointer"
-            >
-              <Utensils className="w-4 h-4 sm:w-5 sm:h-5 text-stone-950" />
-              <span>{t.btnMenu}</span>
-            </a>
+              label={t.btnMenu}
+              icon={<Utensils className="w-4 h-4 sm:w-5 sm:h-5 text-stone-950" />}
+              className="w-full sm:flex-1 min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl active:scale-95 sm:hover:scale-105"
+            />
 
             {/* Button 2: Abendprogramm & Events */}
-            <a
+            <KineticButton
               href="#events"
-              className="w-full sm:flex-1 min-h-[48px] flex items-center justify-center gap-2.5 px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl active:scale-95 sm:hover:scale-105 transition-all cursor-pointer backdrop-blur-md"
-            >
-              <Music className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
-              <span>{t.btnEvents}</span>
-            </a>
+              label={t.btnEvents}
+              icon={<Music className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />}
+              hoverColor="text-amber-300"
+              className="w-full sm:flex-1 min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
+            />
 
             {/* Button 3: Route starten */}
-            <a
+            <KineticButton
               href={BAR_INFO.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:flex-1 min-h-[48px] flex items-center justify-center gap-2.5 px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-white/20 shadow-xl active:scale-95 sm:hover:scale-105 transition-all cursor-pointer backdrop-blur-md"
-            >
-              <Compass className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />
-              <span>{t.btnRoute}</span>
-            </a>
+              label={t.btnRoute}
+              icon={<Compass className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />}
+              hoverColor="text-amber-300"
+              className="w-full sm:flex-1 min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-white/20 shadow-xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
+            />
           </div>
 
           {/* Scroll Indicator */}
