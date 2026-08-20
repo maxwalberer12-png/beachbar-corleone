@@ -9,10 +9,10 @@ import { Language } from '@/lib/types';
 interface NavbarProps {
   currentLang: Language;
   onLanguageChange: (lang: Language) => void;
-  showCenterLogo?: boolean;
+  isIntroActive?: boolean;
 }
 
-export default function Navbar({ currentLang, onLanguageChange, showCenterLogo = true }: NavbarProps) {
+export default function Navbar({ currentLang, onLanguageChange, isIntroActive = false }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = DICTIONARY[currentLang].nav;
@@ -40,7 +40,11 @@ export default function Navbar({ currentLang, onLanguageChange, showCenterLogo =
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex items-center justify-between">
         
         {/* Left Nav Links */}
-        <nav className="hidden md:flex items-center gap-10 flex-1 justify-start">
+        <nav
+          className={`hidden md:flex items-center gap-10 flex-1 justify-start transition-opacity duration-700 ${
+            isIntroActive ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
           <a
             href="#experience"
             className="text-xs font-mono font-bold tracking-[0.2em] text-stone-300 hover:text-white uppercase transition-colors"
@@ -59,8 +63,8 @@ export default function Navbar({ currentLang, onLanguageChange, showCenterLogo =
         <div className="flex-1 flex justify-center text-center">
           <Link
             href="/"
-            className={`transition-all duration-500 flex flex-col items-center group ${
-              isScrolled || showCenterLogo ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+            className={`transition-all duration-700 flex flex-col items-center group ${
+              isIntroActive ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
             }`}
           >
             <span className="font-serif text-2xl sm:text-3xl font-black tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none">
@@ -73,7 +77,11 @@ export default function Navbar({ currentLang, onLanguageChange, showCenterLogo =
         </div>
 
         {/* Right Nav Links & Language Switcher */}
-        <div className="hidden md:flex items-center gap-8 flex-1 justify-end">
+        <div
+          className={`hidden md:flex items-center gap-8 flex-1 justify-end transition-opacity duration-700 ${
+            isIntroActive ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
           <a
             href="#events"
             className="text-xs font-mono font-bold tracking-[0.2em] text-stone-300 hover:text-white uppercase transition-colors"
@@ -107,7 +115,11 @@ export default function Navbar({ currentLang, onLanguageChange, showCenterLogo =
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div
+          className={`flex items-center gap-3 md:hidden transition-opacity duration-700 ${
+            isIntroActive ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
           <div className="flex items-center rounded-full bg-black/40 p-0.5 border border-white/15 text-[11px] font-mono font-semibold text-stone-200">
             {(['en', 'hr', 'de'] as Language[]).map((lang) => (
               <button

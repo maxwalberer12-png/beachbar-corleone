@@ -16,14 +16,15 @@ import { Language } from '@/lib/types';
 
 export default function HomePage() {
   const [lang, setLang] = useState<Language>('en');
+  const [isIntroActive, setIsIntroActive] = useState(true);
 
   return (
     <div className="relative flex min-h-screen flex-col bg-[#0A0D12] text-white selection:bg-amber-400 selection:text-stone-950">
-      {/* 0. Scheme Engine Initial Loading & Logo-Morph Animation */}
-      <SchemeIntroAnimation />
+      {/* 0. Scheme Engine Initial Loading Screen with Traveling Logo */}
+      <SchemeIntroAnimation onComplete={() => setIsIntroActive(false)} />
 
       {/* Top Scheme Engine Style Centered Glass Navbar */}
-      <Navbar currentLang={lang} onLanguageChange={setLang} />
+      <Navbar currentLang={lang} onLanguageChange={setLang} isIntroActive={isIntroActive} />
 
       {/* Main Experience (Restored Rich Visual Flow) */}
       <main className="flex-1">
