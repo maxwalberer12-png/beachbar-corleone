@@ -23,26 +23,35 @@ export default function HeroIris({ lang }: HeroIrisProps) {
       const scrollDistance = containerRef.current.offsetHeight - window.innerHeight;
       if (scrollDistance <= 0) return;
 
+      // Distance from top of container to top of viewport
       const currentScroll = -rect.top;
       const p = Math.min(1, Math.max(0, currentScroll / scrollDistance));
       setProgress(p);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
-  // Circle radius: starts at 36%, expands to 150% (full bleed) before unpinning
-  const circleRadius = 36 + progress * 114;
-  const contentOpacity = Math.max(0, 1 - progress * 1.5);
-  const contentTranslateY = progress * -60;
+  // Circle radius:
+  // Starts at 26vmax (distinct circle portal)
+  // Reaches 120vmax at progress = 0.75 (100% full bleed screen)
+  // From 0.75 to 1.0, it remains 100% full bleed before unpinning
+  const isFullyOpen = progress >= 0.75;
+  const circleRadius = isFullyOpen ? 150 : 26 + (progress / 0.75) * 110;
+  const contentOpacity = Math.max(0, 1 - progress * 2.0);
+  const contentTranslateY = progress * -80;
   const imageScale = 1.05 + progress * 0.12;
 
   return (
-    <section ref={containerRef} className="relative h-[230vh] w-full bg-black select-none">
+    <section ref={containerRef} className="relative h-[250vh] w-full bg-[#070509] select-none">
       
-      {/* Sticky Pinned Viewport Container */}
+      {/* Sticky Pinned Viewport Container (Remains pinned at top during the entire circle expansion) */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#070509]">
         
         {/* Background Ghost Typography */}
@@ -52,11 +61,11 @@ export default function HeroIris({ lang }: HeroIrisProps) {
           </span>
         </div>
 
-        {/* Dynamic Expanding Circular Iris Mask (Stage Pinned: opens completely before scrolling down) */}
+        {/* Dynamic Expanding Circular Iris Mask (Opens to 100% full bleed BEFORE unpinning) */}
         <div 
           className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path]"
           style={{
-            clipPath: `circle(${circleRadius}% at 50% 50%)`,
+            clipPath: isFullyOpen ? 'none' : `circle(${circleRadius}vmax at 50% 50%)`,
           }}
         >
           <Image

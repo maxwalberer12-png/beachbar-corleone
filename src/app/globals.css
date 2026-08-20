@@ -21,10 +21,8 @@
   body {
     background-color: var(--bg-dark);
     color: #F7F5EE;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    perspective: 1000px;
   }
 }
 
