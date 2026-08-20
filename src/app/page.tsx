@@ -1,55 +1,48 @@
-'use client';
+import type { Metadata } from 'next';
+import HomeView from '@/components/views/HomeView';
 
-import React, { useState } from 'react';
-import Navbar from '@/components/layout/Navbar';
-import FloatingCallButton from '@/components/layout/FloatingCallButton';
-import Footer from '@/components/layout/Footer';
-import HeroIris from '@/components/scrollytelling/HeroIris';
-import StoryDescent from '@/components/features/StoryDescent';
-import DayNightCurtain from '@/components/scrollytelling/DayNightCurtain';
-import LiquidCocktailScroller from '@/components/menu/LiquidCocktailScroller';
-import SunsetNightStage from '@/components/events/SunsetNightStage';
-import InteractiveWaypoint from '@/components/location/InteractiveWaypoint';
-import ConsentModal from '@/components/ui/ConsentModal';
-import { Language } from '@/lib/types';
+export const metadata: Metadata = {
+  title: "Beach Bar Corleone | Cliffside Bar, Cocktails & Sunset in Malinska, Krk",
+  description:
+    "Beach Bar Corleone is an exclusive cliffside cocktail bar & sunset lounge situated directly above Plaža Cuklićevo in Malinska, Island of Krk (Croatia). Serving artisan Illy espresso, signature Mediterranean cocktails, local Krk wines, and chilled sunset DJ sessions with 180° panoramic Adriatic sea views. Open daily 10:00–23:00 (May–October). Walk-ins welcome, dog friendly.",
+  keywords: [
+    "Beach Bar Corleone",
+    "Beach Bar Corleone Malinska",
+    "Best beach bar Krk Croatia",
+    "Plaža Cuklićevo",
+    "Sunset bar Malinska",
+    "Cocktails Malinska Krk",
+    "Kvarner bay sunset bar",
+    "Illy coffee beach bar Krk",
+    "Cuklicevo beach lounge",
+    "Dog friendly beach bar Croatia",
+  ],
+  openGraph: {
+    title: "Beach Bar Corleone | Sea Views, Signature Cocktails & Sunset in Malinska, Krk",
+    description:
+      "Perched on the limestone cliffs above Cuklićevo Beach in Malinska (Krk, Croatia). Artisan espresso, craft sunset cocktails, chilled coastal DJ beats, and unobstructed Adriatic sea views. Open daily 10:00–23:00.",
+    url: "https://beachbar-corleone.com",
+    siteName: "Beach Bar Corleone",
+    images: [
+      {
+        url: "/images/hero-cliffside.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Beach Bar Corleone cliffside terrace overlooking Plaža Cuklićevo and the Adriatic Sea",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Beach Bar Corleone | Cliffside Sunset & Cocktails in Malinska, Krk",
+    description:
+      "Cliffside cocktail bar & sunset lounge directly above Cuklićevo Beach, Malinska (Krk, Croatia). Artisan coffee, signature spritz, and Adriatic panoramas.",
+    images: ["/images/hero-cliffside.jpg"],
+  },
+};
 
 export default function HomePage() {
-  const [lang, setLang] = useState<Language>('en');
-
-  return (
-    <div className="relative flex min-h-screen flex-col bg-[#0A0D12] text-white selection:bg-amber-400 selection:text-stone-950 overflow-x-clip max-w-full">
-      {/* Top Scheme Engine Centered Glass Navbar with Unified Intro Logo Flight */}
-      <Navbar currentLang={lang} onLanguageChange={setLang} />
-
-      {/* Main Experience (Restored Rich Visual Flow) */}
-      <main className="flex-1 overflow-x-clip max-w-full">
-        {/* 1. Cinematic Cliffside Hero with Animated Liquid Typography & Direct Action Hub */}
-        <HeroIris lang={lang} />
-
-        {/* 2. The Cliff Experience & Ambient Soundwave Bar */}
-        <StoryDescent lang={lang} />
-
-        {/* 3. Interactive Day/Night Split Curtain Slider */}
-        <DayNightCurtain lang={lang} />
-
-        {/* 4. Liquid Alchemy (Interactive Cocktail Spotlight & Category Drawer) */}
-        <LiquidCocktailScroller lang={lang} />
-
-        {/* 5. Nightfall Rhythm & Vinyl Stage Pass */}
-        <SunsetNightStage lang={lang} />
-
-        {/* 6. The Waypoint (Live Radar HUD & 2-Click Map) */}
-        <InteractiveWaypoint lang={lang} />
-      </main>
-
-      {/* Footer */}
-      <Footer lang={lang} />
-
-      {/* Mobile Floating Call Button (Floats on scroll, stops/hides before footer) */}
-      <FloatingCallButton lang={lang} />
-
-      {/* 100% DSGVO Consent Modal */}
-      <ConsentModal lang={lang} />
-    </div>
-  );
+  return <HomeView />;
 }
