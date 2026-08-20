@@ -1,26 +1,167 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-sand: #F7F5EE;
+    --bg-dark: #0A0D12;
+    --brand-amber: #E76F51;
+    --brand-amber-light: #F4A261;
+    --brand-coral: #E63946;
+    --brand-adriatic: #0D2838;
+    --brand-turquoise: #2A9D8F;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-dark);
+    color: #F7F5EE;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: #F7F5EE;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    perspective: 1000px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Glassmorphism & Liquid Panels */
+.liquid-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
+
+.liquid-glass-amber {
+  background: linear-gradient(135deg, rgba(231, 111, 81, 0.15) 0%, rgba(244, 162, 97, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(244, 162, 97, 0.3);
+  box-shadow: 0 20px 50px -10px rgba(231, 111, 81, 0.25);
+}
+
+/* Grain & Noise Overlay */
+.grain-overlay {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Continuous Marquee Tickers */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: 200%;
+  animation: marquee-reverse 25s linear infinite;
+}
+
+.animate-marquee:hover,
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* Equalizer Bars Animation */
+@keyframes eq-1 {
+  0%, 100% { height: 4px; }
+  50% { height: 24px; }
+}
+@keyframes eq-2 {
+  0%, 100% { height: 18px; }
+  50% { height: 6px; }
+}
+@keyframes eq-3 {
+  0%, 100% { height: 8px; }
+  50% { height: 28px; }
+}
+@keyframes eq-4 {
+  0%, 100% { height: 22px; }
+  50% { height: 10px; }
+}
+
+.eq-bar-1 { animation: eq-1 1.2s ease-in-out infinite; }
+.eq-bar-2 { animation: eq-2 0.9s ease-in-out infinite; }
+.eq-bar-3 { animation: eq-3 1.5s ease-in-out infinite; }
+.eq-bar-4 { animation: eq-4 1.1s ease-in-out infinite; }
+
+/* Custom Glows */
+.amber-neon-glow {
+  filter: drop-shadow(0 0 25px rgba(231, 111, 81, 0.6));
+}
+
+.text-stroke-white {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  color: transparent;
+}
+
+.text-stroke-amber {
+  -webkit-text-stroke: 1px rgba(244, 162, 97, 0.5);
+  color: transparent;
+}
+
+/* Organic Clip-Path Shapes */
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 4vw, 100% 100%, 0 calc(100% - 4vw));
+}
+
+.clip-slanted {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vw), 0 100%);
+}
+
+/* Animated Flowing Gradient for Text */
+@keyframes flow-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-liquid-gradient {
+  background: linear-gradient(
+    -45deg,
+    #f59e0b,
+    #fbbf24,
+    #f43f5e,
+    #fb7185,
+    #fb923c,
+    #eab308,
+    #f59e0b
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flow-gradient 6s ease-in-out infinite;
+}
+
