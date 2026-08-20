@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import MobileQuickBar from '@/components/layout/MobileQuickBar';
 import Footer from '@/components/layout/Footer';
-import SchemeHero from '@/components/hero/SchemeHero';
+import SchemeIntroAnimation from '@/components/ui/SchemeIntroAnimation';
+import HeroIris from '@/components/scrollytelling/HeroIris';
 import StoryDescent from '@/components/features/StoryDescent';
 import DayNightCurtain from '@/components/scrollytelling/DayNightCurtain';
 import LiquidCocktailScroller from '@/components/menu/LiquidCocktailScroller';
@@ -17,14 +18,17 @@ export default function HomePage() {
   const [lang, setLang] = useState<Language>('en');
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#070509] text-white selection:bg-amber-400 selection:text-stone-950">
+    <div className="relative flex min-h-screen flex-col bg-[#0A0D12] text-white selection:bg-amber-400 selection:text-stone-950">
+      {/* 0. Scheme Engine Initial Loading & Logo-Morph Animation */}
+      <SchemeIntroAnimation />
+
       {/* Top Scheme Engine Style Centered Glass Navbar */}
       <Navbar currentLang={lang} onLanguageChange={setLang} />
 
-      {/* Main Experience */}
+      {/* Main Experience (Restored Rich Visual Flow) */}
       <main className="flex-1">
-        {/* 1. Scheme Engine Centered Brand Monolith & Action Hub */}
-        <SchemeHero lang={lang} />
+        {/* 1. Cinematic Cliffside Hero with Animated Liquid Typography & Direct Action Hub */}
+        <HeroIris lang={lang} />
 
         {/* 2. The Cliff Experience & Ambient Soundwave Bar */}
         <StoryDescent lang={lang} />
