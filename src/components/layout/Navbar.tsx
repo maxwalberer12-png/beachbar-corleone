@@ -9,15 +9,19 @@ import { Language } from '@/lib/types';
 interface NavbarProps {
   currentLang: Language;
   onLanguageChange: (lang: Language) => void;
-  isIntroActive?: boolean;
 }
 
-export default function Navbar({ currentLang, onLanguageChange, isIntroActive = false }: NavbarProps) {
+export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
   const t = DICTIONARY[currentLang].nav;
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIntroDone(true);
+    }, 1800);
+
     const handleScroll = () => {
       if (window.scrollY > 80) {
         setIsScrolled(true);
@@ -26,7 +30,10 @@ export default function Navbar({ currentLang, onLanguageChange, isIntroActive = 
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -42,7 +49,7 @@ export default function Navbar({ currentLang, onLanguageChange, isIntroActive = 
         {/* Left Nav Links */}
         <nav
           className={`hidden md:flex items-center gap-10 flex-1 justify-start transition-opacity duration-700 ${
-            isIntroActive ? 'opacity-0' : 'opacity-100'
+            introDone ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <a
@@ -64,7 +71,7 @@ export default function Navbar({ currentLang, onLanguageChange, isIntroActive = 
           <Link
             href="/"
             className={`transition-all duration-700 flex flex-col items-center group ${
-              isIntroActive ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+              introDone ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
             }`}
           >
             <span className="font-serif text-2xl sm:text-3xl font-black tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none">
@@ -79,7 +86,7 @@ export default function Navbar({ currentLang, onLanguageChange, isIntroActive = 
         {/* Right Nav Links & Language Switcher */}
         <div
           className={`hidden md:flex items-center gap-8 flex-1 justify-end transition-opacity duration-700 ${
-            isIntroActive ? 'opacity-0' : 'opacity-100'
+            introDone ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <a
@@ -117,7 +124,7 @@ export default function Navbar({ currentLang, onLanguageChange, isIntroActive = 
         {/* Mobile Menu Button */}
         <div
           className={`flex items-center gap-3 md:hidden transition-opacity duration-700 ${
-            isIntroActive ? 'opacity-0' : 'opacity-100'
+            introDone ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <div className="flex items-center rounded-full bg-black/40 p-0.5 border border-white/15 text-[11px] font-mono font-semibold text-stone-200">
