@@ -11,23 +11,29 @@ interface NavbarProps {
   onLanguageChange: (lang: Language) => void;
 }
 
+const LETTERS = ['C', 'O', 'R', 'L', 'E', 'O', 'N', 'E'];
+
 export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
-  const [isIntro, setIsIntro] = useState(true);
+  const [introStep, setIntroStep] = useState<'building' | 'assembled' | 'flying' | 'done'>('building');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [introUnmounted, setIntroUnmounted] = useState(false);
   const t = DICTIONARY[currentLang].nav;
 
   useEffect(() => {
-    // 1. Hold logo in center for 700ms, then trigger smooth flight to top
-    const flyTimer = setTimeout(() => {
-      setIsIntro(false);
-    }, 700);
+    // 1. Letters assemble during first 1.0s -> assembled
+    const assembledTimer = setTimeout(() => {
+      setIntroStep('assembled');
+    }, 1100);
 
-    // 2. Unmount the dark backdrop completely after transition completes
-    const unmountTimer = setTimeout(() => {
-      setIntroUnmounted(true);
+    // 2. Hold in center until 2.2s -> trigger flight to top navbar
+    const flyTimer = setTimeout(() => {
+      setIntroStep('flying');
     }, 2200);
+
+    // 3. Arrive in navbar after 3.4s -> intro complete
+    const doneTimer = setTimeout(() => {
+      setIntroStep('done');
+    }, 3400);
 
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -39,23 +45,27 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
+      clearTimeout(assembledTimer);
       clearTimeout(flyTimer);
-      clearTimeout(unmountTimer);
+      clearTimeout(doneTimer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  const isIntro = introStep !== 'done';
+  const isAtTop = introStep === 'flying' || introStep === 'done';
+
   return (
     <>
-      {/* 1. Fullscreen Dark Backdrop Curtain (Fades out smoothly as logo glides up) */}
-      {!introUnmounted && (
+      {/* 1. Fullscreen Dark Backdrop Curtain (Fades out when logo starts flying) */}
+      {introStep !== 'done' && (
         <div
           className={`fixed inset-0 z-40 bg-[#070509] pointer-events-none transition-opacity duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-            isIntro ? 'opacity-100' : 'opacity-0'
+            isAtTop ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          {/* Ambient Glow & Film Grain */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(231,111,81,0.22)_0%,rgba(43,16,9,0.25)_45%,rgba(7,5,9,0.95)_75%)]" />
+          {/* Ambient Sunset/Purple Glow & Film Grain */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(231,111,81,0.25)_0%,rgba(43,16,9,0.3)_45%,rgba(7,5,9,0.95)_75%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_0)] [background-size:24px_24px] opacity-40" />
         </div>
       )}
@@ -73,7 +83,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
           {/* Left Nav Links (Fade in once logo arrives at top) */}
           <nav
             className={`hidden md:flex items-center gap-10 flex-1 justify-start transition-all duration-700 delay-300 ${
-              isIntro ? 'opacity-0 -translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'
+              isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
             }`}
           >
             <a
@@ -90,28 +100,46 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             </a>
           </nav>
 
-          {/* Center Travelling Brand Logo (Single Unified Element: Smoothly glides from screen center to navbar) */}
+          {/* Center Travelling Brand Logo: Assembles letter-by-letter in center, then glides to top navbar */}
           <div className="flex-1 flex justify-center text-center">
             <Link
               href="/"
               className="flex flex-col items-center group will-change-transform"
               style={{
-                transform: isIntro
-                  ? 'translateY(calc(50vh - 2rem)) scale(1.65)'
-                  : 'translateY(0) scale(1)',
+                transform: isAtTop
+                  ? 'translateY(0) scale(1)'
+                  : 'translateY(calc(50vh - 2rem)) scale(1.65)',
                 transition: 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)',
                 transformOrigin: 'top center',
               }}
             >
-              <span className="font-serif text-3xl sm:text-4xl font-black tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl">
-                CORLEONE
-              </span>
+              {/* Kinetic Letter-by-Letter Assembly */}
+              <div className="font-serif text-3xl sm:text-4xl font-black tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center">
+                {LETTERS.map((letter, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-block transition-all duration-500 ease-out"
+                    style={{
+                      transitionDelay: isIntro ? `${idx * 90}ms` : '0ms',
+                      opacity: 1,
+                      transform: 'translateY(0)',
+                    }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </div>
+
+              {/* Subline that fades in after letters build */}
               <span
-                className={`text-[9px] uppercase tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-500 ${
-                  isIntro
-                    ? 'text-stone-300 tracking-[0.4em] scale-110'
-                    : 'text-stone-400'
+                className={`text-[9px] uppercase tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 ${
+                  isAtTop
+                    ? 'text-stone-400'
+                    : 'text-stone-300 tracking-[0.4em] scale-110'
                 }`}
+                style={{
+                  transitionDelay: '800ms',
+                }}
               >
                 BEACH BAR • CUKLIĆEVO
               </span>
@@ -121,7 +149,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
           {/* Right Nav Links & Language Switcher (Fade in once logo arrives at top) */}
           <div
             className={`hidden md:flex items-center gap-8 flex-1 justify-end transition-all duration-700 delay-300 ${
-              isIntro ? 'opacity-0 translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'
+              isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
             }`}
           >
             <a
@@ -159,7 +187,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
           {/* Mobile Menu Button */}
           <div
             className={`flex items-center gap-3 md:hidden transition-all duration-700 delay-300 ${
-              isIntro ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              isAtTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
             <div className="flex items-center rounded-full bg-black/40 p-0.5 border border-white/15 text-[11px] font-mono font-semibold text-stone-200">
