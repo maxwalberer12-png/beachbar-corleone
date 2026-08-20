@@ -65,7 +65,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex items-center justify-between relative min-h-[44px]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex items-center justify-between relative">
           
           {/* Left Nav Links with kinetic rolling typography hover animation */}
           <nav
@@ -85,8 +85,8 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             />
           </nav>
 
-          {/* Center Travelling Brand Logo: 100% Dead-Centered on all screen sizes */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center text-center pointer-events-auto z-10">
+          {/* Center Travelling Brand Logo: Assembles letter-by-letter in center, then glides to top navbar */}
+          <div className="flex-1 flex justify-center text-center">
             <Link
               href="/"
               className="flex flex-col items-center group will-change-transform"
@@ -95,7 +95,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                   ? 'translateY(0) scale(1)'
                   : 'translateY(calc(50vh - 2rem)) scale(1.65)',
                 transition: 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)',
-                transformOrigin: 'center center',
+                transformOrigin: 'top center',
               }}
             >
               {/* Kinetic Letter-by-Letter Assembly */}
