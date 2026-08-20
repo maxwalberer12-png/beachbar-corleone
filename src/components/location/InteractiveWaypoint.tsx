@@ -15,7 +15,7 @@ export default function InteractiveWaypoint({ lang }: InteractiveWaypointProps) 
   const t = DICTIONARY[lang].location;
 
   return (
-    <section id="location" className="relative z-20 pt-16 sm:pt-24 pb-32 bg-stone-950 text-white select-none">
+    <section id="location" className="relative z-20 pt-16 sm:pt-24 pb-32 bg-stone-950 text-white select-none overflow-x-clip">
       {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
       <div className="absolute top-0 left-0 right-0 -translate-y-[99%] overflow-hidden leading-none pointer-events-none">
         <CurvedDivider fillColor="#0c0a09" />

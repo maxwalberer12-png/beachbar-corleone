@@ -29,7 +29,7 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
   };
 
   return (
-    <section className="relative z-20 pt-16 sm:pt-24 pb-28 bg-[#080B10] text-white select-none">
+    <section className="relative z-20 pt-16 sm:pt-24 pb-28 bg-[#080B10] text-white select-none overflow-x-clip">
       {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
       <div className="absolute top-0 left-0 right-0 -translate-y-[99%] overflow-hidden leading-none pointer-events-none">
         <CurvedDivider fillColor="#080B10" />

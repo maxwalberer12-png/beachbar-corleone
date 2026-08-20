@@ -51,7 +51,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#070509]">
         
         {/* Background Ghost Typography */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20 overflow-hidden">
           <span className="text-[24vw] font-serif font-black tracking-tighter text-stroke-white whitespace-nowrap">
             CORLEONE
           </span>

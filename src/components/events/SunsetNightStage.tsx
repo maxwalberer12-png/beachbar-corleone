@@ -18,7 +18,7 @@ export default function SunsetNightStage({ lang }: SunsetNightStageProps) {
   const upcomingEvents = EVENTS_DATA.filter((e) => e.id !== tonightEvent.id);
 
   return (
-    <section id="events" className="relative z-20 pt-16 sm:pt-24 pb-32 bg-[#080B10] text-white select-none">
+    <section id="events" className="relative z-20 pt-16 sm:pt-24 pb-32 bg-[#080B10] text-white select-none overflow-x-clip">
       {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
       <div className="absolute top-0 left-0 right-0 -translate-y-[99%] overflow-hidden leading-none pointer-events-none">
         <CurvedDivider fillColor="#080B10" />

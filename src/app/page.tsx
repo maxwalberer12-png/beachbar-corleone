@@ -17,12 +17,12 @@ export default function HomePage() {
   const [lang, setLang] = useState<Language>('en');
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#0A0D12] text-white selection:bg-amber-400 selection:text-stone-950">
+    <div className="relative flex min-h-screen flex-col bg-[#0A0D12] text-white selection:bg-amber-400 selection:text-stone-950 overflow-x-clip max-w-full">
       {/* Top Scheme Engine Centered Glass Navbar with Unified Intro Logo Flight */}
       <Navbar currentLang={lang} onLanguageChange={setLang} />
 
       {/* Main Experience (Restored Rich Visual Flow) */}
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-clip max-w-full">
         {/* 1. Cinematic Cliffside Hero with Animated Liquid Typography & Direct Action Hub */}
         <HeroIris lang={lang} />
 

@@ -17,7 +17,7 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
   return (
     <section 
       id="experience" 
-      className="relative z-20 bg-[#0C121A] text-stone-100 pb-32 pt-8 sm:pt-14"
+      className="relative z-20 bg-[#0C121A] text-stone-100 pb-32 pt-8 sm:pt-14 overflow-x-clip"
     >
       {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
       <div className="absolute top-0 left-0 right-0 -translate-y-[99%] overflow-hidden leading-none pointer-events-none">
