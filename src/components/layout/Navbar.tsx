@@ -14,26 +14,21 @@ interface NavbarProps {
 const LETTERS = ['C', 'O', 'R', 'L', 'E', 'O', 'N', 'E'];
 
 export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
-  const [introStep, setIntroStep] = useState<'building' | 'assembled' | 'flying' | 'done'>('building');
+  const [introStep, setIntroStep] = useState<'intro' | 'flying' | 'done'>('intro');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = DICTIONARY[currentLang].nav;
 
   useEffect(() => {
-    // 1. Letters assemble during first 1.2s -> assembled
-    const assembledTimer = setTimeout(() => {
-      setIntroStep('assembled');
-    }, 1200);
-
-    // 2. Hold in center until 2.3s -> trigger flight to top navbar
+    // 1. Hold in center until 2.2s (letters build from 0.1s to 0.75s, then rest) -> trigger flight
     const flyTimer = setTimeout(() => {
       setIntroStep('flying');
-    }, 2300);
+    }, 2200);
 
-    // 3. Arrive in navbar after 3.5s -> intro complete
+    // 2. Settle in navbar at 3.4s -> intro complete
     const doneTimer = setTimeout(() => {
       setIntroStep('done');
-    }, 3500);
+    }, 3400);
 
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -45,7 +40,6 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      clearTimeout(assembledTimer);
       clearTimeout(flyTimer);
       clearTimeout(doneTimer);
       window.removeEventListener('scroll', handleScroll);
@@ -118,9 +112,9 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                 {LETTERS.map((letter, idx) => (
                   <span
                     key={idx}
-                    className={`inline-block ${introStep === 'building' ? 'animate-letter-build' : 'opacity-100'}`}
+                    className="inline-block animate-letter-build"
                     style={{
-                      animationDelay: `${180 + idx * 110}ms`,
+                      animationDelay: `${100 + idx * 80}ms`,
                     }}
                   >
                     {letter}
@@ -128,14 +122,12 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                 ))}
               </div>
 
-              {/* Subline that builds in after letters */}
+              {/* Subline that builds in smoothly */}
               <span
-                className={`text-[9px] uppercase tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 ${
+                className={`text-[9px] uppercase tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build ${
                   isAtTop
-                    ? 'text-stone-400 opacity-100'
-                    : introStep === 'building'
-                    ? 'animate-subline-build'
-                    : 'text-stone-300 tracking-[0.4em] scale-110 opacity-100'
+                    ? 'text-stone-400'
+                    : 'text-stone-300 tracking-[0.4em] scale-110'
                 }`}
               >
                 BEACH BAR • CUKLIĆEVO
