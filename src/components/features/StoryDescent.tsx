@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { Sun, Sunset, Moon, Volume2, VolumeX, Sparkles, Waves, ArrowRight, Dog, Mountain } from 'lucide-react';
+import { Sun, Sunset, Moon, Sparkles, Waves, ArrowRight, Dog, Mountain } from 'lucide-react';
 import { DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
 import CurvedDivider from '@/components/ui/CurvedDivider';
@@ -12,7 +12,6 @@ interface StoryDescentProps {
 }
 
 export default function StoryDescent({ lang }: StoryDescentProps) {
-  const [soundPlaying, setSoundPlaying] = useState(false);
   const t = DICTIONARY[lang].story;
 
   return (
@@ -55,38 +54,6 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
                 {t.paragraph2}
               </p>
             </div>
-
-            {/* Interactive Ambient Soundwave Bar */}
-            <div className="p-5 rounded-2xl liquid-glass border border-white/15 flex items-center justify-between gap-4 max-w-md">
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => setSoundPlaying(!soundPlaying)}
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all cursor-pointer ${
-                    soundPlaying ? 'bg-amber-500 text-stone-950 shadow-lg shadow-amber-500/30' : 'bg-white/10 text-white hover:bg-white/20'
-                  }`}
-                  aria-label="Toggle ambient vibe"
-                >
-                  {soundPlaying ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5 text-stone-400" />}
-                </button>
-                <div>
-                  <p className="text-xs font-bold text-white uppercase tracking-wider font-mono">
-                    {soundPlaying ? 'Waves & Sunset Beats' : 'Ambient Lounge Vibe'}
-                  </p>
-                  <p className="text-[11px] text-stone-400 font-mono">
-                    {soundPlaying ? 'Broadcasting live ambience' : 'Click to feel the mood'}
-                  </p>
-                </div>
-              </div>
-
-              {/* Animated Equalizer Bars */}
-              <div className="flex items-end gap-1 h-6">
-                <div className={`w-1 bg-amber-400 rounded-full ${soundPlaying ? 'eq-bar-1' : 'h-1.5'}`} />
-                <div className={`w-1 bg-rose-400 rounded-full ${soundPlaying ? 'eq-bar-2' : 'h-3'}`} />
-                <div className={`w-1 bg-amber-300 rounded-full ${soundPlaying ? 'eq-bar-3' : 'h-2'}`} />
-                <div className={`w-1 bg-emerald-400 rounded-full ${soundPlaying ? 'eq-bar-4' : 'h-4'}`} />
-              </div>
-            </div>
-
           </div>
 
           {/* Right Column: Layered Overlapping Parallax Composition (6 Cols) */}
