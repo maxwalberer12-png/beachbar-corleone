@@ -37,91 +37,104 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
     };
   }, []);
 
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'py-3.5 bg-stone-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
-          : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative min-h-[40px]">
-        
-        {/* Left Nav Links */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start">
-          <KineticNavLink
-            href="#experience"
-            label={t.experience}
-            activeColor="text-amber-400"
-          />
-          <KineticNavLink
-            href="#menu"
-            label={t.drinks}
-            activeColor="text-amber-400"
-          />
-        </nav>
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
-        {/* Center Brand Logo */}
-        <div className="flex-1 flex justify-center text-center">
-          <Link
-            href="/"
-            className="flex flex-col items-center group will-change-transform"
-          >
-            {/* Letter-by-Letter Assembly */}
-            <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-black tracking-[0.16em] sm:tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center whitespace-nowrap">
-              {LETTERS.map((letter, idx) => (
-                <span
-                  key={idx}
-                  className="inline-block animate-letter-build"
-                  style={{
-                    animationDelay: `${60 + idx * 50}ms`,
-                  }}
+  return (
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          isScrolled
+            ? 'py-3.5 bg-stone-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
+            : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative min-h-[40px]">
+          
+          {/* Left Nav Links */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start">
+            <KineticNavLink
+              href="#experience"
+              label={t.experience}
+              activeColor="text-amber-400"
+            />
+            <KineticNavLink
+              href="#menu"
+              label={t.drinks}
+              activeColor="text-amber-400"
+            />
+          </nav>
+
+          {/* Center Brand Logo */}
+          <div className="flex-1 flex justify-center text-center">
+            <Link
+              href="/"
+              className="flex flex-col items-center group will-change-transform"
+            >
+              {/* Letter-by-Letter Assembly */}
+              <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-black tracking-[0.16em] sm:tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center whitespace-nowrap">
+                {LETTERS.map((letter, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-block animate-letter-build"
+                    style={{
+                      animationDelay: `${60 + idx * 50}ms`,
+                    }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </div>
+
+              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build whitespace-nowrap text-stone-400">
+                BEACH BAR • CUKLIĆEVO
+              </span>
+            </Link>
+          </div>
+
+          {/* Right Nav Links & Language Switcher */}
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end">
+            <KineticNavLink
+              href="#events"
+              label={t.events}
+              activeColor="text-amber-400"
+            />
+            <KineticNavLink
+              href="#location"
+              label={t.location}
+              activeColor="text-amber-400"
+            />
+
+            {/* Language Switcher */}
+            <div className="flex items-center rounded-full bg-white/10 p-1 border border-white/15 backdrop-blur-md text-[11px] font-mono font-bold text-stone-200 ml-2">
+              {(['en', 'hr', 'de'] as Language[]).map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => onLanguageChange(lang)}
+                  className={`px-2.5 py-0.5 rounded-full uppercase transition-all cursor-pointer ${
+                    currentLang === lang
+                      ? 'bg-amber-500 text-stone-950 font-black shadow-sm'
+                      : 'hover:text-white text-stone-400'
+                  }`}
+                  aria-label={`Switch to ${lang.toUpperCase()}`}
                 >
-                  {letter}
-                </span>
+                  {lang}
+                </button>
               ))}
             </div>
-
-            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build whitespace-nowrap text-stone-400">
-              BEACH BAR • CUKLIĆEVO
-            </span>
-          </Link>
-        </div>
-
-        {/* Right Nav Links & Language Switcher */}
-        <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end">
-          <KineticNavLink
-            href="#events"
-            label={t.events}
-            activeColor="text-amber-400"
-          />
-          <KineticNavLink
-            href="#location"
-            label={t.location}
-            activeColor="text-amber-400"
-          />
-
-          {/* Language Switcher */}
-          <div className="flex items-center rounded-full bg-white/10 p-1 border border-white/15 backdrop-blur-md text-[11px] font-mono font-bold text-stone-200 ml-2">
-            {(['en', 'hr', 'de'] as Language[]).map((lang) => (
-              <button
-                key={lang}
-                onClick={() => onLanguageChange(lang)}
-                className={`px-2.5 py-0.5 rounded-full uppercase transition-all cursor-pointer ${
-                  currentLang === lang
-                    ? 'bg-amber-500 text-stone-950 font-black shadow-sm'
-                    : 'hover:text-white text-stone-400'
-                }`}
-                aria-label={`Switch to ${lang.toUpperCase()}`}
-              >
-                {lang}
-              </button>
-            ))}
           </div>
-        </div>
 
-        {/* Mobile Menu Button & Language Switcher */}
-        <div className="flex items-center gap-2 lg:hidden ml-auto">
+          {/* Mobile Menu Button & Language Switcher */}
+          <div className="flex items-center gap-2 lg:hidden ml-auto">
             <div className="flex items-center rounded-full bg-black/40 p-0.5 border border-white/15 text-[10px] font-mono font-semibold text-stone-200">
               {(['en', 'hr', 'de'] as Language[]).map((lang) => (
                 <button
@@ -139,68 +152,112 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             </div>
 
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen(true)}
               className="p-2 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors cursor-pointer"
-              aria-label="Toggle menu"
+              aria-label="Open menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <Menu className="w-5 h-5" />
             </button>
           </div>
 
         </div>
+      </header>
 
-        {/* Mobile Slide-down Drawer */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#080A0F]/95 backdrop-blur-2xl border-b border-stone-800 px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-200 mt-4">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
+      {/* Luxury Full-Screen Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 bg-[#070509]/98 backdrop-blur-3xl h-screen w-screen flex flex-col justify-between p-6 sm:p-8 animate-in fade-in duration-200 overflow-y-auto">
+          
+          {/* Top Header inside Full-Screen Menu */}
+          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="flex items-center gap-2">
+              <span className="font-serif font-black text-xl text-white tracking-widest uppercase">CORLEONE</span>
+              <span className="text-[9px] uppercase font-mono bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2 py-0.5 rounded-full font-bold">
+                BAR
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {/* Language Switcher inside Overlay */}
+              <div className="flex items-center rounded-full bg-stone-900 p-1 border border-white/15 text-xs font-mono font-bold text-stone-200">
+                {(['en', 'hr', 'de'] as Language[]).map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => onLanguageChange(lang)}
+                    className={`px-2 py-0.5 rounded-full uppercase transition-all ${
+                      currentLang === lang
+                        ? 'bg-amber-500 text-stone-950 font-bold'
+                        : 'text-stone-400'
+                    }`}
+                  >
+                    {lang}
+                  </button>
+                ))}
+              </div>
+
+              {/* Close Button */}
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-10 h-10 rounded-2xl bg-white/10 hover:bg-amber-500 hover:text-stone-950 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer"
+                aria-label="Close menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+
+          {/* Center Navigation Links */}
+          <nav className="my-auto py-8 space-y-4">
+            <a
+              href="#experience"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-2xl sm:text-3xl font-serif font-bold text-stone-200 hover:text-amber-400 transition-colors py-2 border-b border-white/5"
+            >
+              01 • {t.experience}
+            </a>
+            <a
+              href="#menu"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-2xl sm:text-3xl font-serif font-bold text-stone-200 hover:text-amber-400 transition-colors py-2 border-b border-white/5"
+            >
+              02 • {t.drinks}
+            </a>
+            <a
+              href="#events"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-2xl sm:text-3xl font-serif font-bold text-stone-200 hover:text-amber-400 transition-colors py-2 border-b border-white/5"
+            >
+              03 • {t.events}
+            </a>
+            <a
+              href="#location"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-2xl sm:text-3xl font-serif font-bold text-stone-200 hover:text-amber-400 transition-colors py-2 border-b border-white/5"
+            >
+              04 • {t.location}
+            </a>
+          </nav>
+
+          {/* Bottom Info & Quick Action */}
+          <div className="space-y-4 pt-4 border-t border-white/10">
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-dot" />
               <span>{t.openStatus}: <strong className="text-white">{BAR_INFO.regularHours}</strong></span>
             </div>
 
-            <nav className="flex flex-col space-y-3 pt-2">
-              <a
-                href="#experience"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-stone-200 hover:text-amber-400 py-1 transition-colors"
-              >
-                {t.experience}
-              </a>
-              <a
-                href="#menu"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-stone-200 hover:text-amber-400 py-1 transition-colors"
-              >
-                {t.drinks}
-              </a>
-              <a
-                href="#events"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-stone-200 hover:text-amber-400 py-1 transition-colors"
-              >
-                {t.events}
-              </a>
-              <a
-                href="#location"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-stone-200 hover:text-amber-400 py-1 transition-colors"
-              >
-                {t.location}
-              </a>
-            </nav>
-
-            <div className="pt-4 border-t border-stone-800 flex flex-col gap-3">
-              <a
-                href={BAR_INFO.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-amber-500 text-stone-950 font-bold text-sm uppercase tracking-wider shadow-lg"
-              >
-                <Compass className="w-4 h-4" />
-                <span>{t.directions} (Google Maps)</span>
-              </a>
-            </div>
+            <a
+              href={BAR_INFO.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs uppercase tracking-wider shadow-lg transition-all active:scale-95"
+            >
+              <Compass className="w-4 h-4" />
+              <span>{t.directions} (Google Maps)</span>
+            </a>
           </div>
-        )}
-      </header>
+
+        </div>
+      )}
+    </>
   );
 }
