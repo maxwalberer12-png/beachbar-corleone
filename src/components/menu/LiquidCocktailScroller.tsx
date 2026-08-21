@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { Sparkles, Wine, Coffee, GlassWater, Utensils, Droplets, Check, Compass, ChevronRight, ChevronLeft, Flame } from 'lucide-react';
-import { SIGNATURE_COCKTAILS, MENU_CATEGORIES, DICTIONARY, BAR_INFO } from '@/lib/data';
+import { DICTIONARY, BAR_INFO } from '@/lib/data';
+import { useMenuData } from '@/lib/menuStore';
 import { Language, SignatureCocktail } from '@/lib/types';
 import CurvedDivider from '@/components/ui/CurvedDivider';
 
@@ -15,8 +16,11 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
   const [activeCategoryTab, setActiveCategoryTab] = useState<string>('coffee');
   const t = DICTIONARY[lang].menu;
 
-  const currentCocktail = SIGNATURE_COCKTAILS[selectedCocktailIndex];
-  const activeCategory = MENU_CATEGORIES.find((cat) => cat.id === activeCategoryTab) || MENU_CATEGORIES[0];
+  const { signatureCocktails, menuCategories } = useMenuData();
+
+  const safeIndex = selectedCocktailIndex < signatureCocktails.length ? selectedCocktailIndex : 0;
+  const currentCocktail = signatureCocktails[safeIndex] || signatureCocktails[0];
+  const activeCategory = menuCategories.find((cat) => cat.id === activeCategoryTab) || menuCategories[0] || { id: 'default', title: { de: 'Menü', hr: 'Meni', en: 'Menu' }, iconName: 'GlassWater', items: [] };
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
@@ -66,7 +70,7 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
             <button
               onClick={() =>
                 setSelectedCocktailIndex((prev) =>
-                  prev === 0 ? SIGNATURE_COCKTAILS.length - 1 : prev - 1
+                  prev === 0 ? signatureCocktails.length - 1 : prev - 1
                 )
               }
               className="w-12 h-12 rounded-full liquid-glass border border-white/20 hover:border-amber-400 text-white flex items-center justify-center transition-all cursor-pointer hover:scale-105"
@@ -75,12 +79,12 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
               <ChevronLeft className="w-6 h-6" />
             </button>
             <span className="text-xs font-mono text-stone-400 tracking-widest">
-              0{selectedCocktailIndex + 1} / 0{SIGNATURE_COCKTAILS.length}
+              0{selectedCocktailIndex + 1} / 0{signatureCocktails.length}
             </span>
             <button
               onClick={() =>
                 setSelectedCocktailIndex((prev) =>
-                  prev === SIGNATURE_COCKTAILS.length - 1 ? 0 : prev + 1
+                  prev === signatureCocktails.length - 1 ? 0 : prev + 1
                 )
               }
               className="w-12 h-12 rounded-full liquid-glass border border-white/20 hover:border-amber-400 text-white flex items-center justify-center transition-all cursor-pointer hover:scale-105"
@@ -154,7 +158,7 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
 
               {/* Cocktail Selector Pills */}
               <div className="grid grid-cols-2 gap-2 w-full">
-                {SIGNATURE_COCKTAILS.map((cocktail, idx) => {
+                {signatureCocktails.map((cocktail, idx) => {
                   const displayName = typeof cocktail.name === 'string' ? cocktail.name : cocktail.name[lang];
                   return (
                     <button
@@ -188,7 +192,7 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
 
             {/* Category Selector Tabs */}
             <div className="flex flex-wrap items-center gap-2">
-              {MENU_CATEGORIES.map((cat) => (
+              {menuCategories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategoryTab(cat.id)}
@@ -210,12 +214,19 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
             {activeCategory.items.map((item, index) => (
               <div
                 key={index}
-                className="p-5 rounded-2xl bg-stone-950/80 border border-stone-800 hover:border-amber-500/40 transition-colors flex flex-col justify-between"
+                className={`p-5 rounded-2xl bg-stone-950/80 border border-stone-800 hover:border-amber-500/40 transition-colors flex flex-col justify-between ${
+                  item.isSoldOut ? 'opacity-40' : ''
+                }`}
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
-                    <h4 className="font-semibold text-white text-base font-sans">
-                      {item.name[lang]}
+                    <h4 className="font-semibold text-white text-base font-sans flex items-center gap-2">
+                      <span>{item.name[lang]}</span>
+                      {item.isSoldOut && (
+                        <span className="text-[9px] font-mono uppercase bg-rose-500/20 text-rose-400 border border-rose-500/40 px-1.5 py-0.2 rounded font-bold">
+                          Ausverkauft
+                        </span>
+                      )}
                     </h4>
                     <span className="font-bold text-amber-400 font-serif whitespace-nowrap text-sm">
                       {item.price}

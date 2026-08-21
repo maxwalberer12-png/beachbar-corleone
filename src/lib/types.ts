@@ -20,11 +20,13 @@ export interface SignatureCocktail {
 }
 
 export interface MenuItem {
+  id?: string;
   name: Record<Language, string>;
   description?: Record<Language, string>;
   price: string;
   tags?: string[];
   isPopular?: boolean;
+  isSoldOut?: boolean;
 }
 
 export interface MenuCategory {
