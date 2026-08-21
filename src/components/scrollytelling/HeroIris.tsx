@@ -135,10 +135,10 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         ref={stickyRef}
         className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#070509] gpu-layer"
       >
-        {/* Background Typography */}
+        {/* Background Typography (Desktop only) */}
         <div 
           ref={ghostTextRef}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20 overflow-hidden will-change-transform"
+          className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none z-0 opacity-15 overflow-hidden will-change-transform"
         >
           <span className="text-[24vw] font-serif font-black tracking-tighter text-stroke-white whitespace-nowrap select-none">
             CORLEONE
@@ -167,8 +167,10 @@ export default function HeroIris({ lang }: HeroIrisProps) {
               sizes="100vw"
               className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-black/60" />
-            <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
+            {/* High-Contrast Atmospheric Overlay for Crisp Text Legibility */}
+            <div className="absolute inset-0 bg-stone-950/35" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-black/70" />
+            <div className="absolute inset-0 bg-radial-at-c from-black/20 via-black/40 to-black/80" />
           </div>
         </div>
 
@@ -181,49 +183,51 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         {/* Hero Content */}
         <div 
           ref={contentRef}
-          className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-20 sm:pt-16 gpu-layer"
+          className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-16 sm:pt-16 gpu-layer"
         >
-          <h1 className={`w-full text-center font-serif font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-2xl ${
+          <h1 className={`w-full text-center font-serif font-black tracking-tight text-white uppercase leading-[0.98] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] ${
             lang === 'hr'
               ? 'text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
               : 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl'
           }`}>
-            <span className="block text-stone-100 text-center w-full whitespace-pre-line animate-hero-text-1">{t.titleStart}</span>
-            <span className="block animate-liquid-gradient text-center w-full whitespace-pre-line animate-hero-text-2">
+            <span className="block text-white text-center w-full whitespace-pre-line animate-hero-text-1">{t.titleStart}</span>
+            <span className="block text-amber-400 sm:animate-liquid-gradient text-center w-full whitespace-pre-line animate-hero-text-2 drop-shadow-md">
               {t.titleAccent}
             </span>
-            <span className="block text-stone-200 text-center w-full whitespace-pre-line animate-hero-text-3">{t.titleEnd}</span>
+            <span className="block text-stone-100 text-center w-full whitespace-pre-line animate-hero-text-3">{t.titleEnd}</span>
           </h1>
 
-          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-stone-200 font-sans font-light max-w-xl mx-auto text-center leading-relaxed text-balance px-2 animate-hero-sub">
+          <p className="mt-3 sm:mt-5 text-xs sm:text-base md:text-lg text-stone-200 font-sans font-medium max-w-xl mx-auto text-center leading-relaxed text-balance px-2 animate-hero-sub drop-shadow-md">
             {t.subtitle}
           </p>
 
-          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm sm:max-w-3xl px-2 animate-hero-buttons">
+          <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full max-w-xs sm:max-w-3xl px-2 animate-hero-buttons">
             <KineticButton
               href="#menu"
               label={t.btnMenu}
               icon={<Utensils className="w-4 h-4 sm:w-5 sm:h-5 text-stone-950" />}
-              className="w-full sm:flex-1 min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl active:scale-95 sm:hover:scale-105"
+              className="w-full sm:flex-1 min-h-[46px] sm:min-h-[48px] px-5 py-3 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl active:scale-95 sm:hover:scale-105"
             />
 
-            <KineticButton
-              href="#events"
-              label={t.btnEvents}
-              icon={<Music className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />}
-              hoverColor="text-amber-300"
-              className="w-full sm:flex-1 min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
-            />
+            <div className="grid grid-cols-2 gap-2 w-full sm:flex sm:flex-1 sm:gap-3">
+              <KineticButton
+                href="#events"
+                label={t.btnEvents}
+                icon={<Music className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-amber-400" />}
+                hoverColor="text-amber-300"
+                className="w-full min-h-[44px] sm:min-h-[48px] px-3 sm:px-5 py-2.5 sm:py-4 rounded-2xl bg-stone-900/90 hover:bg-stone-800 text-white font-bold text-[11px] sm:text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
+              />
 
-            <KineticButton
-              href={BAR_INFO.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              label={t.btnRoute}
-              icon={<Compass className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />}
-              hoverColor="text-amber-300"
-              className="w-full sm:flex-1 min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-white/20 shadow-xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
-            />
+              <KineticButton
+                href={BAR_INFO.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                label={t.btnRoute}
+                icon={<Compass className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-amber-300" />}
+                hoverColor="text-amber-300"
+                className="w-full min-h-[44px] sm:min-h-[48px] px-3 sm:px-5 py-2.5 sm:py-4 rounded-2xl bg-stone-900/90 hover:bg-stone-800 text-white font-bold text-[11px] sm:text-sm uppercase tracking-wider border border-white/20 shadow-xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
+              />
+            </div>
           </div>
 
           <div 

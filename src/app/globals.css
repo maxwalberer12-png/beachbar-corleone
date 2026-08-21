@@ -179,3 +179,15 @@
   opacity: 0;
   animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
 }
+
+/* Ensure Instant High-Contrast Legibility on Mobile */
+@media (max-width: 767px) {
+  .animate-hero-text-1,
+  .animate-hero-text-2,
+  .animate-hero-text-3,
+  .animate-hero-sub,
+  .animate-hero-buttons {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
