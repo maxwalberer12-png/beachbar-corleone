@@ -62,7 +62,9 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
               src="/images/night-vibe.jpg"
               alt="Night party and lights at Beach Bar Corleone"
               fill
-              sizes="100vw"
+              loading="lazy"
+              quality={75}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
               className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
@@ -93,7 +95,9 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
               src="/images/day-drinks.jpg"
               alt="Daytime coffee and drinks at Beach Bar Corleone"
               fill
-              sizes="100vw"
+              loading="lazy"
+              quality={75}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
               className="object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />

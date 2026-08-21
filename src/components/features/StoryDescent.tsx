@@ -68,6 +68,8 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
                 src="/images/day-drinks.jpg"
                 alt="Artisan drinks on limestone terrace overlooking the sea at Beach Bar Corleone"
                 fill
+                loading="lazy"
+                quality={75}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -88,6 +90,8 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
                 src="/images/sunset-cocktail.jpg"
                 alt="Sunset cocktail at Corleone"
                 fill
+                loading="lazy"
+                quality={75}
                 sizes="300px"
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
               />

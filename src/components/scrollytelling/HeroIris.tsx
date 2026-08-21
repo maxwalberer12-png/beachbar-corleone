@@ -31,115 +31,96 @@ export default function HeroIris({ lang }: HeroIrisProps) {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      const isMobile = window.innerWidth < 768;
-      const initialRadius = isMobile ? '24vmax' : '28vmax';
+    const mm = gsap.matchMedia();
 
-      // Master scrollytelling timeline linked to scroll progress with momentum scrubbing
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1.2, // Smooth interpolation / momentum lag
-          invalidateOnRefresh: true,
-        },
-      });
+    mm.add(
+      {
+        isMobile: '(max-width: 767px)',
+        isDesktop: '(min-width: 768px)',
+      },
+      (context) => {
+        const { isMobile } = context.conditions as { isMobile: boolean; isDesktop: boolean };
+        const initialRadius = isMobile ? '24vmax' : '28vmax';
 
-      // 1. Circular Iris Mask Expansion (0% -> 80% scroll progress reaches full screen bleed)
-      tl.fromTo(
-        maskRef.current,
-        {
-          clipPath: `circle(${initialRadius} at 50% 50%)`,
-          WebkitClipPath: `circle(${initialRadius} at 50% 50%)`,
-        },
-        {
-          clipPath: 'circle(140vmax at 50% 50%)',
-          WebkitClipPath: 'circle(140vmax at 50% 50%)',
-          ease: 'power2.inOut',
-          duration: 0.8,
-        },
-        0
-      );
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      // 2. Luminous Glowing Ring (Expands with circle, fades out as it clears viewport)
-      if (ringRef.current) {
         tl.fromTo(
-          ringRef.current,
+          maskRef.current,
           {
-            scale: 1,
-            opacity: 0.85,
+            clipPath: `circle(${initialRadius} at 50% 50%)`,
+            WebkitClipPath: `circle(${initialRadius} at 50% 50%)`,
           },
           {
-            scale: isMobile ? 5.8 : 5.0,
-            opacity: 0,
+            clipPath: 'circle(140vmax at 50% 50%)',
+            WebkitClipPath: 'circle(140vmax at 50% 50%)',
             ease: 'power2.inOut',
             duration: 0.8,
           },
           0
         );
-      }
 
-      // 3. Cinematic Parallax Zoom on the Cliffside Background Image
-      if (imageRef.current) {
-        tl.fromTo(
-          imageRef.current,
-          {
-            scale: 1.18,
-          },
-          {
-            scale: 1.0,
-            ease: 'power1.out',
-            duration: 1.0,
-          },
-          0
-        );
-      }
+        if (ringRef.current) {
+          tl.fromTo(
+            ringRef.current,
+            {
+              scale: 1,
+              opacity: 0.85,
+            },
+            {
+              scale: isMobile ? 5.8 : 5.0,
+              opacity: 0,
+              ease: 'power2.inOut',
+              duration: 0.8,
+            },
+            0
+          );
+        }
 
-      // 4. Hero Content Fade-out and Float Upward
-      if (contentRef.current) {
-        tl.to(
-          contentRef.current,
-          {
-            autoAlpha: 0, // Fades opacity & sets visibility: hidden to prevent ghost clicks
-            y: -75,
-            ease: 'power2.in',
-            duration: 0.55,
-          },
-          0
-        );
-      }
+        if (imageRef.current) {
+          tl.fromTo(
+            imageRef.current,
+            { scale: 1.18 },
+            { scale: 1.0, ease: 'power1.out', duration: 1.0 },
+            0
+          );
+        }
 
-      // 5. Scroll Prompt Indicator (Disappears swiftly upon starting scroll)
-      if (scrollIndicatorRef.current) {
-        tl.to(
-          scrollIndicatorRef.current,
-          {
-            opacity: 0,
-            y: 20,
-            ease: 'power1.out',
-            duration: 0.25,
-          },
-          0
-        );
-      }
+        if (contentRef.current) {
+          tl.to(
+            contentRef.current,
+            { autoAlpha: 0, y: -75, ease: 'power2.in', duration: 0.55 },
+            0
+          );
+        }
 
-      // 6. Background Ghost Typography Subtile Scale & Depth Drift
-      if (ghostTextRef.current) {
-        tl.to(
-          ghostTextRef.current,
-          {
-            scale: 1.2,
-            opacity: 0.05,
-            ease: 'power1.inOut',
-            duration: 1.0,
-          },
-          0
-        );
-      }
-    }, containerRef);
+        if (scrollIndicatorRef.current) {
+          tl.to(
+            scrollIndicatorRef.current,
+            { opacity: 0, y: 20, ease: 'power1.out', duration: 0.25 },
+            0
+          );
+        }
 
-    return () => ctx.revert();
+        if (ghostTextRef.current) {
+          tl.to(
+            ghostTextRef.current,
+            { scale: 1.2, opacity: 0.05, ease: 'power1.inOut', duration: 1.0 },
+            0
+          );
+        }
+      },
+      containerRef
+    );
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -180,6 +161,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
               alt="Beach Bar Corleone Cliffside Panorama"
               fill
               priority
+              quality={80}
               sizes="100vw"
               className="object-cover object-center"
             />
