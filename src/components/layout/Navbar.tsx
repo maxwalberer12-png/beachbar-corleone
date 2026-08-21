@@ -15,22 +15,11 @@ interface NavbarProps {
 const LETTERS = ['C', 'O', 'R', 'L', 'E', 'O', 'N', 'E'];
 
 export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
-  const [introStep, setIntroStep] = useState<'intro' | 'flying' | 'done'>('intro');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = DICTIONARY[currentLang].nav;
 
   useEffect(() => {
-    // 1. Letters assemble smoothly (0.06s to 0.5s), subline settles at ~1.0s -> trigger flight at 1.15s
-    const flyTimer = setTimeout(() => {
-      setIntroStep('flying');
-    }, 1150);
-
-    // 2. Settle in navbar at 1.8s -> intro complete
-    const doneTimer = setTimeout(() => {
-      setIntroStep('done');
-    }, 1800);
-
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -44,100 +33,63 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      clearTimeout(flyTimer);
-      clearTimeout(doneTimer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  const isAtTop = introStep === 'flying' || introStep === 'done';
-
   return (
-    <>
-      {/* Dark Ambient Backdrop during Intro Phase */}
-      <div
-        className={`fixed inset-0 z-40 bg-[#070509] transition-opacity duration-700 pointer-events-none ${
-          introStep === 'intro' ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? 'py-3.5 bg-stone-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
+          : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative min-h-[40px]">
+        
+        {/* Left Nav Links */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start">
+          <KineticNavLink
+            href="#experience"
+            label={t.experience}
+            activeColor="text-amber-400"
+          />
+          <KineticNavLink
+            href="#menu"
+            label={t.drinks}
+            activeColor="text-amber-400"
+          />
+        </nav>
 
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'py-3.5 bg-stone-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
-            : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative min-h-[40px]">
-          
-          {/* Left Nav Links with kinetic rolling typography hover animation */}
-          <nav
-            className={`hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start transition-all duration-500 delay-150 ${
-              isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
-            }`}
+        {/* Center Brand Logo */}
+        <div className="flex-1 flex justify-center text-center">
+          <Link
+            href="/"
+            className="flex flex-col items-center group will-change-transform"
           >
-            <KineticNavLink
-              href="#experience"
-              label={t.experience}
-              activeColor="text-amber-400"
-            />
-            <KineticNavLink
-              href="#menu"
-              label={t.drinks}
-              activeColor="text-amber-400"
-            />
-          </nav>
+            {/* Letter-by-Letter Assembly */}
+            <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-black tracking-[0.16em] sm:tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center whitespace-nowrap">
+              {LETTERS.map((letter, idx) => (
+                <span
+                  key={idx}
+                  className="inline-block animate-letter-build"
+                  style={{
+                    animationDelay: `${60 + idx * 60}ms`,
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
 
-          {/* Left Spacer on Mobile to keep center logo 100% symmetrically centered during intro */}
-          <div className="lg:hidden flex-1" />
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build whitespace-nowrap text-stone-400">
+              BEACH BAR • CUKLIĆEVO
+            </span>
+          </Link>
+        </div>
 
-          {/* Center Travelling Brand Logo: Assembles letter-by-letter in center, then glides to top navbar */}
-          <div className="flex-1 flex justify-center text-center">
-            <Link
-              href="/"
-              className="flex flex-col items-center group will-change-transform"
-              style={{
-                transform: isAtTop
-                  ? 'translateY(0) scale(1)'
-                  : 'translateY(calc(46vh - 2rem)) scale(1.3)',
-                transition: 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)',
-                transformOrigin: 'top center',
-              }}
-            >
-              {/* Kinetic Letter-by-Letter Assembly */}
-              <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-black tracking-[0.16em] sm:tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center whitespace-nowrap">
-                {LETTERS.map((letter, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-block animate-letter-build"
-                    style={{
-                      animationDelay: `${60 + idx * 60}ms`,
-                    }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </div>
-
-              {/* Subline that builds in smoothly */}
-              <span
-                className={`text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build whitespace-nowrap ${
-                  isAtTop
-                    ? 'text-stone-400'
-                    : 'text-stone-300 tracking-[0.35em] scale-110'
-                }`}
-              >
-                BEACH BAR • CUKLIĆEVO
-              </span>
-            </Link>
-          </div>
-
-          {/* Right Nav Links with kinetic rolling typography hover animation & Language Switcher */}
-          <div
-            className={`hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end transition-all duration-500 delay-150 ${
-              isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
-            }`}
-          >
+        {/* Right Nav Links & Language Switcher */}
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end">
             <KineticNavLink
               href="#events"
               label={t.events}
@@ -168,12 +120,8 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
             </div>
           </div>
 
-          {/* Mobile Menu Button & Language Switcher (Fade in once logo arrives at top) */}
-          <div
-            className={`flex items-center gap-2 lg:hidden ml-auto transition-all duration-500 delay-150 ${
-              isAtTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-          >
+          {/* Mobile Menu Button & Language Switcher */}
+          <div className="flex items-center gap-2 lg:hidden ml-auto">
             <div className="flex items-center rounded-full bg-black/40 p-0.5 border border-white/15 text-[10px] font-mono font-semibold text-stone-200">
               {(['en', 'hr', 'de'] as Language[]).map((lang) => (
                 <button
@@ -254,6 +202,5 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
           </div>
         )}
       </header>
-    </>
   );
 }

@@ -27,7 +27,13 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize Lenis
+    // Bypass Lenis on mobile/touch devices for native high-performance momentum scrolling
+    const isTouch = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
+    if (isTouch) {
+      return;
+    }
+
+    // Initialize Lenis on desktop
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
