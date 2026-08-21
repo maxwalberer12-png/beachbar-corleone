@@ -15,7 +15,7 @@ export default function ConsentModal({ lang }: ConsentModalProps) {
   useEffect(() => {
     const consent = localStorage.getItem('corleone_consent');
     if (!consent) {
-      const timer = setTimeout(() => setIsOpen(true), 1200);
+      const timer = setTimeout(() => setIsOpen(true), 3500);
       return () => clearTimeout(timer);
     }
   }, []);
