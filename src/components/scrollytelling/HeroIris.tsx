@@ -201,33 +201,31 @@ export default function HeroIris({ lang }: HeroIrisProps) {
             {t.subtitle}
           </p>
 
-          <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full max-w-xs sm:max-w-3xl px-2 animate-hero-buttons">
+          <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-sm sm:max-w-3xl px-2 animate-hero-buttons">
             <KineticButton
               href="#menu"
               label={t.btnMenu}
               icon={<Utensils className="w-4 h-4 sm:w-5 sm:h-5 text-stone-950" />}
-              className="w-full sm:flex-1 min-h-[46px] sm:min-h-[48px] px-5 py-3 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl active:scale-95 sm:hover:scale-105"
+              className="w-full min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl active:scale-95 sm:hover:scale-105"
             />
 
-            <div className="grid grid-cols-2 gap-2 w-full sm:flex sm:flex-1 sm:gap-3">
-              <KineticButton
-                href="#events"
-                label={t.btnEvents}
-                icon={<Music className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-amber-400" />}
-                hoverColor="text-amber-300"
-                className="w-full min-h-[44px] sm:min-h-[48px] px-3 sm:px-5 py-2.5 sm:py-4 rounded-2xl bg-stone-900/90 hover:bg-stone-800 text-white font-bold text-[11px] sm:text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
-              />
+            <KineticButton
+              href="#events"
+              label={t.btnEvents}
+              icon={<Music className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />}
+              hoverColor="text-amber-300"
+              className="w-full min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/90 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
+            />
 
-              <KineticButton
-                href={BAR_INFO.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                label={t.btnRoute}
-                icon={<Compass className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-amber-300" />}
-                hoverColor="text-amber-300"
-                className="w-full min-h-[44px] sm:min-h-[48px] px-3 sm:px-5 py-2.5 sm:py-4 rounded-2xl bg-stone-900/90 hover:bg-stone-800 text-white font-bold text-[11px] sm:text-sm uppercase tracking-wider border border-white/20 shadow-xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
-              />
-            </div>
+            <KineticButton
+              href={BAR_INFO.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              label={t.btnRoute}
+              icon={<Compass className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />}
+              hoverColor="text-amber-300"
+              className="w-full min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/90 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-white/20 shadow-xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
+            />
           </div>
 
           <div 
