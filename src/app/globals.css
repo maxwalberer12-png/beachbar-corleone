@@ -145,21 +145,6 @@
   }
 }
 
-@keyframes hero-portal-smooth {
-  0% {
-    opacity: 0.2;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-hero-portal {
-  animation: hero-portal-smooth 1.35s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
-
 .animate-hero-text-1 {
   opacity: 0;
   animation: hero-fade-up-smooth 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.12s forwards;

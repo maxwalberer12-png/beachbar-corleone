@@ -146,7 +146,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         {/* Expanding Circular Iris Mask */}
         <div 
           ref={maskRef}
-          className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path] gpu-layer animate-hero-portal"
+          className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path] gpu-layer"
           style={{
             clipPath: 'circle(28vmax at 50% 50%)',
             WebkitClipPath: 'circle(28vmax at 50% 50%)',
@@ -173,7 +173,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         {/* Ambient Ring Border */}
         <div
           ref={ringRef}
-          className="absolute z-15 pointer-events-none rounded-full w-[48vmax] h-[48vmax] md:w-[56vmax] md:h-[56vmax] border border-amber-400/50 shadow-[0_0_50px_rgba(245,158,11,0.4),inset_0_0_40px_rgba(245,158,11,0.2)] will-change-transform gpu-layer animate-hero-portal"
+          className="absolute z-15 pointer-events-none rounded-full w-[48vmax] h-[48vmax] md:w-[56vmax] md:h-[56vmax] border border-amber-400/50 shadow-[0_0_50px_rgba(245,158,11,0.4),inset_0_0_40px_rgba(245,158,11,0.2)] will-change-transform gpu-layer"
         />
 
         {/* Hero Content */}
