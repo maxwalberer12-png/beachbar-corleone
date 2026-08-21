@@ -50,6 +50,9 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
         {/* Asymmetrical Left-Aligned Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 pb-8 border-b border-white/10">
           <div className="max-w-2xl text-left space-y-3">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-400 bg-amber-950/80 border border-amber-500/30 px-3.5 py-1.5 rounded-full inline-block">
+              {t.eyebrow}
+            </span>
             <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-black text-white tracking-tight leading-[0.95]">
               {t.title}
             </h2>
@@ -95,11 +98,21 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
             {/* Left: Drink Story & Ingredients (7 Cols) */}
             <div className="lg:col-span-7 space-y-6 text-left">
               <div>
+                <div className="flex flex-wrap items-center gap-3 mb-2">
+                  <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">
+                    {currentCocktail.category[lang]}
+                  </span>
+                  {currentCocktail.badge && (
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300">
+                      ★ {currentCocktail.badge[lang]}
+                    </span>
+                  )}
+                </div>
                 <h3 className="text-4xl sm:text-6xl font-serif font-black text-white leading-tight">
-                  {currentCocktail.name}
+                  {typeof currentCocktail.name === 'string' ? currentCocktail.name : currentCocktail.name[lang]}
                 </h3>
                 <p className="text-base sm:text-lg italic text-amber-300/90 mt-1 font-serif">
-                  „{currentCocktail.tagline}“
+                  „{currentCocktail.tagline[lang]}“
                 </p>
               </div>
 
@@ -110,10 +123,10 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
               {/* Alchemy Ingredients Tags */}
               <div className="space-y-2 pt-2">
                 <span className="text-xs font-mono uppercase tracking-widest text-stone-400 block">
-                  CRAFTED WITH:
+                  {t.craftedWith}
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {currentCocktail.ingredients.map((ing, idx) => (
+                  {currentCocktail.ingredients[lang].map((ing, idx) => (
                     <span
                       key={idx}
                       className="text-xs px-3.5 py-1.5 rounded-xl bg-black/60 border border-white/15 text-stone-200 font-mono font-medium shadow-inner"
@@ -129,34 +142,37 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
             <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-8">
               <div className="p-8 rounded-3xl bg-black/40 border border-white/10 w-full text-center space-y-4">
                 <span className="text-xs font-mono uppercase tracking-widest text-stone-400">
-                  ALCOHOL BY VOLUME: {currentCocktail.alcoholContent}
+                  {t.abvLabel} {currentCocktail.alcoholContent}
                 </span>
                 <p className="text-5xl sm:text-6xl font-serif font-black text-amber-400">
                   {currentCocktail.price}
                 </p>
                 <p className="text-xs text-stone-400 font-mono">
-                  Prepared fresh at the cliffside bar with crystal clear ice
+                  {t.freshNotice}
                 </p>
               </div>
 
               {/* Cocktail Selector Pills */}
               <div className="grid grid-cols-2 gap-2 w-full">
-                {SIGNATURE_COCKTAILS.map((cocktail, idx) => (
-                  <button
-                    key={cocktail.id}
-                    onClick={() => setSelectedCocktailIndex(idx)}
-                    className={`p-3.5 rounded-2xl text-left text-xs font-mono font-bold transition-all cursor-pointer border ${
-                      selectedCocktailIndex === idx
-                        ? 'bg-white text-stone-950 border-white shadow-xl scale-[1.02]'
-                        : 'bg-stone-900/80 text-stone-300 border-stone-800 hover:border-white/30'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="truncate">{cocktail.name.split(' ')[0]}</span>
-                      <span>{cocktail.price}</span>
-                    </div>
-                  </button>
-                ))}
+                {SIGNATURE_COCKTAILS.map((cocktail, idx) => {
+                  const displayName = typeof cocktail.name === 'string' ? cocktail.name : cocktail.name[lang];
+                  return (
+                    <button
+                      key={cocktail.id}
+                      onClick={() => setSelectedCocktailIndex(idx)}
+                      className={`p-3.5 rounded-2xl text-left text-xs font-mono font-bold transition-all cursor-pointer border ${
+                        selectedCocktailIndex === idx
+                          ? 'bg-white text-stone-950 border-white shadow-xl scale-[1.02]'
+                          : 'bg-stone-900/80 text-stone-300 border-stone-800 hover:border-white/30'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="truncate">{displayName.split(' ')[0]}</span>
+                        <span>{cocktail.price}</span>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -224,7 +240,7 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
           </div>
 
           <p className="text-xs text-stone-500 text-left mt-4 font-mono">
-            * {BAR_INFO.seasonNotice[lang]} • All prices in Euro (€) incl. VAT.
+            * {BAR_INFO.seasonNotice[lang]} • {t.vatNotice}
           </p>
         </div>
 

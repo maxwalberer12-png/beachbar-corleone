@@ -82,7 +82,7 @@ export default function LiveStatusCard({ lang }: LiveStatusCardProps) {
                 className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-900 text-xs font-bold tracking-wider transition-colors cursor-pointer"
               >
                 <Phone className="w-4 h-4 text-amber-600" />
-                <span>{common.callUsBtn}</span>
+                <span>{common.phoneLabel}</span>
               </a>
               <a
                 href={BAR_INFO.mapsUrl}

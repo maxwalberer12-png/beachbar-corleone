@@ -42,9 +42,9 @@ export default function SchemeHero({ lang }: SchemeHeroProps) {
         {/* Animated Liquid Gradient Sub-Headline */}
         <div className="mt-4 mb-8 max-w-2xl">
           <p className="text-2xl sm:text-4xl md:text-5xl font-serif font-black tracking-tight uppercase leading-tight">
-            <span className="text-stone-200">SEA VIEWS. </span>
-            <span className="animate-liquid-gradient">COCKTAILS. </span>
-            <span className="text-stone-200">SUNSET VIBES.</span>
+            <span className="text-stone-200">{t.titleStart} </span>
+            <span className="animate-liquid-gradient">{t.titleAccent} </span>
+            <span className="text-stone-200">{t.titleEnd}</span>
           </p>
           <p className="mt-4 text-stone-400 font-sans text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
             {t.subtitle}
@@ -86,7 +86,7 @@ export default function SchemeHero({ lang }: SchemeHeroProps) {
         {/* Minimal Scroll Down Cue */}
         <div className="mt-16 flex items-center gap-2 text-xs font-mono text-stone-500 uppercase tracking-widest animate-bounce">
           <ArrowDown className="w-4 h-4 text-amber-400" />
-          <span>EXPLORE THE CLIFF</span>
+          <span>{t.scrollHint}</span>
         </div>
 
       </div>

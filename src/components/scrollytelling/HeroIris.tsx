@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Compass, ArrowDown, Utensils, Music } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BAR_INFO, DICTIONARY } from '@/lib/data';
 import { Language } from '@/lib/types';
 import KineticButton from '@/components/ui/KineticButton';
@@ -14,90 +16,197 @@ interface HeroIrisProps {
 
 export default function HeroIris({ lang }: HeroIrisProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const maskRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const ghostTextRef = useRef<HTMLDivElement>(null);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+
   const t = DICTIONARY[lang].hero;
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const totalScrollableDistance = rect.height - windowHeight;
+    if (typeof window === 'undefined') return;
 
-      if (totalScrollableDistance <= 0) return;
+    gsap.registerPlugin(ScrollTrigger);
 
-      const currentScroll = -rect.top;
-      const calculatedProgress = Math.min(
-        Math.max(currentScroll / totalScrollableDistance, 0),
-        1
+    const ctx = gsap.context(() => {
+      const isMobile = window.innerWidth < 768;
+      const initialRadius = isMobile ? '24vmax' : '28vmax';
+
+      // Master scrollytelling timeline linked to scroll progress with momentum scrubbing
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1.2, // Smooth interpolation / momentum lag
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // 1. Circular Iris Mask Expansion (0% -> 80% scroll progress reaches full screen bleed)
+      tl.fromTo(
+        maskRef.current,
+        {
+          clipPath: `circle(${initialRadius} at 50% 50%)`,
+          WebkitClipPath: `circle(${initialRadius} at 50% 50%)`,
+        },
+        {
+          clipPath: 'circle(140vmax at 50% 50%)',
+          WebkitClipPath: 'circle(140vmax at 50% 50%)',
+          ease: 'power2.inOut',
+          duration: 0.8,
+        },
+        0
       );
-      setProgress(calculatedProgress);
-    };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+      // 2. Luminous Glowing Ring (Expands with circle, fades out as it clears viewport)
+      if (ringRef.current) {
+        tl.fromTo(
+          ringRef.current,
+          {
+            scale: 1,
+            opacity: 0.85,
+          },
+          {
+            scale: isMobile ? 5.8 : 5.0,
+            opacity: 0,
+            ease: 'power2.inOut',
+            duration: 0.8,
+          },
+          0
+        );
+      }
+
+      // 3. Cinematic Parallax Zoom on the Cliffside Background Image
+      if (imageRef.current) {
+        tl.fromTo(
+          imageRef.current,
+          {
+            scale: 1.18,
+          },
+          {
+            scale: 1.0,
+            ease: 'power1.out',
+            duration: 1.0,
+          },
+          0
+        );
+      }
+
+      // 4. Hero Content Fade-out and Float Upward
+      if (contentRef.current) {
+        tl.to(
+          contentRef.current,
+          {
+            autoAlpha: 0, // Fades opacity & sets visibility: hidden to prevent ghost clicks
+            y: -75,
+            ease: 'power2.in',
+            duration: 0.55,
+          },
+          0
+        );
+      }
+
+      // 5. Scroll Prompt Indicator (Disappears swiftly upon starting scroll)
+      if (scrollIndicatorRef.current) {
+        tl.to(
+          scrollIndicatorRef.current,
+          {
+            opacity: 0,
+            y: 20,
+            ease: 'power1.out',
+            duration: 0.25,
+          },
+          0
+        );
+      }
+
+      // 6. Background Ghost Typography Subtile Scale & Depth Drift
+      if (ghostTextRef.current) {
+        tl.to(
+          ghostTextRef.current,
+          {
+            scale: 1.2,
+            opacity: 0.05,
+            ease: 'power1.inOut',
+            duration: 1.0,
+          },
+          0
+        );
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
-  // Circle radius: Starts at 28vmax, reaches 120vmax at progress = 0.75 (100% full bleed), unpins at 1.0
-  const isFullyOpen = progress >= 0.75;
-  const circleRadius = isFullyOpen ? 150 : 28 + (progress / 0.75) * 105;
-  const contentOpacity = Math.max(0, 1 - progress * 2.0);
-  const contentTranslateY = progress * -80;
-  const imageScale = 1.05 + progress * 0.12;
-
   return (
-    <section ref={containerRef} className="relative h-[240vh] w-full bg-[#070509] select-none">
-      
-      {/* Sticky Pinned Viewport Container (Remains pinned at top during the entire circle expansion) */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#070509]">
-        
+    <section 
+      ref={containerRef} 
+      className="relative h-[230vh] w-full bg-[#070509] select-none"
+    >
+      {/* Sticky Pinned Viewport Container (GPU accelerated layer) */}
+      <div 
+        ref={stickyRef}
+        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#070509] gpu-layer"
+      >
         {/* Background Ghost Typography */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20 overflow-hidden">
-          <span className="text-[24vw] font-serif font-black tracking-tighter text-stroke-white whitespace-nowrap">
+        <div 
+          ref={ghostTextRef}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20 overflow-hidden will-change-transform"
+        >
+          <span className="text-[24vw] font-serif font-black tracking-tighter text-stroke-white whitespace-nowrap select-none">
             CORLEONE
           </span>
         </div>
 
-        {/* Dynamic Expanding Circular Iris Mask (Opens to 100% full bleed BEFORE unpinning) */}
+        {/* Dynamic Expanding Circular Iris Mask (Direct GPU-driven hardware layer) */}
         <div 
-          className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path]"
+          ref={maskRef}
+          className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path] gpu-layer"
           style={{
-            clipPath: isFullyOpen ? 'none' : `circle(${circleRadius}vmax at 50% 50%)`,
+            clipPath: 'circle(28vmax at 50% 50%)',
+            WebkitClipPath: 'circle(28vmax at 50% 50%)',
           }}
         >
-          <Image
-            src="/images/hero-cliffside.jpg"
-            alt="Beach Bar Corleone Cliffside Panorama"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center will-change-transform"
-            style={{
-              transform: `scale(${imageScale})`,
-            }}
-          />
-          {/* Layered cinematic lighting */}
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-black/60" />
-          <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
+          <div 
+            ref={imageRef} 
+            className="absolute inset-0 w-full h-full will-change-transform gpu-layer"
+          >
+            <Image
+              src="/images/hero-cliffside.jpg"
+              alt="Beach Bar Corleone Cliffside Panorama"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            {/* Layered cinematic lighting */}
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-black/60" />
+            <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
+          </div>
         </div>
+
+        {/* Ambient Glowing Iris Ring Border (Expands together with the circle) */}
+        <div
+          ref={ringRef}
+          className="absolute z-15 pointer-events-none rounded-full w-[48vmax] h-[48vmax] md:w-[56vmax] md:h-[56vmax] border border-amber-400/50 shadow-[0_0_50px_rgba(245,158,11,0.4),inset_0_0_40px_rgba(245,158,11,0.2)] will-change-transform gpu-layer"
+        />
 
         {/* Overlay Content (Pinned with graceful fade & rise, responsive mobile padding) */}
         <div 
-          className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-20 sm:pt-16"
-          style={{
-            opacity: contentOpacity,
-            transform: `translateY(${contentTranslateY}px)`,
-          }}
+          ref={contentRef}
+          className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-20 sm:pt-16 gpu-layer"
         >
-          
           {/* Massive Screen Title (Mobile optimized text scaling, fully centered) */}
           <h1 className="w-full text-center text-4xl sm:text-7xl md:text-9xl font-serif font-black tracking-tight text-white uppercase leading-[0.92] drop-shadow-2xl">
-            <span className="block text-stone-100 text-center w-full">SEA VIEWS.</span>
+            <span className="block text-stone-100 text-center w-full">{t.titleStart}</span>
             <span className="block animate-liquid-gradient text-center w-full">
-              COCKTAILS.
+              {t.titleAccent}
             </span>
-            <span className="block text-stone-200 text-center w-full">SUNSET VIBES.</span>
+            <span className="block text-stone-200 text-center w-full">{t.titleEnd}</span>
           </h1>
 
           <p className="mt-4 sm:mt-6 text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl mx-auto text-center leading-relaxed text-balance px-2">
@@ -136,14 +245,17 @@ export default function HeroIris({ lang }: HeroIrisProps) {
           </div>
 
           {/* Scroll Indicator */}
-          <div className="mt-8 sm:mt-12 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce">
+          <div 
+            ref={scrollIndicatorRef}
+            className="mt-8 sm:mt-12 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce"
+          >
             <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
-            <span>SCROLL TO EXPAND THE VIEW</span>
+            <span>{t.scrollHint}</span>
           </div>
         </div>
 
       </div>
-
     </section>
   );
 }
+

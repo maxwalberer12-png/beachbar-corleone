@@ -56,13 +56,13 @@ export default function EventTeaser({ lang }: EventTeaserProps) {
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500 text-stone-950 text-xs font-black uppercase tracking-widest shadow-md">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>{t.tonightBadge}</span>
+                  <span>{t.tonightLineup}</span>
                 </span>
 
                 <div className="flex items-center gap-4 text-xs font-mono text-amber-300">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                    <span>{tonightEvent.date}</span>
+                    <span>{tonightEvent.date[lang]}</span>
                   </span>
                   <span className="flex items-center gap-1.5 text-stone-400">
                     <Clock className="w-3.5 h-3.5" />
@@ -72,18 +72,20 @@ export default function EventTeaser({ lang }: EventTeaserProps) {
               </div>
 
               <h3 className="text-3xl sm:text-5xl font-serif font-black text-white mt-6 group-hover:text-amber-300 transition-colors">
-                {tonightEvent.title}
+                {tonightEvent.title[lang]}
               </h3>
 
               {tonightEvent.djOrAct && (
                 <p className="text-sm font-semibold text-amber-300/90 flex items-center gap-2 mt-2 font-mono">
                   <Music className="w-4 h-4 text-amber-400" />
-                  <span>{tonightEvent.djOrAct}</span>
+                  <span>
+                    {typeof tonightEvent.djOrAct === 'string' ? tonightEvent.djOrAct : tonightEvent.djOrAct[lang]}
+                  </span>
                 </p>
               )}
 
               <span className="inline-block text-xs font-mono text-stone-300 mt-3 px-3 py-1 rounded-xl bg-stone-900 border border-stone-800">
-                {tonightEvent.genre}
+                {tonightEvent.genre[lang]}
               </span>
 
               <p className="text-base sm:text-lg text-stone-300 mt-6 leading-relaxed font-sans max-w-2xl">
@@ -118,16 +120,16 @@ export default function EventTeaser({ lang }: EventTeaserProps) {
               >
                 <div>
                   <div className="flex items-center justify-between text-xs font-mono text-stone-400 mb-2">
-                    <span>{evt.date}</span>
+                    <span>{evt.date[lang]}</span>
                     <span>{evt.time}</span>
                   </div>
 
                   <h4 className="text-xl font-serif font-bold text-white">
-                    {evt.title}
+                    {evt.title[lang]}
                   </h4>
 
                   <span className="text-xs font-mono text-amber-400/80 block mt-1">
-                    {evt.genre}
+                    {evt.genre[lang]}
                   </span>
 
                   <p className="text-xs sm:text-sm text-stone-300 mt-2.5 leading-relaxed font-sans">

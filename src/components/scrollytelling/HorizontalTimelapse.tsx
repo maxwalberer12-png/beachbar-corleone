@@ -112,7 +112,7 @@ export default function HorizontalTimelapse({ lang, progress }: HorizontalTimela
             <div className="p-5 rounded-2xl liquid-glass-amber border border-amber-400/40 max-w-md space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-300">
-                  {sunsetDrink.name}
+                  {typeof sunsetDrink.name === 'string' ? sunsetDrink.name : sunsetDrink.name[lang]}
                 </span>
                 <span className="text-lg font-serif font-bold text-amber-400">
                   {sunsetDrink.price}
@@ -162,7 +162,7 @@ export default function HorizontalTimelapse({ lang, progress }: HorizontalTimela
             <div className="p-5 rounded-2xl liquid-glass border border-white/20 max-w-md space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-300">
-                  {ginDrink.name}
+                  {typeof ginDrink.name === 'string' ? ginDrink.name : ginDrink.name[lang]}
                 </span>
                 <span className="text-lg font-serif font-bold text-amber-400">
                   {ginDrink.price}

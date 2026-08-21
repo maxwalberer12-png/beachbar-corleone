@@ -92,7 +92,7 @@ export default function Footer({ lang }: FooterProps) {
           {/* Direct Contact */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
-              Contact & Location
+              {t.contactHeading}
             </h4>
             <ul className="space-y-2.5 text-xs text-stone-400">
               <li className="flex items-start gap-2">
@@ -143,9 +143,9 @@ export default function Footer({ lang }: FooterProps) {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
           <p>© {new Date().getFullYear()} {BAR_INFO.name}. {t.rights}</p>
           <div className="flex items-center gap-4">
-            <Link href="/impressum" className="hover:text-stone-400 transition-colors">Impressum</Link>
+            <Link href="/impressum" className="hover:text-stone-400 transition-colors">{t.impressumLink}</Link>
             <span>•</span>
-            <Link href="/datenschutz" className="hover:text-stone-400 transition-colors">Datenschutz</Link>
+            <Link href="/datenschutz" className="hover:text-stone-400 transition-colors">{t.privacyLink}</Link>
           </div>
         </div>
       </div>

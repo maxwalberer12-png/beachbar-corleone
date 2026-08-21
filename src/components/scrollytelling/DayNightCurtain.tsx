@@ -28,6 +28,8 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
     setSliderPos(percentage);
   };
 
+  const t = DICTIONARY[lang].dayNight;
+
   return (
     <section className="relative z-20 pt-16 sm:pt-24 pb-28 bg-[#080B10] text-white select-none overflow-x-clip">
       {/* Continuous Halbrunde Kuppel / Majestic Arched Dome Divider */}
@@ -36,13 +38,13 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-left">
         <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-black text-white tracking-tight leading-[0.95]">
-          TWO WORLDS. <br />
+          {t.title} <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-amber-300 to-rose-400">
-            ONE CLIFF.
+            {t.titleAccent}
           </span>
         </h2>
         <p className="text-stone-400 text-base sm:text-lg mt-3 max-w-xl font-sans">
-          Drag or hover across the curtain to reveal the morning serenity versus the nightfall rhythm at Cuklićevo.
+          {t.subtitle}
         </p>
       </div>
 
@@ -69,13 +71,13 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
             <div className="absolute bottom-8 right-8 text-right z-10 space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/30 border border-rose-400 text-rose-300 text-xs font-mono font-bold">
                 <Moon className="w-4 h-4" />
-                <span>NIGHTFALL CHILL</span>
+                <span>{t.nightBadge}</span>
               </div>
               <h3 className="text-2xl sm:text-4xl font-serif font-bold text-white">
-                DJ Grooves & Cocktails
+                {t.nightTitle}
               </h3>
               <p className="text-xs sm:text-sm text-stone-300 max-w-xs font-sans">
-                Lanterns glowing on limestone, music echoing across the sea.
+                {t.nightDesc}
               </p>
             </div>
           </div>
@@ -100,13 +102,13 @@ export default function DayNightCurtain({ lang }: DayNightCurtainProps) {
             <div className="absolute bottom-8 left-8 text-left z-10 space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/30 border border-teal-400 text-teal-300 text-xs font-mono font-bold">
                 <Sun className="w-4 h-4" />
-                <span>DAYTIME SERENITY</span>
+                <span>{t.dayBadge}</span>
               </div>
               <h3 className="text-2xl sm:text-4xl font-serif font-bold text-white">
-                Espresso & Morning Swims
+                {t.dayTitle}
               </h3>
               <p className="text-xs sm:text-sm text-stone-300 max-w-xs font-sans">
-                Silence of the cove, turquoise water, and freshly extracted coffee.
+                {t.dayDesc}
               </p>
             </div>
           </div>

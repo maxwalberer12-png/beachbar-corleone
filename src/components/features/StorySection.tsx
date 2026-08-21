@@ -45,8 +45,8 @@ export default function StorySection({ lang }: StorySectionProps) {
                   <Mountain className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-stone-900 text-sm">{t.card1Title}</h4>
-                  <p className="text-xs text-stone-500 mt-0.5">{t.card1Desc}</p>
+                  <h4 className="font-bold text-stone-900 text-sm">{t.stage1Title}</h4>
+                  <p className="text-xs text-stone-500 mt-0.5">{t.stage1Desc}</p>
                 </div>
               </div>
 
@@ -55,8 +55,8 @@ export default function StorySection({ lang }: StorySectionProps) {
                   <GlassWater className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-stone-900 text-sm">{t.card2Title}</h4>
-                  <p className="text-xs text-stone-500 mt-0.5">{t.card2Desc}</p>
+                  <h4 className="font-bold text-stone-900 text-sm">{t.stage2Title}</h4>
+                  <p className="text-xs text-stone-500 mt-0.5">{t.stage2Desc}</p>
                 </div>
               </div>
 
@@ -65,8 +65,8 @@ export default function StorySection({ lang }: StorySectionProps) {
                   <Dog className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-stone-900 text-sm">{t.card3Title}</h4>
-                  <p className="text-xs text-stone-500 mt-0.5">{t.card3Desc}</p>
+                  <h4 className="font-bold text-stone-900 text-sm">{t.stage3Title}</h4>
+                  <p className="text-xs text-stone-500 mt-0.5">{t.stage3Desc}</p>
                 </div>
               </div>
             </div>

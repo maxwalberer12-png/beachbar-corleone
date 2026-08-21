@@ -65,13 +65,12 @@ export default function HybridMenu({ lang }: HybridMenuProps) {
 
           {/* Flavor Filter Pills */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-stone-400 text-xs font-mono uppercase tracking-wider mr-1">{t.flavorProfile}:</span>
             {[
-              { id: 'all', label: 'All Signatures' },
-              { id: 'refreshing', label: t.refreshing },
-              { id: 'sour', label: t.sour },
-              { id: 'bitter', label: t.bitter },
-              { id: 'sweet', label: t.sweet },
+              { id: 'all', label: 'All' },
+              { id: 'refreshing', label: 'Fresh & Citrus' },
+              { id: 'sour', label: 'Spritz & Bubbles' },
+              { id: 'bitter', label: 'Herb & Bitter' },
+              { id: 'sweet', label: 'Tropical & Sweet' },
             ].map((filter) => (
               <button
                 key={filter.id}
@@ -99,7 +98,7 @@ export default function HybridMenu({ lang }: HybridMenuProps) {
               <div>
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-xs font-mono uppercase font-bold tracking-widest text-amber-400 bg-amber-950 px-3 py-1 rounded-full border border-amber-500/30">
-                    FEATURED SIGNATURE • {heroCocktail.category}
+                    FEATURED SIGNATURE • {heroCocktail.category[lang]}
                   </span>
                   <span className="text-2xl sm:text-3xl font-serif font-black text-amber-400">
                     {heroCocktail.price}
@@ -107,10 +106,10 @@ export default function HybridMenu({ lang }: HybridMenuProps) {
                 </div>
 
                 <h3 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-white mt-6 group-hover:text-amber-300 transition-colors">
-                  {heroCocktail.name}
+                  {typeof heroCocktail.name === 'string' ? heroCocktail.name : heroCocktail.name[lang]}
                 </h3>
                 <p className="text-sm italic text-amber-300/90 mt-1 font-serif">
-                  „{heroCocktail.tagline}“
+                  „{heroCocktail.tagline[lang]}“
                 </p>
 
                 <p className="text-base sm:text-lg text-stone-300 mt-4 leading-relaxed font-sans max-w-xl">
@@ -119,7 +118,7 @@ export default function HybridMenu({ lang }: HybridMenuProps) {
 
                 {/* Ingredients Pills */}
                 <div className="flex flex-wrap gap-2 mt-6">
-                  {heroCocktail.ingredients.map((ing, idx) => (
+                  {heroCocktail.ingredients[lang].map((ing: string, idx: number) => (
                     <span
                       key={idx}
                       className="text-xs px-3 py-1 rounded-xl bg-stone-950/80 border border-stone-800 text-stone-200 font-medium"
@@ -132,7 +131,7 @@ export default function HybridMenu({ lang }: HybridMenuProps) {
 
               <div className="flex items-center justify-between pt-4 text-xs text-stone-400 font-mono">
                 <span>ALC: {heroCocktail.alcoholContent}</span>
-                <span className="text-amber-400 font-semibold">{heroCocktail.badge}</span>
+                <span className="text-amber-400 font-semibold">{heroCocktail.badge ? heroCocktail.badge[lang] : ''}</span>
               </div>
             </div>
           )}
@@ -147,7 +146,7 @@ export default function HybridMenu({ lang }: HybridMenuProps) {
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs uppercase font-mono tracking-widest text-stone-400">
-                      {drink.category}
+                      {drink.category[lang]}
                     </span>
                     <span className="text-lg font-serif font-bold text-amber-400">
                       {drink.price}
@@ -155,10 +154,10 @@ export default function HybridMenu({ lang }: HybridMenuProps) {
                   </div>
 
                   <h4 className="text-2xl font-serif font-bold text-white mt-2 group-hover:text-amber-300 transition-colors">
-                    {drink.name}
+                    {typeof drink.name === 'string' ? drink.name : drink.name[lang]}
                   </h4>
                   <p className="text-xs italic text-stone-400 mt-0.5">
-                    „{drink.tagline}“
+                    „{drink.tagline[lang]}“
                   </p>
                   <p className="text-xs sm:text-sm text-stone-300 mt-3 leading-relaxed font-sans">
                     {drink.description[lang]}
@@ -167,7 +166,7 @@ export default function HybridMenu({ lang }: HybridMenuProps) {
 
                 <div className="mt-4 pt-4 border-t border-stone-800 flex items-center justify-between text-xs text-stone-400 font-mono">
                   <span>{drink.alcoholContent}</span>
-                  <span className="text-stone-300">{drink.ingredients.slice(0, 3).join(' • ')}</span>
+                  <span className="text-stone-300">{drink.ingredients[lang].slice(0, 3).join(' • ')}</span>
                 </div>
               </div>
             ))}

@@ -30,8 +30,8 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
       {/* Horizontal Giant Editorial Marquee */}
       <div className="w-full overflow-hidden select-none pointer-events-none opacity-20 my-6">
         <div className="animate-marquee whitespace-nowrap text-6xl sm:text-9xl font-serif font-black uppercase tracking-tighter text-stroke-white">
-          <span>THE CLIFFSIDE RITUAL • CUKLIĆEVO BEACH • </span>
-          <span>THE CLIFFSIDE RITUAL • CUKLIĆEVO BEACH • </span>
+          <span>{t.marquee}</span>
+          <span>{t.marquee}</span>
         </div>
       </div>
 
@@ -41,7 +41,10 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Wild Editorial Cutout (6 Cols) */}
-          <div className="lg:col-span-6 space-y-8 text-left">
+          <div className="lg:col-span-6 space-y-6 text-left">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-400 bg-amber-950/80 border border-amber-500/30 px-3.5 py-1.5 rounded-full inline-block">
+              {t.eyebrow}
+            </span>
             <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-black text-white tracking-tight leading-[0.95] text-balance">
               {t.title}
             </h2>
@@ -73,9 +76,9 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
               <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-between text-xs font-mono text-stone-200">
                 <span className="flex items-center gap-1.5 text-amber-400">
                   <Sun className="w-4 h-4" />
-                  <span>Morning Escape</span>
+                  <span>{t.badgeMorning}</span>
                 </span>
-                <span className="text-stone-400">Illy Espresso & Sea Dip</span>
+                <span className="text-stone-400">{t.badgeMorningSub}</span>
               </div>
             </div>
 
@@ -90,7 +93,7 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 right-3 text-[11px] font-mono text-amber-300 font-bold flex items-center justify-between">
-                <span>Golden Hour Spritz</span>
+                <span>{t.badgeSunset}</span>
                 <Sunset className="w-4 h-4 text-amber-400" />
               </div>
             </div>
@@ -98,10 +101,10 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
             {/* Overlapping Floating Stamp */}
             <div className="hidden sm:block absolute -top-8 -right-6 z-30 p-4 rounded-2xl bg-amber-500 text-stone-950 shadow-2xl rotate-[8deg]">
               <span className="text-[11px] font-black uppercase tracking-widest font-mono block">
-                CLIFFSIDE PERCH
+                {t.stampTitle}
               </span>
               <span className="text-xs font-bold font-serif">
-                100% Sea View
+                {t.stampSubtitle}
               </span>
             </div>
 
@@ -116,15 +119,15 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
           <div className="p-7 rounded-3xl liquid-glass border border-white/10 hover:border-sky-400/40 transition-all group space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-sky-400">
-                10:00 AM
+                {t.stage1Time}
               </span>
               <Sun className="w-5 h-5 text-sky-400" />
             </div>
             <h3 className="text-2xl font-serif font-bold text-white group-hover:text-sky-300 transition-colors">
-              Morning Espresso & Swims
+              {t.stage1Title}
             </h3>
             <p className="text-xs sm:text-sm text-stone-400 leading-relaxed font-sans">
-              Quiet morning breeze, authentic Illy espresso, and steps down to the secluded pebble beach before the crowds arrive.
+              {t.stage1Desc}
             </p>
           </div>
 
@@ -132,15 +135,15 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
           <div className="p-7 rounded-3xl liquid-glass-amber border-2 border-amber-400/30 hover:border-amber-400 transition-all group space-y-4 shadow-xl shadow-amber-950/30">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-400">
-                17:30 PM
+                {t.stage2Time}
               </span>
               <Sunset className="w-5 h-5 text-amber-400 animate-pulse" />
             </div>
             <h3 className="text-2xl font-serif font-bold text-white group-hover:text-amber-300 transition-colors">
-              The Golden Hour Spritz
+              {t.stage2Title}
             </h3>
             <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-sans">
-              The sky turns fiery amber, glasses clink with homemade rosemary spritz, and complimentary Mediterranean bar snacks are served.
+              {t.stage2Desc}
             </p>
           </div>
 
@@ -148,15 +151,15 @@ export default function StoryDescent({ lang }: StoryDescentProps) {
           <div className="p-7 rounded-3xl liquid-glass border border-white/10 hover:border-rose-400/40 transition-all group space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-rose-400">
-                21:00 PM
+                {t.stage3Time}
               </span>
               <Moon className="w-5 h-5 text-rose-400" />
             </div>
             <h3 className="text-2xl font-serif font-bold text-white group-hover:text-rose-300 transition-colors">
-              Starlit Beats & Gin
+              {t.stage3Title}
             </h3>
             <p className="text-xs sm:text-sm text-stone-400 leading-relaxed font-sans">
-              Lanterns illuminate the limestone tables, deep house rhythms echo across the water, and handcrafted gin tonics flow under the stars.
+              {t.stage3Desc}
             </p>
           </div>
 

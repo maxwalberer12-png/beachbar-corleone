@@ -2,11 +2,11 @@ export type Language = 'en' | 'hr' | 'de';
 
 export interface SignatureCocktail {
   id: string;
-  name: string;
-  category: string;
-  tagline: string;
+  name: Record<Language, string> | string;
+  category: Record<Language, string>;
+  tagline: Record<Language, string>;
   description: Record<Language, string>;
-  ingredients: string[];
+  ingredients: Record<Language, string[]>;
   tasteProfile: {
     sweet: number; // 1-5
     sour: number;
@@ -15,7 +15,7 @@ export interface SignatureCocktail {
   };
   alcoholContent: string;
   price: string;
-  badge?: string;
+  badge?: Record<Language, string>;
   color: string;
 }
 
@@ -36,11 +36,11 @@ export interface MenuCategory {
 
 export interface EventItem {
   id: string;
-  title: string;
-  date: string;
+  title: Record<Language, string>;
+  date: Record<Language, string>;
   time: string;
-  djOrAct?: string;
-  genre: string;
+  djOrAct?: Record<Language, string> | string;
+  genre: Record<Language, string>;
   description: Record<Language, string>;
   isTonight?: boolean;
 }

@@ -14,12 +14,33 @@ import ConsentModal from '@/components/ui/ConsentModal';
 import { Language } from '@/lib/types';
 
 export default function HomeView() {
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLangState] = useState<Language>('de');
+
+  React.useEffect(() => {
+    try {
+      const saved = localStorage.getItem('corleone_lang') as Language | null;
+      if (saved && (saved === 'en' || saved === 'hr' || saved === 'de')) {
+        setLangState(saved);
+      } else if (typeof navigator !== 'undefined') {
+        const browserLang = navigator.language.slice(0, 2);
+        if (browserLang === 'de' || browserLang === 'hr') {
+          setLangState(browserLang as Language);
+        }
+      }
+    } catch {}
+  }, []);
+
+  const handleLanguageChange = (newLang: Language) => {
+    setLangState(newLang);
+    try {
+      localStorage.setItem('corleone_lang', newLang);
+    } catch {}
+  };
 
   return (
     <div className="relative flex min-h-screen flex-col bg-[#0A0D12] text-white selection:bg-amber-400 selection:text-stone-950 overflow-x-clip max-w-full">
       {/* Top Scheme Engine Centered Glass Navbar with Unified Intro Logo Flight */}
-      <Navbar currentLang={lang} onLanguageChange={setLang} />
+      <Navbar currentLang={lang} onLanguageChange={handleLanguageChange} />
 
       {/* Main Experience (Restored Rich Visual Flow) */}
       <main className="flex-1 overflow-x-clip max-w-full">

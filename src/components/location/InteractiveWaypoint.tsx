@@ -28,6 +28,9 @@ export default function InteractiveWaypoint({ lang }: InteractiveWaypointProps) 
         
         {/* Asymmetrical Left-Aligned Header */}
         <div className="max-w-2xl text-left mb-16 space-y-3">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-400 bg-amber-950/80 border border-amber-500/30 px-3.5 py-1.5 rounded-full inline-block">
+            {t.eyebrow}
+          </span>
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-black text-white tracking-tight leading-[0.95]">
             {t.title}
           </h2>
@@ -46,7 +49,7 @@ export default function InteractiveWaypoint({ lang }: InteractiveWaypointProps) 
               {/* Coordinates HUD */}
               <div className="p-4 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-between text-xs font-mono text-amber-300">
                 <span>45.1215° N, 14.5262° E</span>
-                <span className="text-emerald-400 font-bold">● ACTIVE SPOT</span>
+                <span className="text-emerald-400 font-bold">● {t.activeSpot}</span>
               </div>
 
               {/* Address */}
@@ -60,7 +63,7 @@ export default function InteractiveWaypoint({ lang }: InteractiveWaypointProps) 
                   <p className="text-sm text-stone-300">{BAR_INFO.address}</p>
                   <p className="text-sm text-stone-300">{BAR_INFO.city}, {BAR_INFO.country}</p>
                   <p className="text-xs font-mono text-amber-400 mt-2 font-bold">
-                    Directly on the cliff above Plaža Cuklićevo
+                    {t.cliffSubline}
                   </p>
                 </div>
               </div>
@@ -149,7 +152,7 @@ export default function InteractiveWaypoint({ lang }: InteractiveWaypointProps) 
 
                   <div className="flex items-center justify-center gap-2 text-xs text-emerald-400 pt-2 font-mono">
                     <ShieldCheck className="w-4 h-4" />
-                    <span>2-Click DSGVO-Consent (Zero External Tracking)</span>
+                    <span>{t.dsgvoBadge}</span>
                   </div>
                 </div>
               )}

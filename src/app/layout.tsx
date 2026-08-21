@@ -255,7 +255,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${playfair.variable} scroll-smooth`}
+      className={`${plusJakarta.variable} ${playfair.variable}`}
     >
       <head>
         {/* Local Business Structured Data for AI & Search Engines */}
