@@ -130,5 +130,57 @@
 
 .animate-subline-build {
   opacity: 0;
-  animation: subline-assemble 0.45s ease-out 0.55s forwards;
+  animation: subline-assemble 0.45s ease-out 0.45s forwards;
+}
+
+/* Luxury Hero Cascade Entrance */
+@keyframes hero-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-portal-scale {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-hero-portal {
+  animation: hero-portal-scale 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-text-1 {
+  opacity: 0;
+  animation: hero-fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.animate-hero-text-2 {
+  opacity: 0;
+  animation: hero-fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+}
+
+.animate-hero-text-3 {
+  opacity: 0;
+  animation: hero-fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+.animate-hero-sub {
+  opacity: 0;
+  animation: hero-fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+}
+
+.animate-hero-buttons {
+  opacity: 0;
+  animation: hero-fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
 }

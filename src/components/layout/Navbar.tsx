@@ -15,21 +15,11 @@ interface NavbarProps {
 const LETTERS = ['C', 'O', 'R', 'L', 'E', 'O', 'N', 'E'];
 
 export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
-  const [introStep, setIntroStep] = useState<'intro' | 'flying' | 'done'>('intro');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = DICTIONARY[currentLang].nav;
 
   useEffect(() => {
-    // Logo letters assemble, then glide to top navbar at 850ms
-    const flyTimer = setTimeout(() => {
-      setIntroStep('flying');
-    }, 850);
-
-    const doneTimer = setTimeout(() => {
-      setIntroStep('done');
-    }, 1500);
-
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -43,13 +33,9 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      clearTimeout(flyTimer);
-      clearTimeout(doneTimer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const isAtTop = introStep === 'flying' || introStep === 'done';
 
   return (
     <header
@@ -62,11 +48,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative min-h-[40px]">
         
         {/* Left Nav Links */}
-        <nav
-          className={`hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start transition-all duration-500 delay-100 ${
-            isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
-          }`}
-        >
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-10 flex-1 justify-start">
           <KineticNavLink
             href="#experience"
             label={t.experience}
@@ -79,18 +61,11 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
           />
         </nav>
 
-        {/* Center Brand Logo (Smoothly glides from center to top) */}
+        {/* Center Brand Logo */}
         <div className="flex-1 flex justify-center text-center">
           <Link
             href="/"
             className="flex flex-col items-center group will-change-transform"
-            style={{
-              transform: isAtTop
-                ? 'translateY(0) scale(1)'
-                : 'translateY(calc(44vh - 2rem)) scale(1.3)',
-              transition: 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)',
-              transformOrigin: 'top center',
-            }}
           >
             {/* Letter-by-Letter Assembly */}
             <div className="font-serif text-2xl sm:text-3xl lg:text-4xl font-black tracking-[0.16em] sm:tracking-widest text-white group-hover:text-amber-400 transition-colors uppercase leading-none drop-shadow-2xl flex items-center justify-center whitespace-nowrap">
@@ -99,7 +74,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
                   key={idx}
                   className="inline-block animate-letter-build"
                   style={{
-                    animationDelay: `${60 + idx * 60}ms`,
+                    animationDelay: `${60 + idx * 50}ms`,
                   }}
                 >
                   {letter}
@@ -107,22 +82,14 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
               ))}
             </div>
 
-            <span
-              className={`text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build whitespace-nowrap ${
-                isAtTop ? 'text-stone-400' : 'text-stone-300 tracking-[0.35em] scale-110'
-              }`}
-            >
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] font-mono font-semibold mt-1 transition-all duration-700 animate-subline-build whitespace-nowrap text-stone-400">
               BEACH BAR • CUKLIĆEVO
             </span>
           </Link>
         </div>
 
         {/* Right Nav Links & Language Switcher */}
-        <div
-          className={`hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end transition-all duration-500 delay-100 ${
-            isAtTop ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
-          }`}
-        >
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end">
           <KineticNavLink
             href="#events"
             label={t.events}
@@ -154,11 +121,7 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
         </div>
 
         {/* Mobile Menu Button & Language Switcher */}
-        <div
-          className={`flex items-center gap-2 lg:hidden ml-auto transition-all duration-500 delay-100 ${
-            isAtTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-        >
+        <div className="flex items-center gap-2 lg:hidden ml-auto">
             <div className="flex items-center rounded-full bg-black/40 p-0.5 border border-white/15 text-[10px] font-mono font-semibold text-stone-200">
               {(['en', 'hr', 'de'] as Language[]).map((lang) => (
                 <button

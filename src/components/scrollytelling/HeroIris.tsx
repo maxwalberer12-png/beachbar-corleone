@@ -146,7 +146,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         {/* Expanding Circular Iris Mask */}
         <div 
           ref={maskRef}
-          className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path] gpu-layer"
+          className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path] gpu-layer animate-hero-portal"
           style={{
             clipPath: 'circle(28vmax at 50% 50%)',
             WebkitClipPath: 'circle(28vmax at 50% 50%)',
@@ -173,7 +173,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         {/* Ambient Ring Border */}
         <div
           ref={ringRef}
-          className="absolute z-15 pointer-events-none rounded-full w-[48vmax] h-[48vmax] md:w-[56vmax] md:h-[56vmax] border border-amber-400/50 shadow-[0_0_50px_rgba(245,158,11,0.4),inset_0_0_40px_rgba(245,158,11,0.2)] will-change-transform gpu-layer"
+          className="absolute z-15 pointer-events-none rounded-full w-[48vmax] h-[48vmax] md:w-[56vmax] md:h-[56vmax] border border-amber-400/50 shadow-[0_0_50px_rgba(245,158,11,0.4),inset_0_0_40px_rgba(245,158,11,0.2)] will-change-transform gpu-layer animate-hero-portal"
         />
 
         {/* Hero Content */}
@@ -186,18 +186,18 @@ export default function HeroIris({ lang }: HeroIrisProps) {
               ? 'text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
               : 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl'
           }`}>
-            <span className="block text-stone-100 text-center w-full whitespace-pre-line">{t.titleStart}</span>
-            <span className="block animate-liquid-gradient text-center w-full whitespace-pre-line">
+            <span className="block text-stone-100 text-center w-full whitespace-pre-line animate-hero-text-1">{t.titleStart}</span>
+            <span className="block animate-liquid-gradient text-center w-full whitespace-pre-line animate-hero-text-2">
               {t.titleAccent}
             </span>
-            <span className="block text-stone-200 text-center w-full whitespace-pre-line">{t.titleEnd}</span>
+            <span className="block text-stone-200 text-center w-full whitespace-pre-line animate-hero-text-3">{t.titleEnd}</span>
           </h1>
 
-          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-stone-200 font-sans font-light max-w-xl mx-auto text-center leading-relaxed text-balance px-2">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-stone-200 font-sans font-light max-w-xl mx-auto text-center leading-relaxed text-balance px-2 animate-hero-sub">
             {t.subtitle}
           </p>
 
-          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm sm:max-w-3xl px-2">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm sm:max-w-3xl px-2 animate-hero-buttons">
             <KineticButton
               href="#menu"
               label={t.btnMenu}
@@ -226,7 +226,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
 
           <div 
             ref={scrollIndicatorRef}
-            className="mt-8 sm:mt-12 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce"
+            className="mt-8 sm:mt-12 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce animate-hero-buttons"
           >
             <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
             <span>{t.scrollHint}</span>
