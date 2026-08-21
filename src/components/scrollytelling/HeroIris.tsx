@@ -200,8 +200,8 @@ export default function HeroIris({ lang }: HeroIrisProps) {
           ref={contentRef}
           className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-20 sm:pt-16 gpu-layer"
         >
-          {/* Massive Screen Title (Mobile optimized text scaling, fully centered) */}
-          <h1 className="w-full text-center text-4xl sm:text-7xl md:text-9xl font-serif font-black tracking-tight text-white uppercase leading-[0.92] drop-shadow-2xl">
+          {/* Massive Screen Title (Refined scaling, elegant & fully centered) */}
+          <h1 className="w-full text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-2xl">
             <span className="block text-stone-100 text-center w-full">{t.titleStart}</span>
             <span className="block animate-liquid-gradient text-center w-full">
               {t.titleAccent}
@@ -209,7 +209,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
             <span className="block text-stone-200 text-center w-full">{t.titleEnd}</span>
           </h1>
 
-          <p className="mt-4 sm:mt-6 text-sm sm:text-xl text-stone-200 font-sans font-light max-w-2xl mx-auto text-center leading-relaxed text-balance px-2">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-stone-200 font-sans font-light max-w-xl mx-auto text-center leading-relaxed text-balance px-2">
             {t.subtitle}
           </p>
 
