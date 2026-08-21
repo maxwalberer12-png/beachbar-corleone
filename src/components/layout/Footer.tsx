@@ -146,10 +146,6 @@ export default function Footer({ lang }: FooterProps) {
             <Link href="/impressum" className="hover:text-stone-400 transition-colors">{t.impressumLink}</Link>
             <span>•</span>
             <Link href="/datenschutz" className="hover:text-stone-400 transition-colors">{t.privacyLink}</Link>
-            <span>•</span>
-            <Link href="/admin" className="hover:text-amber-400 transition-colors flex items-center gap-1 font-mono text-[11px]" title="Admin Panel">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 inline-block" /> Admin
-            </Link>
           </div>
         </div>
       </div>
