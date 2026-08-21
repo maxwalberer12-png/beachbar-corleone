@@ -15,8 +15,22 @@ export default function ConsentModal({ lang }: ConsentModalProps) {
   useEffect(() => {
     const consent = localStorage.getItem('corleone_consent');
     if (!consent) {
-      const timer = setTimeout(() => setIsOpen(true), 3500);
-      return () => clearTimeout(timer);
+      const handleUserInteraction = () => {
+        setIsOpen(true);
+        window.removeEventListener('scroll', handleUserInteraction);
+        window.removeEventListener('click', handleUserInteraction);
+      };
+
+      // Show after user interacts or after 6 seconds
+      window.addEventListener('scroll', handleUserInteraction, { passive: true });
+      window.addEventListener('click', handleUserInteraction, { passive: true });
+      const timer = setTimeout(() => setIsOpen(true), 6000);
+
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener('scroll', handleUserInteraction);
+        window.removeEventListener('click', handleUserInteraction);
+      };
     }
   }, []);
 

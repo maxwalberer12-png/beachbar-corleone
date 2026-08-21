@@ -52,21 +52,13 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
   const isAtTop = introStep === 'flying' || introStep === 'done';
 
   return (
-    <>
-      {/* Dark Ambient Backdrop during Intro Phase */}
-      <div
-        className={`fixed inset-0 z-40 bg-[#070509] transition-opacity duration-700 pointer-events-none ${
-          introStep === 'intro' ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
-
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'py-3.5 bg-stone-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
-            : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
-        }`}
-      >
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? 'py-3.5 bg-stone-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
+          : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative min-h-[40px]">
         
         {/* Left Nav Links */}
@@ -247,6 +239,5 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
           </div>
         )}
       </header>
-    </>
   );
 }
