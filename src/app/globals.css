@@ -108,8 +108,8 @@
 @keyframes letter-assemble {
   0% {
     opacity: 0;
-    transform: translateY(14px);
-    filter: blur(4px);
+    transform: translateY(12px);
+    filter: blur(5px);
   }
   100% {
     opacity: 1;
@@ -120,52 +120,62 @@
 
 .animate-letter-build {
   opacity: 0;
-  animation: letter-assemble 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: letter-assemble 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes subline-assemble {
-  0% { transform: translateY(6px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(6px);
+    opacity: 0;
+    filter: blur(3px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0px);
+  }
 }
 
 .animate-subline-build {
   opacity: 0;
-  animation: subline-assemble 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0.35s forwards;
+  animation: subline-assemble 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
 }
 
-/* Luxury Hero Cascade Entrance - Ultra Smooth Quintic Easing */
+/* Luxury Hero Cascade Entrance - Silky Smooth Kinematics */
 @keyframes hero-fade-up-smooth {
   0% {
     opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(20px);
+    filter: blur(6px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0px);
   }
 }
 
 .animate-hero-text-1 {
   opacity: 0;
-  animation: hero-fade-up-smooth 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.12s forwards;
+  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
 }
 
 .animate-hero-text-2 {
   opacity: 0;
-  animation: hero-fade-up-smooth 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.26s forwards;
+  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
 }
 
 .animate-hero-text-3 {
   opacity: 0;
-  animation: hero-fade-up-smooth 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.4s forwards;
+  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.36s forwards;
 }
 
 .animate-hero-sub {
   opacity: 0;
-  animation: hero-fade-up-smooth 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.54s forwards;
+  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
 }
 
 .animate-hero-buttons {
   opacity: 0;
-  animation: hero-fade-up-smooth 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.68s forwards;
+  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
 }
