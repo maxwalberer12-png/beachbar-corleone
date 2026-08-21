@@ -201,12 +201,16 @@ export default function HeroIris({ lang }: HeroIrisProps) {
           className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-20 sm:pt-16 gpu-layer"
         >
           {/* Massive Screen Title (Refined scaling, elegant & fully centered) */}
-          <h1 className="w-full text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-2xl">
-            <span className="block text-stone-100 text-center w-full">{t.titleStart}</span>
-            <span className="block animate-liquid-gradient text-center w-full">
+          <h1 className={`w-full text-center font-serif font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-2xl ${
+            lang === 'hr'
+              ? 'text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
+              : 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl'
+          }`}>
+            <span className="block text-stone-100 text-center w-full whitespace-pre-line">{t.titleStart}</span>
+            <span className="block animate-liquid-gradient text-center w-full whitespace-pre-line">
               {t.titleAccent}
             </span>
-            <span className="block text-stone-200 text-center w-full">{t.titleEnd}</span>
+            <span className="block text-stone-200 text-center w-full whitespace-pre-line">{t.titleEnd}</span>
           </h1>
 
           <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-stone-200 font-sans font-light max-w-xl mx-auto text-center leading-relaxed text-balance px-2">

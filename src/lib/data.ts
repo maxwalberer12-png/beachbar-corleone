@@ -636,9 +636,9 @@ export const DICTIONARY = {
     },
     hero: {
       eyebrow: "Plaža Cuklićevo • Malinska • Otok Krk",
-      titleStart: "POGLED NA MORE.",
+      titleStart: "POGLED\nNA MORE.",
       titleAccent: "KOKTELI.",
-      titleEnd: "ZALAZAK SUNCA.",
+      titleEnd: "ZALAZAK\nSUNCA.",
       subtitle: "Smješten na litici iznad plaže Cuklićevo u Malinskoj. Vaše prvo mjesto za najljepši zalazak sunca, vrhunsku kavu, signature koktele i opuštene ljetne večeri.",
       btnRoute: "Pokreni rutu u Google Kartama",
       btnMenu: "Karta Pića i Hrane",
