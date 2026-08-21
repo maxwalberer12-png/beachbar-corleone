@@ -123,65 +123,6 @@ export default function LiquidCocktailScroller({ lang }: LiquidCocktailScrollerP
                   ))}
                 </div>
               </div>
-
-              {/* Flavor Profile Equalizer */}
-              <div className="pt-6 border-t border-white/10 grid grid-cols-4 gap-3 text-center text-xs font-mono uppercase text-stone-400">
-                <div>
-                  <div className="flex gap-1 justify-center mt-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div
-                        key={i}
-                        className={`h-2 flex-1 rounded-full ${
-                          i <= currentCocktail.tasteProfile.sweet ? 'bg-amber-400' : 'bg-stone-800'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="mt-2 block">{t.sweet}</span>
-                </div>
-
-                <div>
-                  <div className="flex gap-1 justify-center mt-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div
-                        key={i}
-                        className={`h-2 flex-1 rounded-full ${
-                          i <= currentCocktail.tasteProfile.sour ? 'bg-amber-400' : 'bg-stone-800'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="mt-2 block">{t.sour}</span>
-                </div>
-
-                <div>
-                  <div className="flex gap-1 justify-center mt-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div
-                        key={i}
-                        className={`h-2 flex-1 rounded-full ${
-                          i <= currentCocktail.tasteProfile.bitter ? 'bg-amber-400' : 'bg-stone-800'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="mt-2 block">{t.bitter}</span>
-                </div>
-
-                <div>
-                  <div className="flex gap-1 justify-center mt-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div
-                        key={i}
-                        className={`h-2 flex-1 rounded-full ${
-                          i <= currentCocktail.tasteProfile.refreshing ? 'bg-emerald-400' : 'bg-stone-800'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="mt-2 block">{t.refreshing}</span>
-                </div>
-              </div>
             </div>
 
             {/* Right: Glass Visual & Fast Selector Tabs (5 Cols) */}
