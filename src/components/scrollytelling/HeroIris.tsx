@@ -147,12 +147,12 @@ export default function HeroIris({ lang }: HeroIrisProps) {
       ref={containerRef} 
       className="relative h-[230vh] w-full bg-[#070509] select-none"
     >
-      {/* Sticky Pinned Viewport Container (GPU accelerated layer) */}
+      {/* Sticky Pinned Viewport Container */}
       <div 
         ref={stickyRef}
         className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#070509] gpu-layer"
       >
-        {/* Background Ghost Typography */}
+        {/* Background Typography */}
         <div 
           ref={ghostTextRef}
           className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-20 overflow-hidden will-change-transform"
@@ -162,7 +162,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
           </span>
         </div>
 
-        {/* Dynamic Expanding Circular Iris Mask (Direct GPU-driven hardware layer) */}
+        {/* Expanding Circular Iris Mask */}
         <div 
           ref={maskRef}
           className="absolute inset-0 z-10 overflow-hidden flex items-center justify-center pointer-events-none will-change-[clip-path] gpu-layer"
@@ -183,24 +183,22 @@ export default function HeroIris({ lang }: HeroIrisProps) {
               sizes="100vw"
               className="object-cover object-center"
             />
-            {/* Layered cinematic lighting */}
             <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-black/60" />
             <div className="absolute inset-0 bg-radial-at-c from-transparent via-black/20 to-black/70" />
           </div>
         </div>
 
-        {/* Ambient Glowing Iris Ring Border (Expands together with the circle) */}
+        {/* Ambient Ring Border */}
         <div
           ref={ringRef}
           className="absolute z-15 pointer-events-none rounded-full w-[48vmax] h-[48vmax] md:w-[56vmax] md:h-[56vmax] border border-amber-400/50 shadow-[0_0_50px_rgba(245,158,11,0.4),inset_0_0_40px_rgba(245,158,11,0.2)] will-change-transform gpu-layer"
         />
 
-        {/* Overlay Content (Pinned with graceful fade & rise, responsive mobile padding) */}
+        {/* Hero Content */}
         <div 
           ref={contentRef}
           className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-20 sm:pt-16 gpu-layer"
         >
-          {/* Massive Screen Title (Refined scaling, elegant & fully centered) */}
           <h1 className={`w-full text-center font-serif font-black tracking-tight text-white uppercase leading-[0.95] drop-shadow-2xl ${
             lang === 'hr'
               ? 'text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
@@ -217,9 +215,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
             {t.subtitle}
           </p>
 
-          {/* Direct Action Hub: 3 Large Prominent Buttons with Kinetic Hover Animation */}
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm sm:max-w-3xl px-2">
-            {/* Button 1: Speise- & Getränkekarte */}
             <KineticButton
               href="#menu"
               label={t.btnMenu}
@@ -227,7 +223,6 @@ export default function HeroIris({ lang }: HeroIrisProps) {
               className="w-full sm:flex-1 min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-2xl active:scale-95 sm:hover:scale-105"
             />
 
-            {/* Button 2: Abendprogramm & Events */}
             <KineticButton
               href="#events"
               label={t.btnEvents}
@@ -236,7 +231,6 @@ export default function HeroIris({ lang }: HeroIrisProps) {
               className="w-full sm:flex-1 min-h-[48px] px-5 py-3.5 sm:py-4 rounded-2xl bg-stone-900/85 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider border border-amber-400/50 shadow-2xl active:scale-95 sm:hover:scale-105 backdrop-blur-md"
             />
 
-            {/* Button 3: Route starten */}
             <KineticButton
               href={BAR_INFO.mapsUrl}
               target="_blank"
@@ -248,7 +242,6 @@ export default function HeroIris({ lang }: HeroIrisProps) {
             />
           </div>
 
-          {/* Scroll Indicator */}
           <div 
             ref={scrollIndicatorRef}
             className="mt-8 sm:mt-12 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce"

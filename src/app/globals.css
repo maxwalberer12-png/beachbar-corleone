@@ -177,51 +177,6 @@
   animation: flow-gradient 6s ease-in-out infinite;
 }
 
-/* Scheme Engine Intro Animation Keyframes */
-@keyframes scheme-intro-curtain {
-  0%, 40% {
-    opacity: 1;
-    visibility: visible;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
-
-@keyframes scheme-intro-logo {
-  0%, 40% {
-    top: 50%;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    top: 24px;
-    transform: translate(-50%, 0) scale(0.24);
-  }
-}
-
-@keyframes scheme-intro-subline {
-  0%, 35% {
-    opacity: 1;
-  }
-  60%, 100% {
-    opacity: 0;
-  }
-}
-
-.animate-scheme-curtain {
-  animation: scheme-intro-curtain 2.4s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-}
-
-.animate-scheme-logo {
-  animation: scheme-intro-logo 2.4s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-}
-
-.animate-scheme-subline {
-  animation: scheme-intro-subline 2.4s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-}
-
 /* Letter by Letter Assembly Keyframes */
 @keyframes letter-assemble {
   0% {
