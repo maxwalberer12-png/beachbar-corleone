@@ -434,21 +434,12 @@ export default function AdminPage() {
                         <span className="text-lg font-mono font-black text-amber-400 block">{c.price}</span>
                         <span className="text-[10px] font-mono text-stone-500">{c.alcoholContent}</span>
                       </div>
-                    </div>
-
-                    <div className="pt-2 border-t border-white/5 space-y-2">
+                               <div className="pt-2 border-t border-white/5 space-y-2">
                       <div className="text-xs text-stone-300">
                         <span className="text-stone-500 font-mono text-[10px] uppercase block">Zutaten ({selectedLang.toUpperCase()}):</span>
                         {c.ingredients[selectedLang]?.join(' • ')}
                       </div>
-
-                      <div className="grid grid-cols-4 gap-2 pt-2 text-[10px] font-mono text-stone-400">
-                        <div className="p-1.5 rounded-lg bg-stone-950 text-center">Süße: {c.tasteProfile.sweet}/5</div>
-                        <div className="p-1.5 rounded-lg bg-stone-950 text-center">Säure: {c.tasteProfile.sour}/5</div>
-                        <div className="p-1.5 rounded-lg bg-stone-950 text-center">Bitter: {c.tasteProfile.bitter}/5</div>
-                        <div className="p-1.5 rounded-lg bg-stone-950 text-center">Frische: {c.tasteProfile.refreshing}/5</div>
-                      </div>
-                    </div>
+                    </div>                </div>
 
                     <div className="pt-3 border-t border-white/10 flex items-center justify-end gap-2">
                       <button
@@ -577,37 +568,6 @@ export default function AdminPage() {
                           className="w-full px-3 py-2 rounded-xl bg-stone-950 border border-white/15 text-white text-xs focus:border-amber-400 outline-none"
                         />
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Taste Profile Sliders */}
-                  <div className="space-y-3 pt-2 border-t border-white/5">
-                    <h4 className="text-xs font-mono font-bold uppercase text-amber-400">Geschmacksprofil (1 - 5)</h4>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                      {(['sweet', 'sour', 'bitter', 'refreshing'] as const).map((attr) => (
-                        <div key={attr} className="p-3 rounded-xl bg-stone-950 border border-white/5">
-                          <div className="flex justify-between text-xs font-mono mb-1">
-                            <span className="capitalize">{attr}:</span>
-                            <span className="text-amber-400 font-bold">{editingCocktail.tasteProfile[attr]}</span>
-                          </div>
-                          <input
-                            type="range"
-                            min="1"
-                            max="5"
-                            value={editingCocktail.tasteProfile[attr]}
-                            onChange={(e) =>
-                              setEditingCocktail({
-                                ...editingCocktail,
-                                tasteProfile: {
-                                  ...editingCocktail.tasteProfile,
-                                  [attr]: parseInt(e.target.value),
-                                },
-                              })
-                            }
-                            className="w-full accent-amber-500 cursor-pointer"
-                          />
-                        </div>
-                      ))}
                     </div>
                   </div>
 
