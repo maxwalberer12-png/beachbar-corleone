@@ -33,32 +33,26 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
       return;
     }
 
-    // Initialize Lenis on desktop
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
-      gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      touchMultiplier: 1.0,
     });
 
     setLenisInstance(lenis);
 
-    // 1. Synchronize Lenis scroll position with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
-    // 2. Drive Lenis through GSAP's high-precision RAF ticker
-    const updateTicker = (time: number) => {
-      lenis.raf(time * 1000);
-    };
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
 
-    gsap.ticker.add(updateTicker);
-    // Disable lag smoothing to prevent stutter/jumps after heavy frames or tab switching
-    gsap.ticker.lagSmoothing(0);
-
-    // 3. Smooth anchor link interceptor (e.g. #menu, #events, #location, #experience)
     const handleAnchorClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest('a');
       if (!target) return;
@@ -70,8 +64,7 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
           e.preventDefault();
           lenis.scrollTo(targetElement as HTMLElement, {
             offset: -10,
-            duration: 1.4,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            duration: 1.2,
           });
         }
       }
@@ -79,15 +72,9 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
 
     document.addEventListener('click', handleAnchorClick, { passive: false });
 
-    // Refresh ScrollTrigger once DOM layout stabilizes
-    const refreshTimer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 150);
-
     return () => {
-      clearTimeout(refreshTimer);
+      cancelAnimationFrame(rafId);
       document.removeEventListener('click', handleAnchorClick);
-      gsap.ticker.remove(updateTicker);
       lenis.destroy();
       setLenisInstance(null);
     };
