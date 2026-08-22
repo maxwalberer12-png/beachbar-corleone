@@ -271,7 +271,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#F7F5EE] text-stone-900 font-sans antialiased selection:bg-amber-400 selection:text-stone-950">
+      <body className="min-h-screen bg-[#070509] text-[#F7F5EE] font-sans antialiased selection:bg-amber-400 selection:text-stone-950">
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>
