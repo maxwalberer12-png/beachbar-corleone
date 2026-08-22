@@ -163,8 +163,8 @@ export default function HeroIris({ lang }: HeroIrisProps) {
               alt="Beach Bar Corleone Cliffside Panorama"
               fill
               priority
-              quality={75}
-              sizes="(max-width: 768px) 100vw, 100vw"
+              quality={65}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
               className="object-cover object-center"
             />
             {/* High-Contrast Atmospheric Overlay for Crisp Text Legibility */}
