@@ -108,86 +108,75 @@
 @keyframes letter-assemble {
   0% {
     opacity: 0;
-    transform: translateY(12px);
-    filter: blur(5px);
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0px);
   }
 }
 
 .animate-letter-build {
   opacity: 0;
-  animation: letter-assemble 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+  animation: letter-assemble 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes subline-assemble {
   0% {
-    transform: translateY(6px);
     opacity: 0;
-    filter: blur(3px);
+    transform: translateY(6px);
   }
   100% {
-    transform: translateY(0);
     opacity: 1;
-    filter: blur(0px);
+    transform: translateY(0);
   }
 }
 
 .animate-subline-build {
   opacity: 0;
-  animation: subline-assemble 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  will-change: transform, opacity;
+  animation: subline-assemble 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
 }
 
-/* Luxury Hero Cascade Entrance - Silky Smooth Kinematics */
+/* Luxury Hero Cascade Entrance - Pure GPU Smooth Motion */
 @keyframes hero-fade-up-smooth {
   0% {
     opacity: 0;
-    transform: translateY(20px);
-    filter: blur(6px);
+    transform: translateY(16px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0px);
   }
 }
 
 .animate-hero-text-1 {
   opacity: 0;
-  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
 }
 
 .animate-hero-text-2 {
   opacity: 0;
-  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 
 .animate-hero-text-3 {
   opacity: 0;
-  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.36s forwards;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.32s forwards;
 }
 
 .animate-hero-sub {
   opacity: 0;
-  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.46s forwards;
 }
 
 .animate-hero-buttons {
   opacity: 0;
-  animation: hero-fade-up-smooth 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
-}
-
-/* Ensure Instant High-Contrast Legibility on Mobile */
-@media (max-width: 767px) {
-  .animate-hero-text-1,
-  .animate-hero-text-2,
-  .animate-hero-text-3,
-  .animate-hero-sub,
-  .animate-hero-buttons {
-    opacity: 1 !important;
-    animation: none !important;
-  }
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
 }
