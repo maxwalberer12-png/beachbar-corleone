@@ -139,11 +139,11 @@
   animation: subline-assemble 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 
-/* Luxury Staggered Hero Cascade - Fast Green CWV Kinematics */
-@keyframes hero-stagger-up {
+/* Cinematic Sequence Cascade */
+@keyframes cinematic-fade-up {
   0% {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(32px);
   }
   100% {
     opacity: 1;
@@ -151,20 +151,32 @@
   }
 }
 
-.animate-hero-title {
+.animate-cascade-1 {
   opacity: 0;
   will-change: transform, opacity;
-  animation: hero-stagger-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.04s both;
+  animation: cinematic-fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 
-.animate-hero-sub {
+.animate-cascade-2 {
   opacity: 0;
   will-change: transform, opacity;
-  animation: hero-stagger-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+  animation: cinematic-fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
 }
 
-.animate-hero-buttons {
+.animate-cascade-3 {
   opacity: 0;
   will-change: transform, opacity;
-  animation: hero-stagger-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+  animation: cinematic-fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
+}
+
+.animate-cascade-sub {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: cinematic-fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.animate-cascade-buttons {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: cinematic-fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.76s both;
 }

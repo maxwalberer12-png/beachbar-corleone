@@ -185,23 +185,23 @@ export default function HeroIris({ lang }: HeroIrisProps) {
           ref={contentRef}
           className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center justify-center pointer-events-auto will-change-transform pt-16 sm:pt-16 gpu-layer"
         >
-          <h1 className={`w-full text-center font-serif font-black tracking-tight text-white uppercase leading-[0.98] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] animate-hero-title ${
+          <h1 className={`w-full text-center font-serif font-black tracking-tight text-white uppercase leading-[0.98] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] ${
             lang === 'hr'
               ? 'text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl'
               : 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl'
           }`}>
-            <span className="block text-white text-center w-full whitespace-pre-line">{t.titleStart}</span>
-            <span className="block text-amber-400 sm:animate-liquid-gradient text-center w-full whitespace-pre-line drop-shadow-md">
+            <span className="block text-white text-center w-full whitespace-pre-line animate-cascade-1">{t.titleStart}</span>
+            <span className="block text-amber-400 sm:animate-liquid-gradient text-center w-full whitespace-pre-line drop-shadow-md animate-cascade-2">
               {t.titleAccent}
             </span>
-            <span className="block text-stone-100 text-center w-full whitespace-pre-line">{t.titleEnd}</span>
+            <span className="block text-stone-100 text-center w-full whitespace-pre-line animate-cascade-3">{t.titleEnd}</span>
           </h1>
 
-          <p className="mt-3 sm:mt-5 text-xs sm:text-base md:text-lg text-stone-200 font-sans font-medium max-w-xl mx-auto text-center leading-relaxed text-balance px-2 drop-shadow-md animate-hero-sub">
+          <p className="mt-3 sm:mt-5 text-xs sm:text-base md:text-lg text-stone-200 font-sans font-medium max-w-xl mx-auto text-center leading-relaxed text-balance px-2 drop-shadow-md animate-cascade-sub">
             {t.subtitle}
           </p>
 
-          <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-sm sm:max-w-3xl px-2 animate-hero-buttons">
+          <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-sm sm:max-w-3xl px-2 animate-cascade-buttons">
             <KineticButton
               href="#menu"
               label={t.btnMenu}
@@ -230,7 +230,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
 
           <div 
             ref={scrollIndicatorRef}
-            className="mt-8 sm:mt-12 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce animate-hero-buttons"
+            className="mt-8 sm:mt-12 flex items-center gap-2 text-[11px] sm:text-xs font-mono text-stone-400 uppercase tracking-widest animate-bounce animate-cascade-buttons"
           >
             <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
             <span>{t.scrollHint}</span>
