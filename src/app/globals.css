@@ -107,63 +107,76 @@
 /* Letter Assembly Keyframes */
 @keyframes letter-assemble {
   0% {
-    transform: translateY(8px);
+    opacity: 0;
+    transform: translateY(12px);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
 
 .animate-letter-build {
-  will-change: transform;
-  animation: letter-assemble 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: letter-assemble 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes subline-assemble {
   0% {
-    transform: translateY(4px);
+    opacity: 0;
+    transform: translateY(6px);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
 
 .animate-subline-build {
-  will-change: transform;
-  animation: subline-assemble 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: subline-assemble 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 
 /* Luxury Hero Cascade Entrance - Pure GPU Smooth Motion */
 @keyframes hero-fade-up-smooth {
   0% {
-    transform: translateY(12px);
+    opacity: 0;
+    transform: translateY(16px);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
 
 .animate-hero-text-1 {
-  will-change: transform;
-  animation: hero-fade-up-smooth 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.04s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
 }
 
 .animate-hero-text-2 {
-  will-change: transform;
-  animation: hero-fade-up-smooth 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
 }
 
 .animate-hero-text-3 {
-  will-change: transform;
-  animation: hero-fade-up-smooth 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.16s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
 }
 
 .animate-hero-sub {
-  will-change: transform;
-  animation: hero-fade-up-smooth 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
 }
 
 .animate-hero-buttons {
-  will-change: transform;
-  animation: hero-fade-up-smooth 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.52s forwards;
 }
