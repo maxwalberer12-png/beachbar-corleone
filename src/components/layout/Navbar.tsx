@@ -52,10 +52,10 @@ export default function Navbar({ currentLang, onLanguageChange }: NavbarProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-40 py-3.5 sm:py-4 transition-all duration-300 ${
           isScrolled
-            ? 'py-3.5 bg-stone-950/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
-            : 'py-6 bg-gradient-to-b from-black/80 via-black/30 to-transparent'
+            ? 'bg-stone-950/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
+            : 'bg-stone-950/50 backdrop-blur-md border-b border-white/5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between relative min-h-[40px]">

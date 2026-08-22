@@ -98,7 +98,7 @@ export default function HeroIris({ lang }: HeroIrisProps) {
         if (contentRef.current) {
           tl.to(
             contentRef.current,
-            { autoAlpha: 0, y: -75, ease: 'power2.in', duration: 0.55 },
+            { autoAlpha: 0, y: -25, ease: 'power1.out', duration: 0.35 },
             0
           );
         }
