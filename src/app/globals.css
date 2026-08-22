@@ -107,7 +107,7 @@
 /* Letter Assembly Keyframes */
 @keyframes letter-assemble {
   0% {
-    opacity: 0;
+    opacity: 0.1;
     transform: translateY(12px);
   }
   100% {
@@ -117,14 +117,14 @@
 }
 
 .animate-letter-build {
-  opacity: 0;
+  opacity: 1;
   will-change: transform, opacity;
   animation: letter-assemble 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes subline-assemble {
   0% {
-    opacity: 0;
+    opacity: 0.15;
     transform: translateY(6px);
   }
   100% {
@@ -134,49 +134,49 @@
 }
 
 .animate-subline-build {
-  opacity: 0;
+  opacity: 1;
   will-change: transform, opacity;
-  animation: subline-assemble 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  animation: subline-assemble 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
 }
 
 /* Luxury Hero Cascade Entrance - Pure GPU Smooth Motion */
 @keyframes hero-fade-up-smooth {
   0% {
-    opacity: 0;
-    transform: translateY(16px);
+    opacity: 0.2;
+    transform: translateY(16px) scale(0.98);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .animate-hero-text-1 {
-  opacity: 0;
+  opacity: 1;
   will-change: transform, opacity;
-  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
+  animation: hero-fade-up-smooth 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
 }
 
 .animate-hero-text-2 {
-  opacity: 0;
+  opacity: 1;
   will-change: transform, opacity;
-  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
+  animation: hero-fade-up-smooth 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
 }
 
 .animate-hero-text-3 {
-  opacity: 0;
+  opacity: 1;
   will-change: transform, opacity;
-  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
+  animation: hero-fade-up-smooth 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 
 .animate-hero-sub {
-  opacity: 0;
+  opacity: 1;
   will-change: transform, opacity;
-  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+  animation: hero-fade-up-smooth 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
 }
 
 .animate-hero-buttons {
-  opacity: 0;
+  opacity: 1;
   will-change: transform, opacity;
-  animation: hero-fade-up-smooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.52s forwards;
+  animation: hero-fade-up-smooth 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.36s forwards;
 }
